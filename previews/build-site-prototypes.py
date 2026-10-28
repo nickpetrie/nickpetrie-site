@@ -135,7 +135,7 @@ o1_article = f'''
 # --- Option 2: profile and stream -------------------------------------------------
 
 o2_side = f'''<aside class="o2-side">
-  {inline_svg("np-square-ink.svg", "np", 72)}
+  {inline_svg("np-square-ink.svg", "np l", 72)}{inline_svg("np-square-paper.svg", "np d", 72)}
   <p class="name">Nick Petrie</p>
   <p class="bio">{BIO}</p>
   <div class="ctas"><a class="btn yellow" href="#">Get the newsletter</a><a class="btn line" href="#">Book mentoring</a></div>
@@ -207,8 +207,11 @@ opt_buttons = ''.join(f'<button type="button" data-set-opt="{n}">{n}. {t}</butto
 
 CSS = r'''
 :root{--ink:#1F2834;--paper:#F7F6F1;--yellow:#E6C635;--muted:#5A6470;--rule:#D8DCD9;
---sans:'Source Sans 3',Arial,sans-serif;--serif:'Source Serif 4',Georgia,serif;--display:'Source Serif 4 Display',Georgia,serif}
-@media (prefers-color-scheme:dark){.view{--ink:#F7F6F1;--paper:#1F2834;--muted:#A9B1BA;--rule:#36404C}}
+--sans:'Source Sans 3',Arial,sans-serif;--serif:'Source Serif 4',Georgia,serif;--display:'Source Serif 4 Display',Georgia,serif;
+--np-light:block;--np-dark:none}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ink:#F7F6F1;--paper:#1F2834;--muted:#A9B1BA;--rule:#36404C;--np-light:none;--np-dark:block;color-scheme:dark}}
+:root[data-theme="dark"]{--ink:#F7F6F1;--paper:#1F2834;--muted:#A9B1BA;--rule:#36404C;--np-light:none;--np-dark:block;color-scheme:dark}
+.np.l{display:var(--np-light)} .np.d{display:var(--np-dark)}
 [hidden]{display:none!important} *{box-sizing:border-box} html{-webkit-text-size-adjust:100%} body{margin:0;background:var(--paper);color:var(--ink);font:400 18px/1.6 var(--sans)}
 a{color:inherit;text-decoration:underline;text-underline-offset:.15em;text-decoration-thickness:1px}
 h1,h2,h3{text-wrap:balance} img,svg{max-width:100%}
@@ -218,7 +221,7 @@ h1,h2,h3{text-wrap:balance} img,svg{max-width:100%}
 .view{background:var(--paper);color:var(--ink);min-height:100vh}
 .mast{display:block;height:auto}
 .signup{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 6px} .signup input{flex:1 1 220px;font:inherit;font-size:17px;padding:11px 12px;border:1px solid var(--ink);border-radius:4px;background:#fff;color:#1F2834}
-.signup button,.btn{font:700 16px/1 var(--sans);padding:13px 18px;border-radius:4px;border:1px solid #1F2834;background:#1F2834;color:#F7F6F1;cursor:pointer;text-decoration:none;display:inline-block}
+.signup button,.btn{font:700 16px/1 var(--sans);padding:13px 18px;border-radius:4px;border:1px solid var(--ink);background:var(--ink);color:var(--paper);cursor:pointer;text-decoration:none;display:inline-block}
 .prose{font:400 19px/1.65 var(--serif)} .prose p{margin:0 0 1.1em} .prose h3{font:700 15px/1.3 var(--sans);margin:2.2em 0 .6em}
 .prose hr{border:0;border-top:1px solid var(--ink);margin:2.4em 0 0} .prose hr+h3{margin-top:.7em}
 .pull{margin:1.8em 0;padding:2px 0 2px 22px;border-left:3px solid var(--yellow)} .pull p{font:400 30px/1.2 var(--serif)!important;margin:0!important}
@@ -226,7 +229,8 @@ h1,h2,h3{text-wrap:balance} img,svg{max-width:100%}
 nav ul{list-style:none;display:flex;gap:6px 20px;flex-wrap:wrap;margin:0;padding:0} nav a{text-decoration:none;font-weight:600}
 
 /* Option 1 */
-.o1 .wrap{max-width:720px;margin:0 auto;padding:0 20px}
+.o1 .wrap{max-width:720px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.o1-wnmp .signup button,.o3-band.yellow .signup button{background:#1F2834;border-color:#1F2834;color:#F7F6F1}
 .o1-head{display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between;align-items:baseline;padding-top:28px!important;padding-bottom:28px!important}
 .o1 .name{font:600 20px/1 var(--sans);text-decoration:none}
 .o1-hero h1{font:400 clamp(40px,7vw,60px)/1.05 var(--display);margin:48px 0 18px;letter-spacing:-.01em}
@@ -242,7 +246,7 @@ nav ul{list-style:none;display:flex;gap:6px 20px;flex-wrap:wrap;margin:0;padding
 .o1-art .byline{color:var(--muted);font-size:15px;border-bottom:1px solid var(--rule);padding-bottom:22px;margin-bottom:28px}
 
 /* Option 2 */
-.o2-layout{display:grid;grid-template-columns:300px minmax(0,1fr);max-width:1180px;margin:0 auto;gap:56px;padding:40px 24px}
+.o2-layout{display:grid;grid-template-columns:300px minmax(0,1fr);max-width:1180px;margin:0 auto;gap:56px;padding-block:40px;padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px))}
 .o2-side{position:sticky;top:24px;align-self:start}
 .o2-side .np{width:72px;height:72px;display:block;margin-bottom:16px} .o2-side .name{font:600 24px/1.1 var(--sans);margin:0 0 10px}
 .o2-side .bio{font-size:16px;color:var(--muted);margin:0 0 18px} .ctas{display:grid;gap:8px;margin-bottom:18px}
@@ -258,7 +262,7 @@ nav ul{list-style:none;display:flex;gap:6px 20px;flex-wrap:wrap;margin:0;padding
 .o2-art .prose{font:400 19px/1.65 var(--sans);max-width:66ch} .o2-art .pull p{font-family:var(--serif)} .tagline{font-size:15px;color:var(--muted)}
 
 /* Option 3 */
-.o3 .wrapw{max-width:1200px;margin:0 auto;padding:0 24px}
+.o3 .wrapw{max-width:1200px;margin:0 auto;padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px))}
 .o3-head{border-bottom:1px solid var(--ink)} .o3-head .wrapw{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;align-items:center;padding-top:18px;padding-bottom:18px}
 .o3 .name{font:600 22px/1 var(--sans);text-decoration:none}
 .o3-lead{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:48px;padding-top:48px!important;padding-bottom:40px!important;border-bottom:1px solid var(--rule)}
@@ -279,14 +283,15 @@ nav ul{list-style:none;display:flex;gap:6px 20px;flex-wrap:wrap;margin:0;padding
 .o3-rail{border-left:1px solid var(--rule);padding-left:24px;font-size:16px;align-self:start;position:sticky;top:24px}
 
 @media (max-width:860px){
-  .o2-layout{grid-template-columns:1fr;gap:28px;padding:24px 20px} .o2-side{position:static} .nav.side{display:none} .ctas{grid-template-columns:1fr 1fr}
+  .o2-layout{grid-template-columns:1fr;gap:28px;padding-block:24px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))} .o2-side{position:static} .nav.side{display:none} .ctas{grid-template-columns:1fr 1fr}
   .o3-lead,.band-in,.o3-artbody{grid-template-columns:1fr;gap:28px} .o3-about{border-left:0;padding-left:0;border-top:1px solid var(--rule);padding-top:20px}
   .o3-grid{grid-template-columns:1fr} .o3-index ul{columns:1} .o3-rail{border-left:0;padding-left:0;position:static}
 }
 @media (max-width:520px){.o1-list .year{grid-template-columns:1fr;gap:4px} .o2-wnmp{flex-direction:column} .ctas{grid-template-columns:1fr}}
 
 /* Review toolbar */
-.bar{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid #D8DCD9;padding:10px 16px;font:400 15px/1.4 'Source Sans 3',Arial,sans-serif;color:#1F2834}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:11;background:#fff}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:#fff;border-bottom:1px solid #D8DCD9;padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));font:400 15px/1.4 'Source Sans 3',Arial,sans-serif;color:#1F2834}
 .bar .row{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:6px} .bar b{margin-right:6px}
 .bar button{font:600 14px/1 'Source Sans 3',Arial,sans-serif;padding:7px 10px;border:1px solid #1F2834;background:#fff;color:#1F2834;border-radius:4px;cursor:pointer}
 .bar button[aria-pressed=true]{background:#1F2834;color:#fff} .bar .desc{margin:4px 0 0;max-width:90ch;color:#5A6470} .bar .desc b{color:#1F2834}
@@ -325,4 +330,8 @@ page = f'''<!doctype html>
 
 out = here / 'site-prototypes.html'
 out.write_text(page)
+art = re.sub(r'^<!doctype html>\s*<html[^>]*><head>.*?<title>', '<title>', page, flags=re.S)
+art = art.replace('</title>', '</title>\n<meta name="claude:viewport-fit-sides" content="cover">', 1)
+art = art.replace('</head>\n<body>', '').replace('</body></html>', '')
+(here / 'artifact-site-prototypes.html').write_text(art)
 print(f'Wrote {out} ({out.stat().st_size // 1024} KB)')
