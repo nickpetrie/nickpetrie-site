@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.astro/
+.wrangler/
+.dev.vars
+.env
+# Personal data never belongs in this public repo.
+*members*.csv
+*members*.json

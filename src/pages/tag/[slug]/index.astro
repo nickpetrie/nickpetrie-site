@@ -1,0 +1,35 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import Base from '../../../layouts/Base.astro';
+import PostList from '../../../components/PostList.astro';
+import { getPosts, breadcrumbs } from '../../../lib/content';
+import { site } from '../../../site';
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  const tags = await getCollection('tags');
+  return tags
+    .map((tag) => ({ params: { slug: tag.id }, props: { tag, posts: posts.filter((p) => p.data.tags.includes(tag.id)) } }))
+    .filter((x) => x.props.posts.length > 0);
+}
+
+interface Props { tag: CollectionEntry<'tags'>; posts: CollectionEntry<'posts'>[] }
+const { tag, posts } = Astro.props;
+const name = tag.data.name;
+const description = tag.data.description ?? `Nick Petrie's writing on ${name.toLowerCase()}: ${posts.length} ${posts.length === 1 ? 'piece' : 'pieces'} on news product and newsroom strategy.`;
+---
+<Base
+  title={`${name}: writing by Nick Petrie`}
+  description={description}
+  jsonLd={[
+    { '@type': 'CollectionPage', '@id': `${site.url}/tag/${tag.id}/#page`, url: `${site.url}/tag/${tag.id}/`, name, description },
+    breadcrumbs([{ name: 'Home', path: '/' }, { name: 'Writing', path: '/writing/' }, { name, path: `/tag/${tag.id}/` }]),
+  ]}
+>
+  <div class="wrap">
+    <p class="kicker"><a href="/writing/">Writing</a> · Topic</p>
+    <h1>{name}</h1>
+    <p class="lede">{description}</p>
+    <PostList posts={posts} />
+  </div>
+</Base>

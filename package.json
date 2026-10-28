@@ -1,0 +1,26 @@
+{
+  "name": "nickpetrie-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "wrangler dev",
+    "deploy": "astro build && wrangler deploy",
+    "import:ghost": "node scripts/import-ghost.mjs",
+    "check:urls": "node scripts/check-urls.mjs"
+  },
+  "dependencies": {
+    "@astrojs/rss": "4.0.19",
+    "@astrojs/sitemap": "3.7.4",
+    "@fontsource/inter": "5.3.0",
+    "@resvg/resvg-js": "2.6.2",
+    "astro": "7.3.8",
+    "satori": "0.63.2"
+  },
+  "devDependencies": {
+    "turndown": "7.2.4",
+    "turndown-plugin-gfm": "1.0.2",
+    "wrangler": "4.154.0"
+  }
+}

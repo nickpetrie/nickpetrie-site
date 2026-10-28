@@ -1,0 +1,57 @@
+---
+import Seo from '../components/Seo.astro';
+import '../styles/global.css';
+import { site } from '../site';
+
+type SeoProps = import('astro/types').ComponentProps<typeof Seo>;
+interface Props extends SeoProps {}
+
+const props = Astro.props;
+const path = Astro.url.pathname;
+const analyticsToken = import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN;
+---
+<!doctype html>
+<html lang={site.lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#16181D" />
+    <Seo {...props} />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="wrap header-inner">
+        <a class="brand" href="/" aria-label="Nick Petrie, home">Nick Petrie</a>
+        <nav aria-label="Main">
+          <ul>
+            {site.nav.map((item) => (
+              <li><a href={item.href} aria-current={path.startsWith(item.href) ? 'page' : undefined}>{item.label}</a></li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap footer-inner">
+        <p>© {new Date().getFullYear()} Nick Petrie</p>
+        <ul>
+          <li><a href="/contact/">Contact</a></li>
+          <li><a href="/rss/">RSS</a></li>
+          <li><a href={site.social.x} rel="me">X</a></li>
+          <li><a href={site.social.mastodon} rel="me">Mastodon</a></li>
+        </ul>
+      </div>
+    </footer>
+
+    {analyticsToken && (
+      <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={JSON.stringify({ token: analyticsToken })} is:inline></script>
+    )}
+  </body>
+</html>

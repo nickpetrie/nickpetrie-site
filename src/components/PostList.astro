@@ -1,0 +1,24 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { formatDate } from '../lib/content';
+
+interface Props {
+  posts: CollectionEntry<'posts'>[];
+  headingLevel?: 'h2' | 'h3';
+}
+const { posts, headingLevel: H = 'h2' } = Astro.props;
+---
+<ol class="post-list">
+  {posts.map((post) => (
+    <li>
+      <article>
+        <H class="post-list-title"><a href={`/${post.id}/`}>{post.data.title}</a></H>
+        <p class="meta">
+          <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
+          {post.data.newsletter && <span class="badge">WNMP #{post.data.newsletter.issue}</span>}
+        </p>
+        <p>{post.data.description}</p>
+      </article>
+    </li>
+  ))}
+</ol>

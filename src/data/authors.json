@@ -1,0 +1,22 @@
+[
+  {
+    "slug": "nick",
+    "name": "Nick Petrie",
+    "bio": "Digital Director at The i Paper. Formerly Deputy Digital News Director at Reuters and Deputy Head of Digital at The Times and Sunday Times. I write about news product, newsroom strategy and the people who make it work, and I mentor people in news product.",
+    "avatar": "../assets/images/2024/01/Nick-2023-profile-round.webp",
+    "url": "https://www.nickpetrie.co/about/",
+    "sameAs": [
+      "https://x.com/petren",
+      "https://macaw.social/@petren"
+    ]
+  },
+  {
+    "slug": "alan",
+    "name": "Alan Hunter",
+    "avatar": "../assets/images/2021/07/Alan-Hunter.jpeg",
+    "url": "https://www.hbmadvisory.com/en-gb/",
+    "sameAs": [
+      "https://www.hbmadvisory.com/en-gb/"
+    ]
+  }
+]

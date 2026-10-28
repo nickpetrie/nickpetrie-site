@@ -1,0 +1,30 @@
+---
+import Base from '../layouts/Base.astro';
+import PostList from '../components/PostList.astro';
+import SignupForm from '../components/SignupForm.astro';
+import { getPosts } from '../lib/content';
+import { site } from '../site';
+
+const posts = await getPosts();
+---
+<Base title={site.title} description={site.description}>
+  <section class="wrap intro">
+    <h1>Nick Petrie</h1>
+    <p class="lede">
+      I work where journalism meets product. I'm Digital Director at The i Paper, and before that I was Deputy Digital News
+      Director at Reuters and spent nearly a decade at The Times and Sunday Times. I write about news product, newsroom
+      strategy and the people who make it work, and I <a href="/mentoring/">mentor</a> people in news product.
+    </p>
+    <p><a href="/about/">More about me</a></p>
+  </section>
+
+  <section class="wrap">
+    <SignupForm source="/" />
+  </section>
+
+  <section class="wrap">
+    <h2>Latest writing</h2>
+    <PostList posts={posts.slice(0, 8)} headingLevel="h3" />
+    <p><a href="/writing/">All writing</a></p>
+  </section>
+</Base>

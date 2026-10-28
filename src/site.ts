@@ -1,0 +1,47 @@
+// Site-wide facts. These feed the page chrome, meta tags and structured data,
+// so search engines and AI assistants get one consistent description of Nick.
+export const site = {
+  url: 'https://www.nickpetrie.co',
+  name: 'Nick Petrie',
+  title: 'Nick Petrie: news product, newsroom strategy and mentoring',
+  description:
+    'Nick Petrie writes about news product, newsroom strategy and digital transformation, and mentors people working in news product. Digital Director at The i Paper.',
+  locale: 'en_GB',
+  lang: 'en-GB',
+  email: 'hello@nickpetrie.co',
+  nav: [
+    { href: '/writing/', label: 'Writing' },
+    { href: '/newsletter/', label: 'Newsletter' },
+    { href: '/mentoring/', label: 'Mentoring' },
+    { href: '/about/', label: 'About' },
+  ],
+  social: {
+    x: 'https://x.com/petren',
+    mastodon: 'https://macaw.social/@petren',
+  },
+} as const;
+
+export const newsletter = {
+  name: 'When News Meets Product',
+  short: 'WNMP',
+  url: `${site.url}/newsletter/`,
+  description: 'Essays on the strategies, structures and outcomes of the news industry’s digital transformation, from a practitioner. By Nick Petrie.',
+} as const;
+
+export const person = {
+  '@type': 'Person',
+  '@id': `${site.url}/#person`,
+  name: 'Nick Petrie',
+  url: `${site.url}/about/`,
+  jobTitle: 'Digital Director',
+  worksFor: { '@type': 'Organization', name: 'The i Paper', url: 'https://inews.co.uk/' },
+  knowsAbout: [
+    'News product management',
+    'Newsroom strategy',
+    'Digital transformation in news media',
+    'Subscription strategy',
+    'Audience data and insights',
+    'Mentoring',
+  ],
+  sameAs: Object.values(site.social),
+};

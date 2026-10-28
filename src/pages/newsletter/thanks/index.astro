@@ -1,0 +1,10 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { newsletter } from '../../../site';
+---
+<Base title="Thanks for subscribing" description={`You're subscribed to ${newsletter.name}.`} noindex>
+  <div class="wrap">
+    <h1>Thanks for subscribing</h1>
+    <p class="lede">Check your inbox for a confirmation email from {newsletter.name}. In the meantime, <a href="/newsletter/">read past issues</a>.</p>
+  </div>
+</Base>

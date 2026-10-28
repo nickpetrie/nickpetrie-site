@@ -1,0 +1,46 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
+import Base from '../../../layouts/Base.astro';
+import PostList from '../../../components/PostList.astro';
+import { getPosts, authorNode, breadcrumbs } from '../../../lib/content';
+import { site } from '../../../site';
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  const authors = await getCollection('authors');
+  return authors.map((author) => ({ params: { slug: author.id }, props: { author, posts: posts.filter((p) => p.data.authors.includes(author.id)) } }));
+}
+
+interface Props { author: CollectionEntry<'authors'>; posts: CollectionEntry<'posts'>[] }
+const { author, posts } = Astro.props;
+const a = author.data;
+const description = a.bio ?? `Writing by ${a.name} on nickpetrie.co.`;
+---
+<Base
+  title={a.name}
+  description={description}
+  type="profile"
+  jsonLd={[
+    {
+      '@type': 'ProfilePage',
+      '@id': `${site.url}/author/${author.id}/#page`,
+      url: `${site.url}/author/${author.id}/`,
+      name: a.name,
+      mainEntity: authorNode(author),
+    },
+    breadcrumbs([{ name: 'Home', path: '/' }, { name: a.name, path: `/author/${author.id}/` }]),
+  ]}
+>
+  <div class="wrap">
+    <header class="author-header">
+      {a.avatar && <Image src={a.avatar} alt="" width={96} height={96} class="avatar" />}
+      <div>
+        <h1>{a.name}</h1>
+        {a.bio && <p class="lede">{a.bio}</p>}
+        {author.id === 'nick' ? <p><a href="/about/">About Nick</a></p> : a.url && <p><a href={a.url}>{new URL(a.url).hostname.replace(/^www\./, '')}</a></p>}
+      </div>
+    </header>
+    <PostList posts={posts} />
+  </div>
+</Base>

@@ -1,0 +1,36 @@
+---
+import Base from '../../layouts/Base.astro';
+import PostList from '../../components/PostList.astro';
+import SignupForm from '../../components/SignupForm.astro';
+import { getPosts, breadcrumbs } from '../../lib/content';
+import { site, newsletter, person } from '../../site';
+
+const issues = (await getPosts()).filter((p) => p.data.newsletter);
+---
+<Base
+  title={`${newsletter.name}: a newsletter by Nick Petrie`}
+  description={newsletter.description}
+  jsonLd={[
+    {
+      '@type': 'CreativeWorkSeries',
+      '@id': `${newsletter.url}#series`,
+      name: newsletter.name,
+      alternateName: newsletter.short,
+      url: newsletter.url,
+      description: newsletter.description,
+      author: { '@id': person['@id'] },
+      inLanguage: site.lang,
+      hasPart: issues.map((p) => ({ '@id': `${site.url}/${p.id}/#article` })),
+    },
+    breadcrumbs([{ name: 'Home', path: '/' }, { name: 'Newsletter', path: '/newsletter/' }]),
+  ]}
+>
+  <div class="wrap">
+    <p class="kicker">Newsletter</p>
+    <h1>{newsletter.name}</h1>
+    <p class="lede">{newsletter.description}</p>
+    <SignupForm source="/newsletter/" heading="Subscribe" />
+    <h2>Past issues</h2>
+    <PostList posts={issues} headingLevel="h3" />
+  </div>
+</Base>

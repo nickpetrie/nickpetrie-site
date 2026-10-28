@@ -1,0 +1,42 @@
+[
+  {
+    "slug": "data-in-the-newsroom",
+    "name": "Data in the newsroom"
+  },
+  {
+    "slug": "jobs",
+    "name": "Jobs"
+  },
+  {
+    "slug": "newsletters",
+    "name": "Newsletters"
+  },
+  {
+    "slug": "newsroom",
+    "name": "Newsroom"
+  },
+  {
+    "slug": "product-development",
+    "name": "Product development"
+  },
+  {
+    "slug": "mentoring",
+    "name": "Mentoring"
+  },
+  {
+    "slug": "strategy",
+    "name": "Strategy"
+  },
+  {
+    "slug": "predictions",
+    "name": "Predictions"
+  },
+  {
+    "slug": "leadership",
+    "name": "Leadership"
+  },
+  {
+    "slug": "links",
+    "name": "Links"
+  }
+]
