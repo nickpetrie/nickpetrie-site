@@ -45,7 +45,8 @@ write('wnmp-paired-rules.svg', svg(f'0 0 {RULES_W} {RULES_H}', RULES, 'When News
 
 # Masthead: the v0.2 outlined masthead with the A2 motif swapped in.
 mast = (here / 'wnmp-masthead-proposed.svg').read_text()
-mast = mast.replace('M0 14H40V20H0ZM0 32H40V38H0Z', 'M0 12H40V21H0ZM0 30H40V34H0Z')
+# Top of the thick bar sits on the cap height of "When" (W top at y 20.27).
+mast = mast.replace('M0 14H40V20H0ZM0 32H40V38H0Z', 'M0 20.27H40V29.27H0ZM0 38.27H40V42.27H0Z')
 mast = mast.replace('— proposed masthead', '')
 write('wnmp-masthead.svg', mast)
 
