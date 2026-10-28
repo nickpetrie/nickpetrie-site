@@ -1,0 +1,29 @@
+{
+  "version": "0.3",
+  "updated": "2026-10-28",
+  "decisions": {
+    "A2": "Paired rules: thick over thin (48 x 27; bars 11 and 5, gap 11)",
+    "B3": "WNMP avatar: paired rules above outlined WNMP on yellow",
+    "C3": "NP mark redrawn from measurements of the preferred reference; ink and paper only, no yellow NP",
+    "D2": "Source Serif 4 below 40px, Source Serif 4 Display at 40px and above",
+    "E8": "Reader promise: For people trying to change news organisations from the inside.",
+    "F1": "Dark mode and links as below"
+  },
+  "colour": {
+    "light": { "ink": "#1F2834", "paper": "#F7F6F1", "yellow": "#E6C635", "textSecondary": "#5A6470", "rule": "#D8DCD9" },
+    "dark": { "ink": "#F7F6F1", "paper": "#1F2834", "yellow": "#E6C635", "textSecondary": "#A9B1BA", "rule": "#36404C" },
+    "links": "Text colour with a visible underline; never yellow text"
+  },
+  "typography": {
+    "sans": "Source Sans 3 (400, 600, 700)",
+    "serif": "Source Serif 4 (400) below 40px",
+    "serifDisplay": "Source Serif 4 Display (400) at 40px and above",
+    "emailFallbacks": { "serif": "Georgia", "sans": "Arial" },
+    "emailBody": "Georgia 18px / 1.6"
+  },
+  "newsletter": {
+    "name": "When News Meets Product",
+    "endorsement": "by Nick Petrie",
+    "promise": "For people trying to change news organisations from the inside."
+  }
+}
