@@ -1,0 +1,4 @@
+web/templates/
+web/assets/
+.wrangler/
+__pycache__/

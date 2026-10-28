@@ -1,0 +1,25 @@
+{
+  // Studio: Nick's LinkedIn post tool at studio.nickpetrie.co. See CONTRACT.md.
+  // Deploy with `node studio/deploy.mjs` (copies the brand skill's template first). Secret: BUFFER_API_KEY.
+  "$schema": "../node_modules/wrangler/config-schema.json",
+  "name": "nickpetrie-studio",
+  "main": "src/worker.js",
+  "compatibility_date": "2026-10-01",
+  "workers_dev": false,
+  "preview_urls": false,
+  "routes": [{ "pattern": "studio.nickpetrie.co", "custom_domain": true }],
+  // The screens (web/) are served from R2 under studio-web/ by the worker: deploy.mjs uploads them.
+  "d1_databases": [{ "binding": "DB", "database_name": "nickpetrie-studio", "database_id": "c6080381-5b9b-44c0-bee0-19de01eff234" }],
+  "r2_buckets": [{ "binding": "MEDIA", "bucket_name": "nickpetrie-social" }],
+  // Every 15 minutes: check Buffer matches what was approved, book waiting posts, refresh the status.
+  "triggers": { "crons": ["*/15 * * * *"] },
+  "vars": {
+    "ACCESS_TEAM": "misty-hall-b273.cloudflareaccess.com",
+    "ACCESS_AUD": "TBD",
+    "ADMIN_EMAIL": "nicholas.petrie@gmail.com",
+    // Set once Nick's own Buffer account has his LinkedIn profile connected.
+    "BUFFER_ORG_ID": "",
+    "BUFFER_CHANNEL_ID": "",
+    "MEDIA_BASE": "https://studio.nickpetrie.co/p/"
+  }
+}
