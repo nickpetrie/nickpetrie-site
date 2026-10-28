@@ -75,7 +75,7 @@ def entry(p, h='h3', summary=True):
 def mentoring_band():
     return (f'<section class="mentor-band"><div class="wrap mentor-in">'
             f'<div class="mentor-head"><p class="label">Mentoring</p><h2>Stuck between editorial and product? Let\'s talk it through.</h2>'
-            f'<p>I mentor and coach people in news product: getting started, stepping into a first management role, or leading change in an organisation that would rather not.</p><blockquote class="band-quote"><p>“Nick has a great way of turning seemingly unsolvable issues into practical, tangible actions.”</p><footer>Joe Cawthorn</footer></blockquote><p class="proof">More than 65 sessions since 2021.</p>'
+            f'<p>I mentor and coach people in news product: getting started, stepping into a first management role, or leading change in an organisation that would rather not.</p><blockquote class="band-quote"><p>“Nick has a great way of turning seemingly unsolvable issues into practical, tangible actions.”</p><footer>Joe Cawthorn</footer></blockquote><p class="proof">More than 100 sessions since 2021.</p>'
             f'<p class="actions"><a class="btn paper" href="#mentoring">Book a session</a> <a href="#mentoring">How it works</a></p></div>'
             f'<ul class="mentor-facts"><li><b>Pay what you can</b>One-off sessions. £250 is the full rate; £1 is fine.</li>'
             f'<li><b>Ongoing mentoring</b>Monthly spaces open from October 2026, over 3, 6 or 12 months.</li>'
@@ -169,7 +169,7 @@ PAGES['mentoring'] = f'''{header('mentoring')}
     <div class="quotes single">
       <figure class="quote"><blockquote><p>Nick has a great way of turning seemingly unsolvable issues into practical, tangible actions to resolve the matter. He takes a keen interest in what makes you tick and provides a calm, reassuring sounding board for you to discuss and unpick things that are on your mind. His experience in the media industry means he knows the pitfalls and dynamics and can help navigate when waters get choppy. His inspiring and authentic manners mean that you feel at ease right away and get the most out of every session.</p></blockquote><figcaption>Joe Cawthorn</figcaption></figure>
     </div>
-    <p class="small">More than 65 sessions since 2021.</p>
+    <p class="small">More than 100 sessions since 2021.</p>
 
     <div class="pull-note"><p>I'll always offer free or very low cost sessions of some kind. Those who can afford to pay, I trust your judgement as to how much that is. I mean every word of that.</p></div>
 
