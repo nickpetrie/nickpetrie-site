@@ -28,10 +28,6 @@ def prose_of(page):
 
 
 about_how = prose_of('about').split('<h2 id="how-i-work">How I work</h2>', 1)[1]
-mentoring_html = prose_of('mentoring')
-mentoring_html = re.sub(r'<h2 id=""></h2>', '', mentoring_html)
-mentoring_html = mentoring_html.replace('<a class="button" href="https://savvycal.com/NickPetrie/0977e9aa">Book a mentoring session</a>',
-                                        '<p><a class="btn" href="https://savvycal.com/NickPetrie/0977e9aa">Book a session</a></p>')
 
 FEATURED = ['bridge-roles-need-to-die', 'the-two-product-team-problem', 'readers-readers-readers-readers-readers']
 featured = [next(p for p in posts if p['slug'] == s) for s in FEATURED]
@@ -72,17 +68,19 @@ def footer(tag):
 
 
 def entry(p, h='h3', summary=True):
-    label = f'<span class="chip">WNMP · Issue {p["issue"]}</span>' if p.get('issue') else ''
     return (f'<li class="entry"><{h}><a href="#article">{e(p["title"])}</a></{h}>'
-            f'<p class="meta">{nice_date(p["date"])} {label}</p>' + (f'<p class="sum">{e(p["standfirst"])}</p>' if summary else '') + '</li>')
+            f'<p class="meta">{nice_date(p["date"])}</p>' + (f'<p class="sum">{e(p["standfirst"])}</p>' if summary else '') + '</li>')
 
 
 def mentoring_band():
-    return ('<section class="mentor-band"><div class="mentor-in"><p class="label">Mentoring</p>'
-            '<h2>Stuck between editorial and product? Let\'s talk it through.</h2>'
-            '<p>I mentor people in news product, from first roles to leading change: strategy, structures, teams and careers. '
-            'One-off sessions are pay what you can, and I have a few spaces for ongoing monthly mentoring.</p>'
-            '<p class="actions"><a class="btn" href="#mentoring">Book a session</a> <a href="#mentoring">How it works</a></p></div></section>')
+    return (f'<section class="mentor-band"><div class="wrap mentor-in">'
+            f'<div class="mentor-head"><p class="label">Mentoring</p><h2>Stuck between editorial and product? Let\'s talk it through.</h2>'
+            f'<p>I mentor people in news product: getting started, stepping into a first management role, or leading change in an organisation that would rather not.</p>'
+            f'<p class="actions"><a class="btn paper" href="#mentoring">Book a session</a> <a href="#mentoring">How it works</a></p></div>'
+            f'<ul class="mentor-facts"><li><b>Pay what you can</b>One-off sessions. £250 is the full rate; £1 is fine.</li>'
+            f'<li><b>Ongoing mentoring</b>A few monthly spaces, over 3, 6 or 12 months.</li>'
+            f'<li><b>Ask your employer</b>Many will fund it as personal development.</li></ul>'
+            f'</div></section>')
 
 
 def author_card():
@@ -97,13 +95,13 @@ PAGES['home'] = f'''{header('home')}
 <main class="wrap">
   <section class="hero">
     <div class="hero-text"><h1>{STATEMENT}</h1><p class="lede">{BIO}</p><p><a href="#about">More about me</a></p></div>
-    <figure class="portrait"><img src="{PHOTO}" alt="Nick Petrie" width="280" height="280"><figcaption>Photo: 2022 profile picture, to be replaced with a new portrait</figcaption></figure>
+    <figure class="portrait"><img src="{PHOTO}" alt="Nick Petrie" width="220" height="220"></figure>
   </section>
   {wnmp_block('home')}
-  <section class="block"><h2 class="label">Start here</h2><ol class="entries featured">{''.join(entry(p) for p in featured)}</ol></section>
+  <section class="block"><h2 class="label">Start with an argument</h2><p class="small intro">Three pieces that say what I think, and why.</p><ol class="entries featured">{''.join(entry(p) for p in featured)}</ol></section>
   <section class="block"><h2 class="label">More writing</h2><ol class="entries compact">{''.join(entry(p, summary=False) for p in more)}</ol><p><a href="#writing">All writing</a></p></section>
-  {mentoring_band()}
 </main>
+{mentoring_band()}
 {footer('foot-home')}'''
 
 PAGES['article'] = f'''{header('writing')}
@@ -132,7 +130,7 @@ PAGES['about'] = f'''{header('about')}
       <p>I'm Digital Director at The i Paper. Before that I spent three years as Deputy Digital News Director at Reuters, and nearly a decade at The Times and Sunday Times, most of it as Deputy Head of Digital, working on content and subscription strategy, newsroom transformation, newsroom tooling, data and insights in the newsroom, and edition-based publishing.</p>
       <p>I write <a href="#newsletter">When News Meets Product</a>, and I <a href="#mentoring">mentor</a> people working in news product.</p>
       <h2>Elsewhere</h2>
-      <ul><li>Former board member of the News Product Alliance</li><li>Ran Evolving Newsroom, a side project on how newsroom roles are changing</li><li>Co-founded Wannabe Hacks (sadly no longer online)</li></ul>
+      <ul><li>Former board member of the News Product Alliance, and now a coach with the NPA</li><li>Ran Evolving Newsroom, a side project on how newsroom roles are changing</li><li>Co-founded Wannabe Hacks (sadly no longer online)</li></ul>
       <h2>How I work</h2>{about_how}
     </div>
   </article>
@@ -142,13 +140,37 @@ PAGES['about'] = f'''{header('about')}
 
 PAGES['mentoring'] = f'''{header('mentoring')}
 <main class="wrap">
-  <article class="art">
+  <article class="art mentor-page">
     <p class="label">Mentoring</p>
     <h1>News product mentoring</h1>
-    <p class="standfirst">For people starting out in news product, moving into their first management role, or leading change in their organisation.</p>
-    <div class="facts"><div><p class="label">One-off sessions</p><p>Pay what you can. £250 is the full rate; £1 is fine if that's what you can manage.</p></div><div><p class="label">Ongoing mentoring</p><p>2 to 3 monthly spaces from June 2026, over 3, 6 or 12 months.</p></div></div>
-    <p><a class="btn" href="https://savvycal.com/NickPetrie/0977e9aa">Book a session</a></p>
-    <div class="prose">{mentoring_html}</div>
+    <p class="standfirst">Practical, honest help from someone who has done the job: at The Times, Reuters and now The i Paper.</p>
+    <div class="facts">
+      <div><p class="label">One-off sessions</p><p>Pay what you can. A session is worth £250; students, early-career journalists and anyone who can't afford it are welcome to pay £1. Honestly.</p></div>
+      <div><p class="label">Ongoing mentoring</p><p>2 to 3 monthly spaces, best as a 3, 6 or 12 month commitment so we can set goals and work through them, with WhatsApp support between calls.</p></div>
+    </div>
+    <p class="actions"><a class="btn" href="https://savvycal.com/NickPetrie/0977e9aa">Book a session</a> <span class="small">It's often worth asking whether your employer will fund it.</span></p>
+
+    <h2 class="section-h">Who it's for</h2>
+    <div class="who">
+      <div><h3>Getting started</h3><p>You're new to news product, or moving into it from editorial, and want to understand the paths open to you.</p></div>
+      <div><h3>First time managing</h3><p>You've stepped into your first management role and want a sounding board while you find your feet.</p></div>
+      <div><h3>Leading change</h3><p>You're responsible for cultural change or innovation, and the organisation isn't making it easy.</p></div>
+    </div>
+
+    <h2 class="section-h">What we can work on</h2>
+    <ul class="ticks"><li>Business, product and organisational strategy</li><li>Structures and teams: how editorial, product and data work together</li><li>Newsroom tooling</li><li>Using reader data and insights in the newsroom</li><li>Your next career move</li></ul>
+
+    <h2 class="section-h">How it works</h2>
+    <ol class="steps"><li><b>Book a time.</b> When you book, you check out rather than just pick a slot. You'll see the fee with a "change amount" button: set what you can afford.</li>
+    <li><b>We talk.</b> Bring the problem you're stuck on. I'll ask a lot of questions and tell you what I think.</li>
+    <li><b>Keep going, if it helps.</b> For ongoing mentoring we agree goals, meet monthly and stay in touch in between.</li></ol>
+
+    <div class="pull-note"><p>I'll always offer free or very low cost sessions of some kind. Those who can afford to pay, I trust your judgement as to how much that is. I mean every word of that.</p></div>
+
+    <h2 class="section-h">With the News Product Alliance</h2>
+    <p>I was a mentor in the <a href="https://newsproduct.org/mentor-network">News Product Alliance's Mentor Network</a>, and I'm now a coach with the NPA. If you're an NPA member, that's another way to work with me.</p>
+
+    <p class="actions"><a class="btn" href="https://savvycal.com/NickPetrie/0977e9aa">Book a session</a></p>
   </article>
 </main>
 {footer('foot-mentor')}'''
@@ -199,10 +221,10 @@ nav a[aria-current]{border-bottom:2px solid var(--ink)}
 .hero{display:grid;gap:24px;padding-block:20px 8px}
 .hero h1{font:400 clamp(40px,7vw,60px)/1.04 var(--display);letter-spacing:-.01em;margin:0 0 16px}
 .hero .lede{margin:0 0 10px}
-.portrait{margin:0} .portrait img{display:block;width:100%;max-width:280px;aspect-ratio:1;object-fit:cover;border-radius:2px}
+.portrait{margin:0} .portrait img{display:block;width:100%;max-width:220px;aspect-ratio:1;object-fit:cover;border-radius:50%}
 .portrait figcaption{font-size:13px;color:var(--muted);margin-top:6px;max-width:280px}
 .portrait.inline{margin:8px 0 24px}
-@container view (max-width:759px){.hero .portrait img{max-width:180px}}
+@container view (max-width:759px){.hero .portrait img{max-width:132px} .wnmp{margin-inline:calc(-1 * max(20px, env(safe-area-inset-left, 0px)))} .wnmp-in{padding:28px max(20px, env(safe-area-inset-left, 0px))}}
 @container view (min-width:760px){.hero{grid-template-columns:minmax(0,1fr) 240px;align-items:end;gap:40px}}
 
 .wnmp{background:var(--yellow);color:#1F2834;margin-block:44px}
@@ -221,8 +243,13 @@ nav a[aria-current]{border-bottom:2px solid var(--ink)}
 .meta{font-size:14px;color:var(--muted);margin:0} .sum{margin:6px 0 0;color:var(--muted);max-width:62ch}
 .chip{font:700 11px/1 var(--sans);letter-spacing:.05em;background:var(--yellow);color:#1F2834;padding:3px 6px;border-radius:3px;margin-left:6px;vertical-align:1px}
 
-.mentor-band{border-top:1px solid var(--ink);margin-block:48px;padding-top:14px}
-.mentor-band h2{font:400 30px/1.15 var(--serif);margin:0 0 12px;max-width:24ch} .mentor-band p{max-width:62ch}
+.mentor-band{background:#1F2834;color:#F7F6F1;padding-block:52px;margin-top:56px}
+.mentor-in{display:grid;gap:28px} .mentor-band .label{color:#E6C635}
+.mentor-band h2{font:400 clamp(32px,5vw,44px)/1.08 var(--display);margin:0 0 14px;max-width:18ch} .mentor-band p{max-width:56ch;font-size:19px}
+.mentor-band a{color:#F7F6F1} .btn.paper{background:#F7F6F1;color:#1F2834;border-color:#F7F6F1}
+.mentor-facts{list-style:none;margin:0;padding:0;display:grid;gap:14px} .mentor-facts li{border-top:3px solid #E6C635;padding-top:10px;font-size:17px;color:#D9DDE2} .mentor-facts b{display:block;color:#F7F6F1;font-size:18px;margin-bottom:2px}
+@container view (min-width:760px){.mentor-in{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:48px;align-items:start}}
+.foot{margin-top:0!important} .intro{margin-top:-4px}
 .actions{display:flex;flex-wrap:wrap;gap:16px;align-items:center}
 
 .foot{border-top:1px solid var(--rule);margin-top:64px;padding-block:32px 48px}
@@ -232,11 +259,12 @@ nav a[aria-current]{border-bottom:2px solid var(--ink)}
 .art h1,.page-h1{font:400 clamp(38px,6.5vw,54px)/1.06 var(--display);margin:12px 0 14px;letter-spacing:-.01em}
 .standfirst{font-size:21px;margin:0 0 14px;max-width:56ch}
 .byline{font-size:15px;color:var(--muted);border-bottom:1px solid var(--rule);padding-bottom:22px;margin:0 0 28px}
-.prose{font:400 19px/1.65 var(--serif);max-width:68ch} .prose p{margin:0 0 1.1em} .prose .lead{font-size:23px;line-height:1.4}
+.prose{font:400 19.5px/1.7 var(--serif);max-width:64ch} .prose p{margin:0 0 1.25em}
+@container view (min-width:760px){.prose{font-size:21px;line-height:1.72} .art .standfirst{font-size:24px}} .prose .lead{font-size:23px;line-height:1.4}
 .prose h2{font:400 28px/1.2 var(--serif);margin:1.6em 0 .5em} .prose h3{font:700 16px/1.3 var(--sans);margin:2em 0 .5em}
 .prose hr{border:0;border-top:1px solid var(--ink);margin:2.4em 0 0} .prose hr+h3{margin-top:.7em}
 .prose blockquote{margin:1.4em 0;padding:2px 0 2px 20px;border-left:3px solid var(--yellow)}
-.pull{margin:1.8em 0!important;padding:2px 0 2px 22px!important} .pull p{font:400 30px/1.2 var(--serif)!important;margin:0!important}
+.pull{margin:2em 0!important;padding:4px 0 4px 24px!important} .pull p{font:400 clamp(26px,4vw,34px)/1.2 var(--display)!important;margin:0!important}
 .prose ul{padding-left:1.2em} .tags{font-size:15px;color:var(--muted)}
 .author{display:flex;gap:16px;align-items:flex-start;border:1px solid var(--rule);background:var(--card);padding:18px;margin-block:36px;border-radius:4px}
 .author img{width:80px;height:80px;border-radius:50%;object-fit:cover;flex:none} .author-name{font:600 18px/1.2 var(--sans);margin:0 0 4px}
@@ -246,6 +274,15 @@ nav a[aria-current]{border-bottom:2px solid var(--ink)}
 .chips li:first-child a{background:var(--ink);color:var(--paper);border-color:var(--ink)}
 .year{display:grid;gap:4px;margin-top:28px} .year h2{font:600 16px/1.6 var(--sans);color:var(--muted);margin:0}
 @container view (min-width:620px){.year{grid-template-columns:80px minmax(0,1fr);gap:16px} .year h2{padding-top:12px}}
+
+.section-h{font:400 30px/1.15 var(--serif);margin:48px 0 16px}
+.who{display:grid;gap:14px} .who>div{background:var(--card);border:1px solid var(--rule);border-radius:4px;padding:18px}
+.who h3{font:600 18px/1.25 var(--sans);margin:0 0 6px} .who p{margin:0;font-size:17px;color:var(--muted)}
+@container view (min-width:760px){.who{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.ticks{list-style:none;padding:0;margin:0;display:grid;gap:8px} .ticks li{padding-left:22px;position:relative} .ticks li::before{content:"";position:absolute;left:0;top:.6em;width:12px;height:3px;background:var(--yellow)}
+.steps{margin:0;padding-left:1.3em;display:grid;gap:12px} .steps b{font-weight:700}
+.pull-note{margin:36px 0;padding:4px 0 4px 22px;border-left:3px solid var(--yellow)} .pull-note p{font:400 24px/1.35 var(--serif);margin:0}
+.mentor-page .facts{margin-top:24px}
 
 /* Review toolbar and device frames */
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:11;background:#fff}
