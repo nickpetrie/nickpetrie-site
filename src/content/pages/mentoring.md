@@ -4,6 +4,11 @@ metaTitle: "News product mentoring and coaching"
 description: "One-to-one mentoring and coaching for people in news product, from Nick Petrie, Digital Director at The i Paper. One-off sessions are pay what you can."
 updated: "2026-10-28T12:00:00.000Z"
 legacySlug: "mentoring-media-innovation-news-product"
+# Quotes people have agreed can be used publicly. `role` is optional.
+testimonials:
+  - quote: "Nick has a great way of turning seemingly unsolvable issues into practical, tangible actions to resolve the matter. He takes a keen interest in what makes you tick and provides a calm, reassuring sounding board for you to discuss and unpick things that are on your mind. His experience in the media industry means he knows the pitfalls and dynamics and can help navigate when waters get choppy. His inspiring and authentic manners mean that you feel at ease right away and get the most out of every session."
+    name: "Joe Cawthorn"
+    date: "2024-12-17"
 faq:
   - q: "How much does it cost?"
     a: "One-off sessions are pay what you can. A session is worth £250, and you can set any amount from £1 when you book. Stripe won't take £0."

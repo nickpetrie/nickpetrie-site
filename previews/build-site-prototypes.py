@@ -58,7 +58,7 @@ STANDFIRST = {'bridge-roles-need-to-die': 'They let us ignore the real problems.
 for p in posts:
     p['standfirst'] = STANDFIRST.get(p['slug'], p['description'])
 lead = posts[0]
-article_html = re.search(r'<div class="prose">(.*?)</div>\s*(?:<ul class="tags"|</article>)', (root / 'dist/bridge-roles-need-to-die/index.html').read_text(), re.S).group(1)
+article_html = re.search(r'<div class="prose">(.*?)</div>\s*(?:<ul class="tags"|<p class="filed"|</article>)', (root / 'dist/bridge-roles-need-to-die/index.html').read_text(), re.S).group(1)
 article = next(p for p in posts if p['slug'] == 'bridge-roles-need-to-die')
 # The one pull quote the email preview uses, so both media show the same building block.
 QUOTE = 'We keep creating jobs that exist to stand in the gap between editorial and product, and then we wonder why the gap never closes.'

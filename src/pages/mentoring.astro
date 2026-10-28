@@ -74,6 +74,17 @@ const jsonLd = [
       <li><b>Keep going, if it helps.</b> For ongoing mentoring we agree goals, meet monthly and stay in touch in between.</li>
     </ol>
 
+    {d.testimonials.length > 0 && (
+      <>
+        <h2 class="section-h">What people say</h2>
+        <div class:list={['quotes', { single: d.testimonials.length === 1 }]}>
+          {d.testimonials.map((t) => (
+            <figure class="quote"><blockquote><p>{t.quote}</p></blockquote><figcaption>{t.name}{t.role && `, ${t.role}`}</figcaption></figure>
+          ))}
+        </div>
+      </>
+    )}
+
     <p class="small" style="margin-top:24px">More than 65 sessions since 2021. Read what I've learnt from them in <a href="/brief-reflection-first-18-months-mentoring/">my first 18 months</a> and <a href="/after-two-years-of-mentoring-and-baby/">after two years</a>.</p>
 
     <div class="pull-note"><p>I'll always offer free or very low cost sessions of some kind. Those who can afford to pay, I trust your judgement as to how much that is. I mean every word of that.</p></div>

@@ -110,6 +110,9 @@ img { max-width: 100%; height: auto; }
 .mentor-band h2 { font: 400 clamp(32px, 5vw, 44px)/1.08 var(--display); margin: 0 0 14px; max-width: 18ch; }
 .mentor-band p { max-width: 56ch; font-size: 19px; }
 .mentor-band a { color: #F7F6F1; }
+.band-quote { margin: 22px 0 18px; padding-left: 18px; border-left: 3px solid #E6C635; }
+.band-quote p { font: 400 21px/1.4 var(--serif); margin: 0 0 6px; }
+.band-quote footer { font-size: 15px; color: #D9DDE2; }
 .btn.paper { background: #F7F6F1; color: #1F2834; border-color: #F7F6F1; }
 .mentor-facts { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
 .mentor-facts li { border-top: 3px solid #E6C635; padding-top: 10px; font-size: 17px; color: #D9DDE2; }
@@ -173,7 +176,7 @@ img { max-width: 100%; height: auto; }
 .ticks li::before { content: ""; position: absolute; left: 0; top: .6em; width: 12px; height: 3px; background: var(--yellow); }
 .steps { margin: 0; padding-left: 1.3em; display: grid; gap: 12px; }
 .quotes { display: grid; gap: 14px; }
-@media (min-width: 760px) { .quotes { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 760px) { .quotes:not(.single) { grid-template-columns: 1fr 1fr; } }
 .quote { margin: 0; padding: 18px 20px; background: var(--card); border: 1px solid var(--rule); border-radius: 6px; }
 .quote blockquote { margin: 0; }
 .quote p { font: 400 19px/1.45 var(--serif); margin: 0 0 10px; }

@@ -40,6 +40,7 @@ const pages = defineCollection({
       updated: z.coerce.date().optional(),
       legacySlug: z.string().optional(),
       faq: z.array(z.object({ q: z.string(), a: z.string() })).default([]),
+      testimonials: z.array(z.object({ quote: z.string(), name: z.string(), role: z.string().optional(), date: z.coerce.date().optional() })).default([]),
       image: image().optional(),
       ogImage: image().optional(),
       metaTitle: z.string().optional(),

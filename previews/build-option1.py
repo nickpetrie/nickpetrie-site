@@ -75,7 +75,7 @@ def entry(p, h='h3', summary=True):
 def mentoring_band():
     return (f'<section class="mentor-band"><div class="wrap mentor-in">'
             f'<div class="mentor-head"><p class="label">Mentoring</p><h2>Stuck between editorial and product? Let\'s talk it through.</h2>'
-            f'<p>I mentor and coach people in news product: getting started, stepping into a first management role, or leading change in an organisation that would rather not.</p><p class="proof">More than 65 sessions since 2021.</p>'
+            f'<p>I mentor and coach people in news product: getting started, stepping into a first management role, or leading change in an organisation that would rather not.</p><blockquote class="band-quote"><p>“Nick has a great way of turning seemingly unsolvable issues into practical, tangible actions.”</p><footer>Joe Cawthorn</footer></blockquote><p class="proof">More than 65 sessions since 2021.</p>'
             f'<p class="actions"><a class="btn paper" href="#mentoring">Book a session</a> <a href="#mentoring">How it works</a></p></div>'
             f'<ul class="mentor-facts"><li><b>Pay what you can</b>One-off sessions. £250 is the full rate; £1 is fine.</li>'
             f'<li><b>Ongoing mentoring</b>Monthly spaces open from October 2026, over 3, 6 or 12 months.</li>'
@@ -166,9 +166,8 @@ PAGES['mentoring'] = f'''{header('mentoring')}
     <li><b>Keep going, if it helps.</b> For ongoing mentoring we agree goals, meet monthly and stay in touch in between.</li></ol>
 
     <h2 class="section-h">What people say</h2>
-    <div class="quotes">
-      <figure class="quote tbc"><blockquote><p>A short quote from someone you've mentored or coached goes here: what they were stuck on, and what changed.</p></blockquote><figcaption>Name, role, organisation</figcaption></figure>
-      <figure class="quote tbc"><blockquote><p>A second quote, ideally from someone at a different stage: a first-time manager, or someone leading change.</p></blockquote><figcaption>Name, role, organisation</figcaption></figure>
+    <div class="quotes single">
+      <figure class="quote"><blockquote><p>Nick has a great way of turning seemingly unsolvable issues into practical, tangible actions to resolve the matter. He takes a keen interest in what makes you tick and provides a calm, reassuring sounding board for you to discuss and unpick things that are on your mind. His experience in the media industry means he knows the pitfalls and dynamics and can help navigate when waters get choppy. His inspiring and authentic manners mean that you feel at ease right away and get the most out of every session.</p></blockquote><figcaption>Joe Cawthorn</figcaption></figure>
     </div>
     <p class="small">More than 65 sessions since 2021.</p>
 
@@ -298,8 +297,9 @@ nav a[aria-current]{border-bottom:2px solid var(--ink)}
 @container view (min-width:760px){.who{grid-template-columns:repeat(3,minmax(0,1fr))}}
 .ticks{list-style:none;padding:0;margin:0;display:grid;gap:8px} .ticks li{padding-left:22px;position:relative} .ticks li::before{content:"";position:absolute;left:0;top:.6em;width:12px;height:3px;background:var(--yellow)}
 .steps{margin:0;padding-left:1.3em;display:grid;gap:12px} .steps b{font-weight:700}
+.band-quote{margin:22px 0 18px;padding-left:18px;border-left:3px solid #E6C635} .band-quote p{font:400 21px/1.4 var(--serif);margin:0 0 6px} .band-quote footer{font-size:15px;color:#D9DDE2}
 .mentor-band .proof{color:#E6C635;font-weight:700;margin-top:-4px}
-.quotes{display:grid;gap:14px} @container view (min-width:760px){.quotes{grid-template-columns:1fr 1fr}}
+.quotes{display:grid;gap:14px} @container view (min-width:760px){.quotes:not(.single){grid-template-columns:1fr 1fr}}
 .quote{margin:0;padding:18px 20px;background:var(--card, #fff);border:1px solid var(--rule);border-radius:6px} .quote blockquote{margin:0} .quote p{font:400 19px/1.45 var(--serif);margin:0 0 10px} .quote figcaption{font-size:15px;color:var(--muted)}
 .quote.tbc{border-style:dashed;background:transparent} .quote.tbc p,.quote.tbc figcaption{color:var(--muted)}
 .faq details{border-top:1px solid var(--rule);padding:14px 0} .faq details:last-child{border-bottom:1px solid var(--rule)} .faq summary{font-weight:700;font-size:18px;cursor:pointer} .faq details p{margin:10px 0 0}
