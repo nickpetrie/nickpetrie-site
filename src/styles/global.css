@@ -189,6 +189,7 @@ img { max-width: 100%; height: auto; }
 .facts { display: grid; gap: 18px; margin: 0 0 24px; }
 .facts > div { border-top: 3px solid var(--yellow); padding-top: 10px; }
 .facts p:not(.label) { margin: 0; }
+.facts .offer-cta { margin-top: 10px; font-weight: 700; }
 @media (min-width: 760px) { .facts { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; } }
 .section-h { font: 400 30px/1.15 var(--serif); margin: 48px 0 16px; }
 .who { display: grid; gap: 14px; }

@@ -1,10 +1,10 @@
 ---
-import { booking } from '../site';
+import { booking, site } from '../site';
 ---
 <section class="mentor-band" aria-labelledby="mentor-band-h">
   <div class="wrap mentor-in">
     <div>
-      <p class="label">Mentoring</p>
+      <p class="label">Mentoring and coaching</p>
       <h2 id="mentor-band-h">Stuck between editorial and product? Let's talk it through.</h2>
       <p>I mentor and coach people in news product: getting started, stepping into a first management role, or leading change in an organisation that would rather not.</p>
       <blockquote class="band-quote"><p>“Nick has a great way of turning seemingly unsolvable issues into practical, tangible actions.”</p><footer>Joe Cawthorn</footer></blockquote>
@@ -12,9 +12,9 @@ import { booking } from '../site';
       <p class="actions"><a class="btn paper" href={booking}>Book a session</a> <a href="/mentoring/">How it works</a></p>
     </div>
     <ul class="mentor-facts">
-      <li><b>Pay what you can</b>One-off sessions. £250 is the full rate; £1 is fine.</li>
       <li><b>Ongoing mentoring</b>Monthly spaces open from October 2026, over 3, 6 or 12 months.</li>
-      <li><b>Ask your employer</b>Many will fund it as personal development.</li>
+      <li><b>Leadership coaching</b>For people leading teams or change. <a href={`mailto:${site.email}?subject=${encodeURIComponent('Leadership coaching')}`}>Get in touch</a></li>
+      <li><b>Pay what you can</b>One-off sessions. £250 is the full rate; £1 is fine. Many employers will fund it as personal development.</li>
     </ul>
   </div>
 </section>
