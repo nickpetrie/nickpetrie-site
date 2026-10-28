@@ -6,7 +6,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "wrangler dev",
-    "deploy": "astro build && wrangler deploy",
+    "deploy": "wrangler deploy",
     "import:ghost": "node scripts/import-ghost.mjs",
     "check:urls": "node scripts/check-urls.mjs"
   },

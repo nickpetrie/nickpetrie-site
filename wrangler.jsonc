@@ -3,6 +3,9 @@
   "name": "nickpetrie-site",
   "main": "worker/index.js",
   "compatibility_date": "2026-10-01",
+  // Runs before every `wrangler deploy`, including Cloudflare's Git builds, so dist/ is always fresh.
+  "build": { "command": "npm run build" },
+  "workers_dev": true,
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",
