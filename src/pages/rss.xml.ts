@@ -19,7 +19,7 @@ export async function GET(context: APIContext) {
       pubDate: post.data.date,
       description: post.data.description,
       categories: post.data.tags,
-      author: 'hello@nickpetrie.co (Nick Petrie)',
+      author: 'nick@nickpetrie.co (Nick Petrie)',
       content: (post.rendered?.html ?? '').replace(/(src|href)="\//g, `$1="${base}/`),
     })),
   });

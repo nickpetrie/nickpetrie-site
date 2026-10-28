@@ -8,7 +8,7 @@ export const site = {
     'Nick Petrie writes about news product, newsroom strategy and digital transformation, and mentors people working in news product. Digital Director at The i Paper.',
   locale: 'en_GB',
   lang: 'en-GB',
-  email: 'hello@nickpetrie.co',
+  email: 'nick@nickpetrie.co',
   nav: [
     { href: '/writing/', label: 'Writing' },
     { href: '/newsletter/', label: 'Newsletter' },
