@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>Nick Petrie social canvas</title>
+<!--
+  One template for every social design. render(spec, root) draws a design into root;
+  window.render() draws window.SPEC into the page. Sizes are in units of a 1080px-wide
+  canvas (--u), so every format scales from the same numbers. See references/formats.md.
+  Studio copies this file and ../assets/ to draw designs live in the browser.
+-->
+<style>
+@font-face { font-family: 'Source Sans 3'; src: url(../assets/fonts/SourceSans3-Regular.woff2) format('woff2'); font-weight: 400; }
+@font-face { font-family: 'Source Sans 3'; src: url(../assets/fonts/SourceSans3-Semibold.woff2) format('woff2'); font-weight: 600; }
+@font-face { font-family: 'Source Sans 3'; src: url(../assets/fonts/SourceSans3-Bold.woff2) format('woff2'); font-weight: 700; }
+@font-face { font-family: 'Source Serif 4'; src: url(../assets/fonts/SourceSerif4-Regular.woff2) format('woff2'); font-weight: 400; }
+@font-face { font-family: 'Source Serif 4'; src: url(../assets/fonts/SourceSerif4-Italic.woff2) format('woff2'); font-weight: 400; font-style: italic; }
+@font-face { font-family: 'Source Serif 4'; src: url(../assets/fonts/SourceSerif4-Semibold.woff2) format('woff2'); font-weight: 600; }
+@font-face { font-family: 'Source Serif 4 Display'; src: url(../assets/fonts/SourceSerif4Display-Regular.woff2) format('woff2'); font-weight: 400; }
+
+:root { --w: 1080px; --h: 1350px; --u: 1px; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: #888; }
+.canvas {
+  width: var(--w); height: var(--h); position: relative; overflow: hidden;
+  display: flex; flex-direction: column;
+  padding: calc(80 * var(--u)) calc(84 * var(--u)) calc(64 * var(--u));
+  background: var(--bg); color: var(--fg);
+  font-family: 'Source Sans 3', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased; text-rendering: geometricPrecision;
+  break-after: page;
+}
+.canvas.paper  { --bg: #F7F6F1; --fg: #1F2834; --muted: #5A6470; --accent: #E6C635; --rule: #D8DCD9; --mark: #1F2834; }
+.canvas.ink    { --bg: #1F2834; --fg: #F7F6F1; --muted: #A9B1BA; --accent: #E6C635; --rule: #36404C; --mark: #F7F6F1; }
+.canvas.yellow { --bg: #E6C635; --fg: #1F2834; --muted: #3B4553; --accent: #1F2834; --rule: rgba(31,40,52,.35); --mark: #1F2834; }
+
+.top { display: flex; align-items: center; justify-content: space-between; gap: calc(24 * var(--u)); }
+.brand { display: flex; align-items: center; gap: calc(18 * var(--u)); font-weight: 600; font-size: calc(34 * var(--u)); }
+.brand svg { width: calc(72 * var(--u)); height: auto; fill: var(--mark); }
+.brand svg path { fill: var(--mark); }
+.masthead svg { display: block; width: calc(var(--mast, 470) * var(--u)); height: auto; }
+.masthead svg path { fill: var(--fg); }
+.count { font-weight: 700; font-size: calc(26 * var(--u)); letter-spacing: .06em; color: var(--muted); }
+
+.main { flex: 1; display: flex; flex-direction: column; justify-content: center; min-height: 0; margin: calc(40 * var(--u)) 0 calc(44 * var(--u)); }
+.main.bottom { justify-content: flex-end; }
+.rules { display: grid; gap: calc(10 * var(--u)); margin-bottom: calc(36 * var(--u)); }
+.rules i { display: block; width: calc(104 * var(--u)); background: var(--accent); }
+.rules i:first-child { height: calc(22 * var(--u)); }
+.rules i:last-child { height: calc(10 * var(--u)); }
+.kicker { font-weight: 700; font-size: calc(28 * var(--u)); letter-spacing: .07em; text-transform: uppercase; margin: 0 0 calc(26 * var(--u)); }
+.canvas.ink .kicker { color: var(--accent); }
+.headline {
+  font-family: 'Source Serif 4 Display', Georgia, serif; font-weight: 400;
+  font-size: calc(var(--hs) * var(--u)); line-height: 1.06; letter-spacing: -.012em;
+  margin: 0; text-wrap: balance; white-space: pre-line;
+}
+.headline mark { color: inherit; background: linear-gradient(transparent 58%, var(--accent) 58%, var(--accent) 84%, transparent 84%); padding: 0 .06em; margin: 0 -.06em; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.canvas.ink .headline mark { background: none; color: var(--accent); }
+.canvas.yellow .headline mark { background: none; text-decoration: underline; text-decoration-thickness: .07em; text-underline-offset: .12em; }
+.text { font-family: 'Source Serif 4', Georgia, serif; font-size: calc(var(--ts, 40) * var(--u)); line-height: 1.4; margin: calc(var(--gap, 34) * var(--u)) 0 0; color: var(--muted); max-width: calc(860 * var(--u)); white-space: pre-line; }
+.canvas.yellow .text { color: var(--fg); }
+
+.facts { list-style: none; margin: calc(var(--gap, 34) * var(--u)) 0 0; padding: 0; display: grid; gap: calc(22 * var(--u)); }
+.facts li { border-top: calc(5 * var(--u)) solid var(--accent); padding-top: calc(14 * var(--u)); font-size: calc(32 * var(--u)); line-height: 1.35; color: var(--muted); }
+.facts b { display: block; color: var(--fg); font-size: calc(34 * var(--u)); margin-bottom: calc(4 * var(--u)); }
+
+.quote-mark { font-family: 'Source Serif 4 Display', Georgia, serif; font-size: calc(300 * var(--u)); line-height: .8; height: calc(150 * var(--u)); color: var(--accent); margin-left: calc(-12 * var(--u)); }
+.quote { font-family: 'Source Serif 4 Display', Georgia, serif; font-size: calc(var(--hs) * var(--u)); line-height: 1.18; margin: 0; text-wrap: pretty; white-space: pre-line; }
+.byline { margin-top: calc(40 * var(--u)); font-weight: 700; font-size: calc(32 * var(--u)); display: flex; align-items: center; gap: calc(18 * var(--u)); }
+.byline::before { content: ""; width: calc(40 * var(--u)); height: calc(4 * var(--u)); background: var(--fg); }
+.byline span { font-weight: 400; color: var(--muted); }
+
+.number { font-family: 'Source Serif 4 Display', Georgia, serif; font-size: calc(220 * var(--u)); line-height: .9; color: var(--accent); margin: 0 0 calc(24 * var(--u)); }
+.canvas.paper .number { color: var(--fg); -webkit-text-stroke: 0; }
+
+.foot { display: flex; justify-content: space-between; align-items: center; gap: calc(24 * var(--u)); border-top: calc(2 * var(--u)) solid var(--rule); padding-top: calc(26 * var(--u)); font-size: calc(30 * var(--u)); }
+.foot .url { font-weight: 700; }
+.foot .who { color: var(--muted); }
+.cta { display: inline-block; margin-top: calc(44 * var(--u)); padding: calc(24 * var(--u)) calc(36 * var(--u)); font-weight: 700; font-size: calc(34 * var(--u)); background: var(--fg); color: var(--bg); border-radius: calc(6 * var(--u)); align-self: flex-start; }
+.canvas.ink .cta { background: #F7F6F1; color: #1F2834; }
+.canvas.f-landscape { padding: calc(52 * var(--u)) calc(64 * var(--u)) calc(40 * var(--u)); }
+.f-landscape .rules { margin-bottom: calc(20 * var(--u)); }
+.f-landscape .kicker { margin-bottom: calc(14 * var(--u)); }
+.f-landscape .foot { padding-top: calc(16 * var(--u)); }
+.f-story { padding-top: calc(230 * var(--u)); padding-bottom: calc(300 * var(--u)); }
+.portrait { width: calc(150 * var(--u)); height: calc(150 * var(--u)); border-radius: 50%; object-fit: cover; margin-bottom: calc(34 * var(--u)); }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+const NP = '<svg viewBox="0 0 170 100" aria-hidden="true"><path d="M0 100V0H19L65 67V0H84V100H65L19 31V100Z"/><path fill-rule="evenodd" d="M97 100V0H153C163 0 170 7 170 17V48C170 58 163 65 153 65H116V100ZM116 16V49H143C148 49 151 46 151 41V24C151 19 148 16 143 16Z"/></svg>';
+const MAST = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 195" aria-hidden="true"><path d="M0 20.27H40V29.27H0ZM0 38.27H40V42.27H0Z"/><path transform="translate(65.000 62) scale(0.064000 -0.064000)" d="M132 0 14 652H167L210 348Q217 296 223.5 244.5Q230 193 235 139H239Q248 193 257.5 245.0Q267 297 277 348L346 652H477L543 348Q553 298 563.0 245.5Q573 193 582 139H586Q591 193 597.5 245.0Q604 297 610 348L656 652H800L683 0H493L432 296Q417 368 408 450H404Q399 410 393.5 371.5Q388 333 380 296L319 0Z"/><path transform="translate(117.032 62) scale(0.064000 -0.064000)" d="M65 0V701H212V529L205 440Q233 465 270.5 486.5Q308 508 358 508Q439 508 475.5 454.5Q512 401 512 308V0H365V289Q365 343 350.5 363.0Q336 383 304 383Q276 383 256.0 370.5Q236 358 212 335V0Z"/><path transform="translate(153.576 62) scale(0.064000 -0.064000)" d="M273 395Q244 395 216.5 375.5Q189 356 179 305H355Q355 344 336.0 369.5Q317 395 273 395ZM287 -12Q216 -12 159.0 18.5Q102 49 69.0 107.5Q36 166 36 248Q36 329 69.5 387.0Q103 445 157.0 476.5Q211 508 270 508Q341 508 388.0 476.5Q435 445 458.0 391.5Q481 338 481 270Q481 251 479.0 232.5Q477 214 475 203H179Q191 145 228.0 123.0Q265 101 307 101Q362 101 415 133L463 43Q426 17 378.5 2.5Q331 -12 287 -12Z"/><path transform="translate(186.728 62) scale(0.064000 -0.064000)" d="M65 0V496H185L195 433H199Q231 463 269.5 485.5Q308 508 358 508Q439 508 475.5 454.5Q512 401 512 308V0H365V289Q365 343 350.5 363.0Q336 383 304 383Q276 383 256.0 370.5Q236 358 212 335V0Z"/><path transform="translate(236.136 62) scale(0.064000 -0.064000)" d="M77 0V652H231L398 331Q415 298 431.0 260.0Q447 222 462 184H466Q461 237 454.0 300.0Q447 363 447 421V652H588V0H434L267 321Q250 354 233.5 392.0Q217 430 202 468H198Q204 414 211.0 351.5Q218 289 218 231V0Z"/><path transform="translate(278.696 62) scale(0.064000 -0.064000)" d="M273 395Q244 395 216.5 375.5Q189 356 179 305H355Q355 344 336.0 369.5Q317 395 273 395ZM287 -12Q216 -12 159.0 18.5Q102 49 69.0 107.5Q36 166 36 248Q36 329 69.5 387.0Q103 445 157.0 476.5Q211 508 270 508Q341 508 388.0 476.5Q435 445 458.0 391.5Q481 338 481 270Q481 251 479.0 232.5Q477 214 475 203H179Q191 145 228.0 123.0Q265 101 307 101Q362 101 415 133L463 43Q426 17 378.5 2.5Q331 -12 287 -12Z"/><path transform="translate(311.848 62) scale(0.064000 -0.064000)" d="M148 0 24 496H171L218 266Q225 231 230.0 194.5Q235 158 240 117H244Q251 158 257.5 195.0Q264 232 272 266L324 496H458L513 266Q521 231 528.0 194.5Q535 158 542 117H546Q553 158 557.0 194.5Q561 231 568 266L615 496H752L633 0H456L414 198Q407 232 401.0 266.5Q395 301 389 346H385Q381 301 375.0 266.5Q369 232 362 198L321 0Z"/><path transform="translate(361.512 62) scale(0.064000 -0.064000)" d="M211 -12Q162 -12 110.5 7.0Q59 26 21 62L83 145Q117 118 150.5 107.5Q184 97 215 97Q248 97 263.0 108.5Q278 120 278 139Q278 164 249.5 177.0Q221 190 181 205Q146 218 115.5 238.0Q85 258 66.5 286.5Q48 315 48 353Q48 422 100.5 465.0Q153 508 238 508Q292 508 337.0 490.5Q382 473 413 445L350 363Q323 383 296.0 391.0Q269 399 243 399Q214 399 200.0 388.0Q186 377 186 360Q186 338 208.5 326.0Q231 314 278 299Q335 280 375.0 245.0Q415 210 415 148Q415 81 363.0 34.5Q311 -12 211 -12Z"/><path transform="translate(65.000 126) scale(0.064000 -0.064000)" d="M77 0V652H241L345 362Q355 333 363.5 303.5Q372 274 381 242H385Q394 274 402.0 303.5Q410 333 420 362L522 652H686V0H551V239Q551 271 554.5 314.5Q558 358 562.5 401.5Q567 445 571 477H567L514 305L422 56H336L245 305L194 477H190Q194 445 198.5 401.5Q203 358 206.0 314.5Q209 271 209 239V0Z"/><path transform="translate(113.768 126) scale(0.064000 -0.064000)" d="M273 395Q244 395 216.5 375.5Q189 356 179 305H355Q355 344 336.0 369.5Q317 395 273 395ZM287 -12Q216 -12 159.0 18.5Q102 49 69.0 107.5Q36 166 36 248Q36 329 69.5 387.0Q103 445 157.0 476.5Q211 508 270 508Q341 508 388.0 476.5Q435 445 458.0 391.5Q481 338 481 270Q481 251 479.0 232.5Q477 214 475 203H179Q191 145 228.0 123.0Q265 101 307 101Q362 101 415 133L463 43Q426 17 378.5 2.5Q331 -12 287 -12Z"/><path transform="translate(146.920 126) scale(0.064000 -0.064000)" d="M273 395Q244 395 216.5 375.5Q189 356 179 305H355Q355 344 336.0 369.5Q317 395 273 395ZM287 -12Q216 -12 159.0 18.5Q102 49 69.0 107.5Q36 166 36 248Q36 329 69.5 387.0Q103 445 157.0 476.5Q211 508 270 508Q341 508 388.0 476.5Q435 445 458.0 391.5Q481 338 481 270Q481 251 479.0 232.5Q477 214 475 203H179Q191 145 228.0 123.0Q265 101 307 101Q362 101 415 133L463 43Q426 17 378.5 2.5Q331 -12 287 -12Z"/><path transform="translate(180.072 126) scale(0.064000 -0.064000)" d="M256 -11Q164 -11 124.5 42.0Q85 95 85 181V381H17V490L93 496L110 648H232V496H351V381H232V183Q232 141 249.5 122.5Q267 104 296 104Q308 104 320.5 106.0Q333 108 343 112L367 9Q348 1 319.5 -5.0Q291 -11 256 -11Z"/><path transform="translate(204.584 126) scale(0.064000 -0.064000)" d="M211 -12Q162 -12 110.5 7.0Q59 26 21 62L83 145Q117 118 150.5 107.5Q184 97 215 97Q248 97 263.0 108.5Q278 120 278 139Q278 164 249.5 177.0Q221 190 181 205Q146 218 115.5 238.0Q85 258 66.5 286.5Q48 315 48 353Q48 422 100.5 465.0Q153 508 238 508Q292 508 337.0 490.5Q382 473 413 445L350 363Q323 383 296.0 391.0Q269 399 243 399Q214 399 200.0 388.0Q186 377 186 360Q186 338 208.5 326.0Q231 314 278 299Q335 280 375.0 245.0Q415 210 415 148Q415 81 363.0 34.5Q311 -12 211 -12Z"/><path transform="translate(245.736 126) scale(0.064000 -0.064000)" d="M77 0V652H301Q373 652 431.5 632.5Q490 613 525.0 567.0Q560 521 560 442Q560 366 525.0 317.0Q490 268 432.0 244.5Q374 221 305 221H224V0ZM224 338H296Q416 338 416 442Q416 493 384.0 514.0Q352 535 292 535H224Z"/><path transform="translate(283.880 126) scale(0.064000 -0.064000)" d="M65 0V496H185L195 409H199Q226 459 264.0 483.5Q302 508 340 508Q361 508 375.0 505.5Q389 503 399 498L371 373Q358 376 347.5 377.5Q337 379 321 379Q293 379 262.5 358.5Q232 338 212 288V0Z"/><path transform="translate(309.352 126) scale(0.064000 -0.064000)" d="M278 -12Q215 -12 159.5 18.5Q104 49 70.0 107.5Q36 166 36 248Q36 331 70.0 389.0Q104 447 159.5 477.5Q215 508 278 508Q341 508 396.0 477.5Q451 447 485.0 389.0Q519 331 519 248Q519 166 485.0 107.5Q451 49 396.0 18.5Q341 -12 278 -12ZM278 107Q323 107 346.0 145.5Q369 184 369 248Q369 313 346.0 351.0Q323 389 278 389Q232 389 209.5 351.0Q187 313 187 248Q187 184 209.5 145.5Q232 107 278 107Z"/><path transform="translate(344.872 126) scale(0.064000 -0.064000)" d="M242 -12Q150 -12 94.5 57.5Q39 127 39 248Q39 329 68.5 387.5Q98 446 145.5 477.0Q193 508 245 508Q286 508 314.0 494.0Q342 480 367 456L361 532V701H508V0H388L378 49H374Q348 23 313.0 5.5Q278 -12 242 -12ZM280 108Q304 108 323.5 118.0Q343 128 361 153V356Q342 374 320.5 381.0Q299 388 279 388Q244 388 217.0 354.5Q190 321 190 250Q190 177 213.5 142.5Q237 108 280 108Z"/><path transform="translate(381.544 126) scale(0.064000 -0.064000)" d="M214 -12Q133 -12 96.5 41.5Q60 95 60 188V496H207V207Q207 154 222.0 133.5Q237 113 269 113Q297 113 316.0 126.0Q335 139 357 168V496H504V0H384L373 69H370Q339 32 302.0 10.0Q265 -12 214 -12Z"/><path transform="translate(417.896 126) scale(0.064000 -0.064000)" d="M284 -12Q214 -12 157.5 18.5Q101 49 68.5 107.5Q36 166 36 248Q36 331 72.0 389.0Q108 447 167.0 477.5Q226 508 294 508Q340 508 376.5 493.5Q413 479 439 455L370 364Q357 375 341.0 382.0Q325 389 303 389Q251 389 219.0 351.0Q187 313 187 248Q187 184 218.5 145.5Q250 107 299 107Q348 107 387 140L445 49Q414 21 372.0 4.5Q330 -12 284 -12Z"/><path transform="translate(447.784 126) scale(0.064000 -0.064000)" d="M256 -11Q164 -11 124.5 42.0Q85 95 85 181V381H17V490L93 496L110 648H232V496H351V381H232V183Q232 141 249.5 122.5Q267 104 296 104Q308 104 320.5 106.0Q333 108 343 112L367 9Q348 1 319.5 -5.0Q291 -11 256 -11Z"/><path transform="translate(65.000 175) scale(0.024000 -0.024000)" d="M297 -12Q263 -12 226.5 4.5Q190 21 158 50H155L148 0H82V712H164V518L162 430Q195 459 234.5 478.5Q274 498 314 498Q409 498 458.0 431.0Q507 364 507 251Q507 168 477.5 109.0Q448 50 400.5 19.0Q353 -12 297 -12ZM283 57Q343 57 382.5 108.5Q422 160 422 250Q422 330 392.5 379.5Q363 429 294 429Q263 429 231.0 412.0Q199 395 164 363V108Q196 80 227.5 68.5Q259 57 283 57Z"/><path transform="translate(78.272 175) scale(0.024000 -0.024000)" d="M90 -209Q74 -209 59.5 -206.0Q45 -203 33 -199L51 -135Q69 -141 86 -141Q127 -141 154.0 -111.5Q181 -82 196 -37L207 -1L12 486H97L196 217Q207 186 219.5 150.0Q232 114 243 80H247Q258 113 268.0 149.0Q278 185 288 217L375 486H455L272 -40Q255 -88 231.5 -126.0Q208 -164 173.5 -186.5Q139 -209 90 -209Z"/><path transform="translate(94.280 175) scale(0.024000 -0.024000)" d="M90 0V656H181L414 248Q433 215 450.5 179.0Q468 143 484 107H488Q484 158 480.5 211.0Q477 264 477 315V656H557V0H466L233 408Q214 441 196.0 477.0Q178 513 162 549H158Q163 500 166.0 448.0Q169 396 169 343V0Z"/><path transform="translate(109.808 175) scale(0.024000 -0.024000)" d="M82 0V486H164V0ZM123 586Q99 586 83.5 600.5Q68 615 68 640Q68 664 83.5 679.0Q99 694 123 694Q147 694 162.5 679.0Q178 664 178 640Q178 615 162.5 600.5Q147 586 123 586Z"/><path transform="translate(115.712 175) scale(0.024000 -0.024000)" d="M275 -12Q210 -12 158.0 18.0Q106 48 76.0 105.0Q46 162 46 242Q46 324 78.5 381.0Q111 438 164.5 468.0Q218 498 280 498Q328 498 362.5 482.0Q397 466 422 441L381 391Q362 408 338.5 419.0Q315 430 283 430Q240 430 205.5 406.5Q171 383 151.0 340.5Q131 298 131 242Q131 159 173.0 107.5Q215 56 282 56Q315 56 344.0 69.0Q373 82 395 102L431 52Q401 23 361.5 5.5Q322 -12 275 -12Z"/><path transform="translate(126.656 175) scale(0.024000 -0.024000)" d="M82 0V712H164V231H166L372 486H464L302 290L486 0H396L254 234L164 128V0Z"/><path transform="translate(143.336 175) scale(0.024000 -0.024000)" d="M90 0V656H277Q351 656 406.0 638.0Q461 620 492.0 577.5Q523 535 523 463Q523 360 456.0 310.0Q389 260 281 260H173V0ZM173 328H271Q357 328 398.5 360.5Q440 393 440 463Q440 534 396.5 561.5Q353 589 267 589H173Z"/><path transform="translate(156.920 175) scale(0.024000 -0.024000)" d="M266 431Q236 431 207.5 416.5Q179 402 158.5 370.0Q138 338 131 286H384Q384 357 353.0 394.0Q322 431 266 431ZM279 -12Q214 -12 160.5 18.0Q107 48 76.0 105.5Q45 163 45 243Q45 322 76.5 379.0Q108 436 158.5 467.0Q209 498 265 498Q359 498 408.5 436.0Q458 374 458 270Q458 257 457.0 245.0Q456 233 454 221H129Q135 139 181.5 97.0Q228 55 289 55Q324 55 354.5 65.0Q385 75 410 92L440 38Q408 16 368.5 2.0Q329 -12 279 -12Z"/><path transform="translate(168.824 175) scale(0.024000 -0.024000)" d="M235 -9Q157 -9 126.5 35.5Q96 80 96 153V419H24V481L100 486L110 642H179V486H310V419H179V151Q179 107 195.5 82.5Q212 58 254 58Q267 58 281.0 60.5Q295 63 309 70L326 12Q307 2 283.5 -3.5Q260 -9 235 -9Z"/><path transform="translate(176.936 175) scale(0.024000 -0.024000)" d="M82 0V486H150L157 398H160Q184 444 220.0 471.0Q256 498 298 498Q327 498 350 488L332 418Q321 421 311.5 422.5Q302 424 287 424Q256 424 222.5 399.0Q189 374 164 312V0Z"/><path transform="translate(185.264 175) scale(0.024000 -0.024000)" d="M82 0V486H164V0ZM123 586Q99 586 83.5 600.5Q68 615 68 640Q68 664 83.5 679.0Q99 694 123 694Q147 694 162.5 679.0Q178 664 178 640Q178 615 162.5 600.5Q147 586 123 586Z"/><path transform="translate(191.168 175) scale(0.024000 -0.024000)" d="M266 431Q236 431 207.5 416.5Q179 402 158.5 370.0Q138 338 131 286H384Q384 357 353.0 394.0Q322 431 266 431ZM279 -12Q214 -12 160.5 18.0Q107 48 76.0 105.5Q45 163 45 243Q45 322 76.5 379.0Q108 436 158.5 467.0Q209 498 265 498Q359 498 408.5 436.0Q458 374 458 270Q458 257 457.0 245.0Q456 233 454 221H129Q135 139 181.5 97.0Q228 55 289 55Q324 55 354.5 65.0Q385 75 410 92L440 38Q408 16 368.5 2.0Q329 -12 279 -12Z"/></svg>';
+const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+// [[words]] in a headline get the highlighter.
+const rich = (s) => esc(s).replace(/\[\[(.+?)\]\]/g, '<mark>$1</mark>');
+
+const DEFAULTS = {
+  statement: { theme: 'paper', hs: 96 },
+  issue: { theme: 'yellow', hs: 92 },
+  quote: { theme: 'ink', hs: 64 },
+  point: { theme: 'paper', hs: 80 },
+  offer: { theme: 'ink', hs: 84 },
+  cta: { theme: 'yellow', hs: 96 },
+};
+
+async function draw(spec, root) {
+  const layout = spec.layout || 'statement';
+  const d = DEFAULTS[layout] || DEFAULTS.statement;
+  const theme = layout === 'issue' ? 'yellow' : (spec.theme || d.theme);
+  const el = document.createElement('section');
+  el.className = `canvas ${theme} l-${layout} f-${spec.format || 'post'}`;
+  el.style.setProperty('--hs', spec.headlineSize || (spec.format === 'landscape' ? Math.round(d.hs * 0.8) : d.hs));
+  if (spec.textSize) el.style.setProperty('--ts', spec.textSize);
+  const foot = `<div class="foot"><span class="who">${esc(spec.footer?.[0] ?? 'Nick Petrie')}</span><span class="url">${esc(spec.url ?? 'nickpetrie.co')}</span></div>`;
+  const top = layout === 'issue' || spec.masthead
+    ? `<div class="top"><div class="masthead">${MAST}</div>${spec.count ? `<span class="count">${esc(spec.count)}</span>` : ''}</div>`
+    : `<div class="top"><div class="brand">${NP}<span>Nick Petrie</span></div>${spec.count ? `<span class="count">${esc(spec.count)}</span>` : ''}</div>`;
+  let main = '';
+  const kicker = spec.kicker ? `<p class="kicker">${esc(spec.kicker)}</p>` : '';
+  const text = spec.text ? `<p class="text">${esc(spec.text)}</p>` : '';
+  const facts = spec.facts?.length ? `<ul class="facts">${spec.facts.map((f) => `<li><b>${esc(f.label)}</b>${esc(f.value)}</li>`).join('')}</ul>` : '';
+  const cta = spec.cta ? `<span class="cta">${esc(spec.cta)}</span>` : '';
+  if (layout === 'quote') {
+    main = `<div class="main"><div class="quote-mark">“</div><p class="quote">${rich(spec.quote)}</p>${spec.byline ? `<p class="byline">${esc(spec.byline)}${spec.source ? `<span>${esc(spec.source)}</span>` : ''}</p>` : ''}</div>`;
+  } else if (layout === 'point') {
+    main = `<div class="main">${spec.number != null ? `<p class="number">${esc(spec.number)}</p>` : ''}${kicker}<h1 class="headline">${rich(spec.headline)}</h1>${text}</div>`;
+  } else {
+    const portrait = spec.portrait ? `<img class="portrait" src="${esc(spec.portrait)}" alt="">` : '';
+    main = `<div class="main${layout === 'statement' || layout === 'issue' ? ' bottom' : ''}">${portrait}${layout !== 'offer' && layout !== 'issue' && !spec.masthead ? '<div class="rules"><i></i><i></i></div>' : ''}${kicker}<h1 class="headline">${rich(spec.headline)}</h1>${text}${facts}${cta}</div>`;
+  }
+  el.innerHTML = top + main + foot;
+  root.appendChild(el);
+  return el;
+}
+
+// Keep everything inside the canvas: step the headline down to 70% before giving up.
+function fit(el, spec) {
+  const changed = [];
+  const main = el.querySelector('.main');
+  const base = Number(el.style.getPropertyValue('--hs'));
+  let hs = base;
+  // Height the children need (with margins) against the room the main area has.
+  const over = () => {
+    const kids = [...main.children];
+    if (!kids.length) return 0;
+    const top = Math.min(...kids.map((k) => k.getBoundingClientRect().top - parseFloat(getComputedStyle(k).marginTop)));
+    const bottom = Math.max(...kids.map((k) => k.getBoundingClientRect().bottom + parseFloat(getComputedStyle(k).marginBottom)));
+    return (bottom - top) - main.clientHeight;
+  };
+  while (over() > 1 && hs > base * 0.7) { hs = Math.round(hs - 2); el.style.setProperty('--hs', hs); }
+  if (hs !== base) changed.push('headlineSize');
+  const outside = over() > 1 ? [{ el: spec.layout || 'statement', over: Math.round(over() / (el.clientWidth / 1080)) }] : [];
+  return { ok: outside.length === 0, changed, headlineSize: hs !== base ? hs : null, outside };
+}
+
+window.FIT = null;
+window.render = async function (spec = window.SPEC, root = document.getElementById('root')) {
+  window.FIT = null;
+  root.innerHTML = '';
+  const slides = spec.slides || [spec];
+  await document.fonts.ready;
+  const fits = [];
+  for (const s of slides) {
+    const el = await draw({ format: spec.format, ...s }, root);
+    await document.fonts.ready;
+    fits.push(fit(el, s));
+  }
+  window.FIT = { ok: fits.every((f) => f.ok), slides: fits };
+  return window.FIT;
+};
+</script>
+</body>
+</html>

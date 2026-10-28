@@ -1,0 +1,9 @@
+{"format": "post", "slides": [
+  {"layout": "statement", "theme": "paper", "kicker": "Readers, readers, readers", "headline": "Five places to start closing the gap with [[readers]].", "count": "1/7"},
+  {"layout": "point", "number": "1", "headline": "Invest much, much more in understanding your audience.", "text": "Talk to them, show them new ideas, run diary studies. Listen, implement, then listen some more.", "count": "2/7"},
+  {"layout": "point", "number": "2", "headline": "Bring novel ideas to the table.", "text": "Every news website is a variation on a theme: a headline, a picture and some body copy. Let's be inventors.", "count": "3/7"},
+  {"layout": "point", "number": "3", "headline": "Play the infinite game.", "text": "Be something very important to a distinct audience, rather than something of marginal value to everyone.", "count": "4/7"},
+  {"layout": "point", "number": "4", "headline": "Consider everything on the table.", "text": "What you cover, how you cover it. Workflow, formats, volume. All of it needs to be examined.", "count": "5/7"},
+  {"layout": "point", "number": "5", "headline": "Design an experience.", "text": "From the first moment someone discovers you to the moment they pause or cancel: considered, easy, respectful.", "count": "6/7"},
+  {"layout": "cta", "masthead": true, "headline": "What would you do differently?", "text": "Read the full piece, and get the next one by email.", "cta": "nickpetrie.co/newsletter", "url": "When News Meets Product", "footer": ["Nick Petrie"], "count": "7/7"}
+]}
