@@ -16,6 +16,7 @@ export const site = {
     { href: '/about/', label: 'About' },
   ],
   social: {
+    linkedin: 'https://www.linkedin.com/in/nick-elliot-petrie/',
     x: 'https://x.com/petren',
     mastodon: 'https://macaw.social/@petren',
   },
