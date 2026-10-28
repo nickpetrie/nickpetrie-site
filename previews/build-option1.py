@@ -31,7 +31,7 @@ about_how = prose_of('about').split('<h2 id="how-i-work">How I work</h2>', 1)[1]
 
 FEATURED = ['bridge-roles-need-to-die', 'the-two-product-team-problem', 'readers-readers-readers-readers-readers']
 featured = [next(p for p in posts if p['slug'] == s) for s in FEATURED]
-more = [p for p in posts if p['slug'] not in FEATURED][:6]
+more = [p for p in posts if p['slug'] not in FEATURED][:3]
 issues = [p for p in posts if p.get('issue')]
 
 STATEMENT = 'I work where journalism meets product.'
@@ -75,10 +75,10 @@ def entry(p, h='h3', summary=True):
 def mentoring_band():
     return (f'<section class="mentor-band"><div class="wrap mentor-in">'
             f'<div class="mentor-head"><p class="label">Mentoring</p><h2>Stuck between editorial and product? Let\'s talk it through.</h2>'
-            f'<p>I mentor people in news product: getting started, stepping into a first management role, or leading change in an organisation that would rather not.</p>'
+            f'<p>I mentor and coach people in news product: getting started, stepping into a first management role, or leading change in an organisation that would rather not.</p><p class="proof">More than 65 sessions since 2021.</p>'
             f'<p class="actions"><a class="btn paper" href="#mentoring">Book a session</a> <a href="#mentoring">How it works</a></p></div>'
             f'<ul class="mentor-facts"><li><b>Pay what you can</b>One-off sessions. £250 is the full rate; £1 is fine.</li>'
-            f'<li><b>Ongoing mentoring</b>A few monthly spaces, over 3, 6 or 12 months.</li>'
+            f'<li><b>Ongoing mentoring</b>Monthly spaces open from October 2026, over 3, 6 or 12 months.</li>'
             f'<li><b>Ask your employer</b>Many will fund it as personal development.</li></ul>'
             f'</div></section>')
 
@@ -98,7 +98,7 @@ PAGES['home'] = f'''{header('home')}
     <figure class="portrait"><img src="{PHOTO}" alt="Nick Petrie" width="220" height="220"></figure>
   </section>
   {wnmp_block('home')}
-  <section class="block"><h2 class="label">Start with an argument</h2><p class="small intro">Three pieces that say what I think, and why.</p><ol class="entries featured">{''.join(entry(p) for p in featured)}</ol></section>
+  <section class="block"><h2 class="label">The hills I'll die on</h2><p class="small intro">Three pieces that say what I think, and why.</p><ol class="entries featured">{''.join(entry(p) for p in featured)}</ol></section>
   <section class="block"><h2 class="label">More writing</h2><ol class="entries compact">{''.join(entry(p, summary=False) for p in more)}</ol><p><a href="#writing">All writing</a></p></section>
 </main>
 {mentoring_band()}
@@ -143,10 +143,10 @@ PAGES['mentoring'] = f'''{header('mentoring')}
   <article class="art mentor-page">
     <p class="label">Mentoring</p>
     <h1>News product mentoring</h1>
-    <p class="standfirst">Practical, honest help from someone who has done the job: at The Times, Reuters and now The i Paper.</p>
+    <p class="standfirst">Mentoring and coaching for people in news product, from someone who has done the job: at The Times, Reuters and now The i Paper.</p>
     <div class="facts">
       <div><p class="label">One-off sessions</p><p>Pay what you can. A session is worth £250; students, early-career journalists and anyone who can't afford it are welcome to pay £1. Honestly.</p></div>
-      <div><p class="label">Ongoing mentoring</p><p>2 to 3 monthly spaces, best as a 3, 6 or 12 month commitment so we can set goals and work through them, with WhatsApp support between calls.</p></div>
+      <div><p class="label">Ongoing mentoring</p><p>2 to 3 monthly spaces open from October 2026, best as a 3, 6 or 12 month commitment so we can set goals and work through them, with WhatsApp support between calls.</p></div>
     </div>
     <p class="actions"><a class="btn" href="https://savvycal.com/NickPetrie/0977e9aa">Book a session</a> <span class="small">It's often worth asking whether your employer will fund it.</span></p>
 
@@ -165,10 +165,27 @@ PAGES['mentoring'] = f'''{header('mentoring')}
     <li><b>We talk.</b> Bring the problem you're stuck on. I'll ask a lot of questions and tell you what I think.</li>
     <li><b>Keep going, if it helps.</b> For ongoing mentoring we agree goals, meet monthly and stay in touch in between.</li></ol>
 
+    <h2 class="section-h">What people say</h2>
+    <div class="quotes">
+      <figure class="quote tbc"><blockquote><p>A short quote from someone you've mentored or coached goes here: what they were stuck on, and what changed.</p></blockquote><figcaption>Name, role, organisation</figcaption></figure>
+      <figure class="quote tbc"><blockquote><p>A second quote, ideally from someone at a different stage: a first-time manager, or someone leading change.</p></blockquote><figcaption>Name, role, organisation</figcaption></figure>
+    </div>
+    <p class="small">More than 65 sessions since 2021.</p>
+
     <div class="pull-note"><p>I'll always offer free or very low cost sessions of some kind. Those who can afford to pay, I trust your judgement as to how much that is. I mean every word of that.</p></div>
 
     <h2 class="section-h">With the News Product Alliance</h2>
-    <p>I was a mentor in the <a href="https://newsproduct.org/mentor-network">News Product Alliance's Mentor Network</a>, and I'm now a coach with the NPA. If you're an NPA member, that's another way to work with me.</p>
+    <p>I was a mentor on the first cohort of the <a href="https://newsproduct.org/mentor-network">News Product Alliance's Mentor Network</a> in 2022 and 2023, and I'm now a coach with the NPA. If you're an NPA member, that's another way to work with me.</p>
+
+    <h2 class="section-h">Questions</h2>
+    <div class="faq">
+      <details><summary>How much does it cost?</summary><p>One-off sessions are pay what you can. A session is worth £250, and you can set any amount from £1 when you book. Stripe won't take £0.</p></details>
+      <details><summary>Is paying £1 really fine?</summary><p>Yes. Students, early-career journalists and anyone who can't afford more are welcome to pay £1. If you can afford to pay, I trust your judgement.</p></details>
+      <details><summary>Is this mentoring or coaching?</summary><p>Both. Mentoring is me sharing what I've learnt and what I'd do in your position. Coaching is helping you work out your own answer. Most sessions use a bit of each, depending on what you need.</p></details>
+      <details><summary>Who is it for?</summary><p>People working in or moving into news product, audience, data and digital roles: from first jobs to people leading change across a newsroom.</p></details>
+      <details><summary>Can my employer pay?</summary><p>Often, yes. Many organisations will fund mentoring or coaching as personal development, so it's worth asking.</p></details>
+      <details><summary>How does ongoing mentoring work?</summary><p>We agree goals, meet monthly over 3, 6 or 12 months, and stay in touch on WhatsApp between calls. I have 2 to 3 spaces open from October 2026.</p></details>
+    </div>
 
     <p class="actions"><a class="btn" href="https://savvycal.com/NickPetrie/0977e9aa">Book a session</a></p>
   </article>
@@ -229,9 +246,9 @@ nav a[aria-current]{border-bottom:2px solid var(--ink)}
 
 .wnmp{background:var(--yellow);color:#1F2834;margin-block:44px}
 .wnmp-in{display:grid;gap:18px;padding:28px} .mast{display:block;width:100%;max-width:340px;height:auto}
-.wnmp .promise{font:400 22px/1.3 var(--serif);margin:0 0 4px} .wnmp .small{color:#1F2834} .wnmp a{color:#1F2834}
+.wnmp .promise{font:400 clamp(18px, 5.4cqi, 21px)/1.3 var(--serif);margin:0 0 4px;text-wrap:balance} .wnmp .small{color:#1F2834} .wnmp a{color:#1F2834}
 .wnmp.compact .mast{max-width:240px} .wnmp.compact .wnmp-in{padding:22px}
-@container view (min-width:760px){.wnmp-in{grid-template-columns:300px minmax(0,1fr);align-items:center;gap:36px;padding:32px} .wnmp.compact .wnmp-in{grid-template-columns:230px minmax(0,1fr)}}
+@container view (min-width:760px){.wnmp-in{grid-template-columns:230px minmax(0,1fr);align-items:center;gap:32px;padding:32px} .wnmp.compact .wnmp-in{grid-template-columns:200px minmax(0,1fr)}}
 .signup{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 8px} .signup input{flex:1 1 200px;min-width:0;font:inherit;font-size:17px;padding:11px 12px;border:1px solid #1F2834;border-radius:4px;background:#fff;color:#1F2834}
 .signup button,.btn{font:700 16px/1 var(--sans);padding:13px 18px;border-radius:4px;border:1px solid var(--ink);background:var(--ink);color:var(--paper);cursor:pointer;text-decoration:none;display:inline-block}
 .wnmp .signup button{background:#1F2834;border-color:#1F2834;color:#F7F6F1}
@@ -281,6 +298,11 @@ nav a[aria-current]{border-bottom:2px solid var(--ink)}
 @container view (min-width:760px){.who{grid-template-columns:repeat(3,minmax(0,1fr))}}
 .ticks{list-style:none;padding:0;margin:0;display:grid;gap:8px} .ticks li{padding-left:22px;position:relative} .ticks li::before{content:"";position:absolute;left:0;top:.6em;width:12px;height:3px;background:var(--yellow)}
 .steps{margin:0;padding-left:1.3em;display:grid;gap:12px} .steps b{font-weight:700}
+.mentor-band .proof{color:#E6C635;font-weight:700;margin-top:-4px}
+.quotes{display:grid;gap:14px} @container view (min-width:760px){.quotes{grid-template-columns:1fr 1fr}}
+.quote{margin:0;padding:18px 20px;background:var(--card, #fff);border:1px solid var(--rule);border-radius:6px} .quote blockquote{margin:0} .quote p{font:400 19px/1.45 var(--serif);margin:0 0 10px} .quote figcaption{font-size:15px;color:var(--muted)}
+.quote.tbc{border-style:dashed;background:transparent} .quote.tbc p,.quote.tbc figcaption{color:var(--muted)}
+.faq details{border-top:1px solid var(--rule);padding:14px 0} .faq details:last-child{border-bottom:1px solid var(--rule)} .faq summary{font-weight:700;font-size:18px;cursor:pointer} .faq details p{margin:10px 0 0}
 .pull-note{margin:36px 0;padding:4px 0 4px 22px;border-left:3px solid var(--yellow)} .pull-note p{font:400 24px/1.35 var(--serif);margin:0}
 .mentor-page .facts{margin-top:24px}
 
