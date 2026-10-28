@@ -14,7 +14,7 @@ const jsonLd = [
     '@type': 'Service',
     '@id': `${url}#service`,
     name: 'News product mentoring and coaching',
-    serviceType: ['Mentoring', 'Career coaching'],
+    serviceType: ['Mentoring', 'Leadership coaching', 'Career coaching'],
     description: d.description,
     url,
     provider: { '@id': person['@id'] },
@@ -28,6 +28,7 @@ const jsonLd = [
         priceSpecification: { '@type': 'PriceSpecification', priceCurrency: 'GBP', minPrice: 1, maxPrice: 250 },
       },
       { '@type': 'Offer', name: 'Ongoing monthly mentoring (3, 6 or 12 months)', url: booking },
+      { '@type': 'Offer', name: 'Leadership coaching', url: booking },
     ],
   },
   {
@@ -45,9 +46,11 @@ const jsonLd = [
     <h1>{d.title}</h1>
     <p class="standfirst">Mentoring and coaching for people in news product, from someone who has done the job: at The Times, Reuters and now The i Paper.</p>
 
+    <h2 class="section-h">What's on offer</h2>
     <div class="facts">
-      <div><p class="label">One-off sessions</p><p>Pay what you can. A session is worth £250; students, early-career journalists and anyone who can't afford it are welcome to pay £1. Honestly.</p></div>
       <div><p class="label">Ongoing mentoring</p><p>2 to 3 monthly spaces open from October 2026, best as a 3, 6 or 12 month commitment so we can set goals and work through them, with WhatsApp support between calls.</p></div>
+      <div><p class="label">Leadership coaching</p><p>For people leading teams or change in news organisations. We focus on you as a leader: how you make decisions, bring people with you and handle the hard conversations.</p></div>
+      <div><p class="label">One-off sessions</p><p>Pay what you can. A session is worth £250; students, early-career journalists and anyone who can't afford it are welcome to pay £1. Honestly.</p></div>
     </div>
     <p class="actions"><a class="btn" href={booking}>Book a session</a> <span class="small">It's often worth asking whether your employer will fund it.</span></p>
 

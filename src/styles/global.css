@@ -186,10 +186,10 @@ img { max-width: 100%; height: auto; }
 @media (min-width: 620px) { .year { grid-template-columns: 80px minmax(0, 1fr); gap: 16px; } .year h2 { padding-top: 12px; } }
 
 /* Mentoring page */
-.facts { display: grid; gap: 12px; margin: 24px 0 20px; }
+.facts { display: grid; gap: 18px; margin: 0 0 24px; }
 .facts > div { border-top: 3px solid var(--yellow); padding-top: 10px; }
 .facts p:not(.label) { margin: 0; }
-@media (min-width: 620px) { .facts { grid-template-columns: 1fr 1fr; gap: 24px; } }
+@media (min-width: 760px) { .facts { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; } }
 .section-h { font: 400 30px/1.15 var(--serif); margin: 48px 0 16px; }
 .who { display: grid; gap: 14px; }
 .who > div { background: var(--tint); border-radius: 2px; padding: 22px 20px 20px; }
