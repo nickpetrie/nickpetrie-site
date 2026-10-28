@@ -1,0 +1,17 @@
+/* Nick Petrie + WNMP v0.2. Load font files separately. */
+:root {
+  --brand-ink: #1F2834;
+  --brand-paper: #F7F6F1;
+  --brand-yellow: #E6C635;
+  --brand-text-secondary: #5A6470;
+  --brand-rule: #D8DCD9;
+  --brand-font-sans: "Source Sans 3", Arial, sans-serif;
+  --brand-font-serif: "Source Serif 4", Georgia, serif;
+  --brand-space-base: 8px;
+  --brand-control-radius: 4px;
+  --brand-reading-measure: 68ch;
+  --brand-divider: 1px;
+  --brand-emphasis-rule: 3px;
+  --brand-label-size: 13px;
+  --brand-source-note-size: 14px;
+}

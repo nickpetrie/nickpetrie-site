@@ -1,0 +1,78 @@
+{
+  "version": "0.2",
+  "updated": "2026-10-28",
+  "status": "Working brand kit. Selected direction preserved; vector refinements, typography and editorial elements proposed.",
+  "colour": {
+    "ink": "#1F2834",
+    "paper": "#F7F6F1",
+    "yellow": "#E6C635",
+    "textSecondary": "#5A6470",
+    "rule": "#D8DCD9"
+  },
+  "typography": {
+    "sans": "Source Sans 3",
+    "serif": "Source Serif 4",
+    "status": "proposed",
+    "sansWeights": [
+      400,
+      600,
+      700
+    ],
+    "heroDesktopPx": [
+      56,
+      72
+    ],
+    "heroMobilePx": [
+      40,
+      48
+    ],
+    "bodyWebPx": [
+      18,
+      20
+    ],
+    "bodyEmailPx": [
+      17,
+      18
+    ]
+  },
+  "layout": {
+    "baseSpacePx": 8,
+    "readingMeasureCh": [
+      60,
+      72
+    ],
+    "controlRadiusPx": 4,
+    "status": "suggested primitives, not prescribed page layouts"
+  },
+  "identity": {
+    "personal": "Use supplied vector NP, not live text. Compact uppercase direction; proposed refinement pending approval.",
+    "newsletter": "Full title with by Nick Petrie; paired-rule publication motif."
+  },
+  "relationship": {
+    "newsletterDestination": "When News Meets Product",
+    "personalEnquiries": "Direct email to Nick",
+    "websiteImplementation": "Claude; Ghost replacement outside brand scope"
+  },
+  "editorial": {
+    "labelPx": [
+      12,
+      14
+    ],
+    "sourceNotePx": [
+      13,
+      14
+    ],
+    "pullQuotePx": [
+      28,
+      40
+    ],
+    "dividerPx": 1,
+    "emphasisRulePx": 3,
+    "motifClearSpace": "at least one motif height",
+    "npClearSpace": "at least one NP stem width",
+    "npAvatarWidthPercent": 64,
+    "npAvatarMinimumPx": 32,
+    "mastheadMinimumWidthPx": 240,
+    "status": "proposed starting values; verify at rendered sizes"
+  }
+}

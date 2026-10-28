@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WNMP email preview</title>
+<style>
+  /* Preview of the proposed beehiiv email theme, built from brand kit v0.2.
+     Email apps such as Gmail ignore web fonts, so this shows the fallbacks every reader is guaranteed:
+     Georgia stands in for Source Serif 4, Arial for Source Sans 3. */
+  :root { --ink:#1F2834; --paper:#F7F6F1; --yellow:#E6C635; --muted:#5A6470; --rule:#D8DCD9;
+          --serif: Georgia, 'Times New Roman', serif; --sans: Arial, Helvetica, sans-serif; --body: var(--serif); }
+  body.sans-body { --body: var(--sans); }
+  body { margin:0; background:#E4E3DD; font-family:var(--sans); color:var(--ink); }
+
+  .note { max-width:600px; margin:16px auto; padding:14px 16px; background:#fff; border:1px solid var(--rule); border-radius:4px; font-size:14px; line-height:1.5; }
+  .note strong { display:block; margin-bottom:4px; }
+  .note ul { margin:6px 0 10px; padding-left:18px; }
+  .toggle { display:flex; gap:8px; flex-wrap:wrap; }
+  .toggle button { font:inherit; font-size:13px; padding:6px 10px; border:1px solid var(--ink); background:#fff; color:var(--ink); border-radius:4px; cursor:pointer; }
+  .toggle button[aria-pressed=true] { background:var(--ink); color:#fff; }
+
+  .inbox { max-width:600px; margin:0 auto; padding:10px 16px; font-size:13px; color:var(--muted); background:#fff; border-bottom:1px solid var(--rule); }
+  .inbox b { color:var(--ink); }
+  .email { max-width:600px; margin:0 auto 32px; background:var(--paper); }
+  .masthead img { display:block; width:100%; height:auto; }
+
+  .body { padding:32px 32px 8px; }
+  .label { font-family:var(--sans); font-size:13px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink); margin:0 0 12px; }
+  h1 { font-family:var(--serif); font-weight:normal; font-size:38px; line-height:1.12; letter-spacing:-0.01em; margin:0 0 12px; }
+  .standfirst { font-family:var(--sans); font-size:19px; line-height:1.45; color:var(--ink); margin:0 0 14px; }
+  .meta { font-family:var(--sans); font-size:14px; color:var(--muted); margin:0 0 28px; padding-bottom:22px; border-bottom:1px solid var(--rule); }
+  .meta a { color:var(--muted); }
+  p { font-family:var(--body); font-size:18px; line-height:1.6; margin:0 0 18px; }
+  a { color:var(--ink); text-decoration:underline; text-underline-offset:2px; }
+
+  .quote { margin:30px 0; padding:2px 0 2px 22px; border-left:3px solid var(--yellow); }
+  .quote p { font-family:var(--serif); font-size:28px; line-height:1.2; margin:0 0 10px; }
+  .quote .attr { font-family:var(--sans); font-size:14px; color:var(--muted); margin:0; }
+
+  .section { margin:40px 0 16px; border-top:1px solid var(--ink); padding-top:12px; }
+  .section span { font-family:var(--sans); font-size:15px; font-weight:700; }
+
+  .annotation { margin:24px 0; padding:2px 0 2px 18px; border-left:3px solid var(--yellow); }
+  .annotation p { font-family:var(--sans); font-size:16px; line-height:1.5; margin:0; }
+  .annotation b { display:block; margin-bottom:2px; }
+
+  .prompt { margin:36px 0 8px; padding:28px; background:var(--ink); color:#fff; }
+  .prompt img { display:block; width:24px; height:14px; margin-bottom:18px; filter:invert(1); }
+  .prompt h2 { font-family:var(--serif); font-weight:normal; font-size:28px; line-height:1.2; margin:0 0 10px; color:#fff; }
+  .prompt p { font-family:var(--sans); font-size:17px; color:#fff; margin:0 0 16px; }
+  .prompt a { color:#fff; font-family:var(--sans); font-weight:700; font-size:16px; }
+
+  .button { display:inline-block; background:var(--ink); color:#fff !important; font-family:var(--sans); font-weight:700; font-size:16px; padding:13px 20px; border-radius:4px; text-decoration:none; }
+
+  .signoff { padding:8px 32px 32px; }
+  .signoff p { margin:0 0 14px; }
+  .signoff img { display:block; width:24px; height:14px; }
+
+  .footer { border-top:1px solid var(--rule); padding:24px 32px 32px; }
+  .footer p { font-family:var(--sans); font-size:14px; line-height:1.55; color:var(--muted); margin:0 0 10px; }
+  .footer .who { color:var(--ink); font-weight:700; }
+  .footer a { color:var(--ink); }
+  .footer .legal { font-size:12px; }
+
+  @media (max-width: 480px) {
+    .body { padding:24px 20px 4px; } .signoff { padding:4px 20px 24px; } .footer { padding:20px; }
+    h1 { font-size:31px; } .quote p, .prompt h2 { font-size:24px; } .prompt { padding:22px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="note">
+  <strong>Email preview, issue 6. Nothing is saved to beehiiv.</strong>
+  Built from brand kit v0.2.
+  <ul>
+    <li>The masthead is the kit's SVG turned into a 1200 px image, shown at 600 px. Most email apps won't display SVG.</li>
+    <li>Fonts are Georgia and Arial, because Gmail and Outlook ignore web fonts. On the website, the real Source Serif and Source Sans will be used.</li>
+    <li>The pull quote, the "Consider this" note and the dark reply box show the kit's optional building blocks. The essay is shortened, and I fixed two typos ("what what", "what makes creates").</li>
+  </ul>
+  <div class="toggle" role="group" aria-label="Body text">
+    <button type="button" aria-pressed="true" data-body="serif">Body text in serif (Georgia)</button>
+    <button type="button" aria-pressed="false" data-body="sans">Body text in sans (Arial)</button>
+  </div>
+</div>
+
+<div class="inbox"><b>When News Meets Product</b> · Bridge roles need to die · They let us ignore the real problems</div>
+
+<div class="email">
+  <header class="masthead"><img src="wnmp-masthead-email.png" alt="When News Meets Product, by Nick Petrie" width="600" height="190"></header>
+
+  <main class="body">
+    <p class="label">Issue 6 · Leadership</p>
+    <h1>Bridge roles need to die</h1>
+    <p class="standfirst">They let us ignore the real problems.</p>
+    <p class="meta">Nick Petrie · 23 January 2026 · <a href="https://www.nickpetrie.co/bridge-roles-need-to-die/">Read on the web</a></p>
+
+    <p>Hello. I've been quiet for a while. Two kids and a full time job will do that. But one theme kept surfacing last year that I couldn't shake and I've been wanting to write it down for a while.</p>
+    <p>Bridge roles need to die. Not because the problem(s) they solve don't matter. Coordination, alignment and cross functional working matter more than ever, but because these roles have become the sticking plaster we reach for instead of doing the harder work: restructuring teams, aligning incentives, building shared goals.</p>
+    <p>A significant number of the people I coach are in what we commonly called bridge roles. The jobs that sit between editorial and product; marketing and data, translating jargon, managing friction, trying to make goals shared.</p>
+
+    <div class="quote">
+      <p>We keep creating jobs that exist to stand in the gap between editorial and product, and then we wonder why the gap never closes.</p>
+      <p class="attr">Nick Petrie / WNMP</p>
+    </div>
+
+    <p>The important question then becomes: how do we build better infrastructure? Bridge-type roles might be part of a transition, but they should be time-limited secondments with off-boarding plans.</p>
+
+    <div class="annotation"><p><b>Consider this</b>We should actively plan how to retire such roles while we're creating them.</p></div>
+
+    <p>What we really need are town planners for organisations: people thinking about how teams connect, what creates a better product for customers, what structures need to exist to lower coordination costs. Not another bridge, but proper foundations.</p>
+
+    <div class="section"><span>Community</span></div>
+    <p>Just before Christmas <a href="https://www.linkedin.com/posts/joannageary_wthhldn-hhldn-hhldn-activity-7399075357510877184-pu_2">Joanna Geary</a> got together a fantastic group of speakers to share the interesting projects they are working on, and at the same time she hit upon a big problem: the hacks/hackers, open source, rising-tide-lifts-all-boats attitude of the 2010s has faded away. I was sad to miss it.</p>
+
+    <div class="section"><span>Mentoring</span></div>
+    <p>If you are looking for support and development, I have space for new sessions. Pay what you can.</p>
+    <p><a class="button" href="https://www.nickpetrie.co/mentoring/">Book a session</a></p>
+
+    <div class="prompt">
+      <img src="wnmp-rules-email.png" alt="" width="24" height="14">
+      <h2>What are you seeing?</h2>
+      <p>Can you point me at examples where people and orgs are solving these problems?</p>
+      <a href="mailto:nick@nickpetrie.co">Reply to Nick →</a>
+    </div>
+  </main>
+
+  <div class="signoff">
+    <p>Nick</p>
+    <img src="wnmp-rules-email.png" alt="" width="24" height="14">
+  </div>
+
+  <footer class="footer">
+    <p class="who">When News Meets Product, by Nick Petrie</p>
+    <p>Clear thinking about the products, teams and decisions shaping news.</p>
+    <p><a href="https://www.nickpetrie.co/newsletter/">Past issues</a> · <a href="https://www.nickpetrie.co/mentoring/">Mentoring</a> · <a href="https://www.nickpetrie.co/">nickpetrie.co</a></p>
+    <p class="legal">You're getting this because you subscribed to When News Meets Product.<br>13 Matthias Court, Richmond, TW10 6LL, United Kingdom<br><a href="#">Unsubscribe</a> · <a href="#">Update your preferences</a></p>
+  </footer>
+</div>
+
+<script>
+  for (const b of document.querySelectorAll('.toggle button')) {
+    b.addEventListener('click', () => {
+      document.body.classList.toggle('sans-body', b.dataset.body === 'sans');
+      for (const o of document.querySelectorAll('.toggle button')) o.setAttribute('aria-pressed', String(o === b));
+    });
+  }
+</script>
+</body>
+</html>
