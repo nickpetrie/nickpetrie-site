@@ -1,10 +1,11 @@
 ---
 title: "A brief reflection on my first 18 months mentoring"
-description: "It's been 18 months since I started offering mentoring slots to anyone who felt I could help them. I wanted to publish a couple of observations and renew the call/option for people to book in for a session if they wanted."
+description: "What 37 news product mentoring sessions taught me: missing career paths, how differently publishers organise, and how lonely the work can be."
 date: "2023-01-02T19:30:01.000Z"
 updated: "2024-01-23T15:04:51.000Z"
 tags: ["mentoring","product-development","strategy"]
 authors: ["nick"]
+related: ["after-two-years-of-mentoring-and-baby", "bridge-roles-need-to-die", "lets-talk-about-how-the-roles-in-newsrooms-are-evolving"]
 ---
 It's been 18 months since I [started offering mentoring slots](/mentoring/) to anyone who felt I could help them. I wanted to publish a couple of observations and renew the call/option for people to [book in for a session](https://savvycal.com/NickPetrie/0977e9aa) if they wanted.
 

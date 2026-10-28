@@ -1,24 +1,20 @@
 ---
-title: "Nick Petrie"
-description: "My name is Nick Petrie and I’m currently Digital Director at The i Paper. Before that I spent three years as Deputy Digital News Director at Reuters and…"
-updated: "2025-09-23T16:22:50.000Z"
+title: "About"
+description: "Digital Director at The i Paper, previously at Reuters and The Times. Nick Petrie writes about news product and newsroom strategy, and mentors people in it."
+updated: "2026-10-28T12:00:00.000Z"
 legacySlug: "nick-petrie"
 ---
-![](../../assets/images/2022/11/Nick-profile-colour-2022.jpg)
+<p class="lead">I'm Nick Petrie. I work where journalism meets product.</p>
 
-My name is Nick Petrie and I’m currently Digital Director at The i Paper. Before that I spent three years as Deputy Digital News Director at Reuters and nearly a decade at at [The Times and Sunday Times](http://www.thetimes.co.uk/), most of it as Deputy head of digital, where I worked on content and subscription strategy, newsroom transformation, newsroom tooling, [data and insights in newsrooms](https://medium.com/digital-times/the-times-and-the-sunday-times-approach-to-data-in-the-newsroom-934f175c1355) and [edition based publishing](https://www.theguardian.com/media/2016/mar/30/times-rolling-editions-website-sunday-times-apps) (amongst other things).
+I'm Digital Director at The i Paper. Before that I spent three years as Deputy Digital News Director at Reuters, and nearly a decade at [The Times and Sunday Times](https://www.thetimes.com/), most of it as Deputy Head of Digital. There I worked on content and subscription strategy, newsroom transformation, newsroom tooling, [data and insights in the newsroom](https://medium.com/digital-times/the-times-and-the-sunday-times-approach-to-data-in-the-newsroom-934f175c1355) and [edition-based publishing](https://www.theguardian.com/media/2016/mar/30/times-rolling-editions-website-sunday-times-apps).
 
----
+I write [When News Meets Product](/newsletter/), a newsletter for people trying to change news organisations from the inside. And I [mentor and coach](/mentoring/) people working in news product, from people starting out to people leading change.
 
 ## Elsewhere
 
-I am a [NPA Board Member](https://newsproduct.org/about-us)
-
-I ran a side project – [Evolving Newsroom](https://evolvingnewsroom.substack.com/about), which you can read more [about here](/lets-talk-about-how-the-roles-in-newsrooms-are-evolving/)
-
-I’m also a co-founder of [Wannabe Hacks](https://medium.com/@hacks_24690/wannabe-hacks-what-next-e93b688e595a) (sadly no longer online)
-
----
+- Former board member of the [News Product Alliance](https://newsproduct.org/about-us), and now a coach with the NPA
+- Ran [Evolving Newsroom](https://evolvingnewsroom.substack.com/about), a side project on how newsroom roles are changing ([more here](/lets-talk-about-how-the-roles-in-newsrooms-are-evolving/))
+- Co-founded Wannabe Hacks (sadly no longer online)
 
 ## How I work
 
@@ -46,7 +42,7 @@ I also strongly believe in the importance of mentoring and make time available e
 
 ### Clear communication
 
-I am happy and confident discussing the top lines for a story one minute, feeding back on wireframes the next, before analysing the trade-offs in our approach to storing analytics data in BQ. In all cases, clear communication is vital and knowing the level of detail and technical translation required is crucial.
+I am happy and confident discussing the top lines for a story one minute, feeding back on wireframes the next, before analysing the trade-offs in our approach to storing analytics data in BigQuery. In all cases, clear communication is vital and knowing the level of detail and technical translation required is crucial.
 
 I am a big advocate of tools such as Slack because I believe that the free flow of information in an organisation is vital to innovation and collaboration. Good use of tools like these takes work to make sure they are an asset and not a burden, but I am convinced they are worth the effort.
 

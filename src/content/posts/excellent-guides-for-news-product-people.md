@@ -1,9 +1,12 @@
 ---
 title: "Excellent guides for News Product people"
-description: "The fab team at the News Product Alliance (NPA) has just published an additional set of 8 guides, taking their Product Kit to a total of 19 guides. In their…"
+description: "The News Product Alliance's Product Kit now has 19 practical guides on product strategy, research and development in news organisations."
 date: "2022-12-14T18:56:07.000Z"
 updated: "2024-01-23T15:04:51.000Z"
+tags: ["product-development"]
 authors: ["nick"]
+related: ["the-two-product-team-problem", "brief-reflection-first-18-months-mentoring"]
+noindex: true
 ---
 The fab team at the News Product Alliance (NPA) has just published an additional set of 8 guides, taking their [Product Kit to a total of 19 guides](https://newsproduct.org/product-kit).
 

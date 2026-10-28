@@ -1,10 +1,11 @@
 ---
 title: "Why newsrooms need to stop transforming and start changing"
-description: "Why newsrooms need to stop transforming and start changing - The news industry has had the greatest gift of all when it comes to disruption: time. And it squandered it."
+description: "The news industry had time to adapt to disruption and squandered it. Why newsrooms need to stop running transformations and make lasting change."
 date: "2021-11-15T08:31:26.000Z"
 updated: "2024-01-23T15:04:51.000Z"
 tags: ["newsroom","strategy","product-development"]
 authors: ["nick"]
+related: ["strategy-isnt-sexy-it-just-means-having-a-plan", "no-thing-can-save-journalism", "the-two-product-team-problem"]
 ---
 ![A directional sign that I liked whilst in Southampton.  Sometimes it is the simple things that catch our eye.](https://images.unsplash.com/photo-1525011268546-bf3f9b007f6a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMTc3M3wwfDF8c2VhcmNofDEyfHxjaGFuZ2V8ZW58MHx8fHwxNjM2NzE3NjY4&ixlib=rb-1.2.1&q=80&w=2000)
 

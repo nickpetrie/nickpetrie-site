@@ -1,10 +1,11 @@
 ---
 title: "Cherry picking metrics in newsrooms"
-description: "But what interests me is the stat. As someone who cares about how newsrooms use data to information decision making (both for our journalism and our product experience) there is crucial context missing."
+description: "The Times reported a 40% drop in toxic comments after requiring real names. Why the absolute number isn't enough, and the context newsroom data needs."
 date: "2023-01-31T16:37:50.000Z"
 updated: "2024-01-23T15:04:52.000Z"
 tags: ["data-in-the-newsroom","newsroom","product-development"]
 authors: ["nick"]
+related: ["gotta-get-structural", "newsrooms-product-development-why-is-speed-good", "readers-readers-readers-readers-readers"]
 image: "../../assets/images/remote/cherry-picking-metrics-feature.jpg"
 imageCaption: "Photo by Isaac Smith / Unsplash"
 ---

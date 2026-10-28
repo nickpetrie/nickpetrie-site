@@ -1,0 +1,91 @@
+---
+// Mentoring has its own layout. Copy is here; the FAQ lives in src/content/pages/mentoring.md.
+import { getEntry } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { ogPath, breadcrumbs } from '../lib/content';
+import { site, person, booking } from '../site';
+
+const page = (await getEntry('pages', 'mentoring'))!;
+const d = page.data;
+const url = `${site.url}/mentoring/`;
+
+const jsonLd = [
+  {
+    '@type': 'Service',
+    '@id': `${url}#service`,
+    name: 'News product mentoring and coaching',
+    serviceType: ['Mentoring', 'Career coaching'],
+    description: d.description,
+    url,
+    provider: { '@id': person['@id'] },
+    areaServed: 'Worldwide',
+    audience: { '@type': 'Audience', audienceType: 'People working in news product, audience, data and digital roles' },
+    offers: [
+      {
+        '@type': 'Offer',
+        name: 'One-off session, pay what you can',
+        url: booking,
+        priceSpecification: { '@type': 'PriceSpecification', priceCurrency: 'GBP', minPrice: 1, maxPrice: 250 },
+      },
+      { '@type': 'Offer', name: 'Ongoing monthly mentoring (3, 6 or 12 months)', url: booking },
+    ],
+  },
+  {
+    '@type': 'FAQPage',
+    '@id': `${url}#faq`,
+    url,
+    mainEntity: d.faq.map(({ q, a }) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })),
+  },
+  breadcrumbs([{ name: 'Home', path: '/' }, { name: 'Mentoring', path: '/mentoring/' }]),
+];
+---
+<Base title={d.metaTitle ?? d.title} description={d.description} image={ogPath('mentoring')} modified={d.updated} jsonLd={jsonLd}>
+  <article class="art">
+    <p class="label">Mentoring and coaching</p>
+    <h1>{d.title}</h1>
+    <p class="standfirst">Mentoring and coaching for people in news product, from someone who has done the job: at The Times, Reuters and now The i Paper.</p>
+
+    <div class="facts">
+      <div><p class="label">One-off sessions</p><p>Pay what you can. A session is worth £250; students, early-career journalists and anyone who can't afford it are welcome to pay £1. Honestly.</p></div>
+      <div><p class="label">Ongoing mentoring</p><p>2 to 3 monthly spaces open from October 2026, best as a 3, 6 or 12 month commitment so we can set goals and work through them, with WhatsApp support between calls.</p></div>
+    </div>
+    <p class="actions"><a class="btn" href={booking}>Book a session</a> <span class="small">It's often worth asking whether your employer will fund it.</span></p>
+
+    <h2 class="section-h">Who it's for</h2>
+    <div class="who">
+      <div><h3>Getting started</h3><p>You're new to news product, or moving into it from editorial, and want to understand the paths open to you.</p></div>
+      <div><h3>First time managing</h3><p>You've stepped into your first management role and want a sounding board while you find your feet.</p></div>
+      <div><h3>Leading change</h3><p>You're responsible for cultural change or innovation, and the organisation isn't making it easy.</p></div>
+    </div>
+
+    <h2 class="section-h">What we can work on</h2>
+    <ul class="ticks">
+      <li>Business, product and organisational strategy</li>
+      <li>Structures and teams: how editorial, product and data work together</li>
+      <li>Newsroom tooling</li>
+      <li>Using reader data and insights in the newsroom</li>
+      <li>Your next career move</li>
+    </ul>
+
+    <h2 class="section-h">How it works</h2>
+    <ol class="steps">
+      <li><b>Book a time.</b> When you book, you check out rather than just pick a slot. You'll see the fee with a "change amount" button: set what you can afford.</li>
+      <li><b>We talk.</b> Bring the problem you're stuck on. I'll ask a lot of questions and tell you what I think.</li>
+      <li><b>Keep going, if it helps.</b> For ongoing mentoring we agree goals, meet monthly and stay in touch in between.</li>
+    </ol>
+
+    <p class="small" style="margin-top:24px">More than 65 sessions since 2021. Read what I've learnt from them in <a href="/brief-reflection-first-18-months-mentoring/">my first 18 months</a> and <a href="/after-two-years-of-mentoring-and-baby/">after two years</a>.</p>
+
+    <div class="pull-note"><p>I'll always offer free or very low cost sessions of some kind. Those who can afford to pay, I trust your judgement as to how much that is. I mean every word of that.</p></div>
+
+    <h2 class="section-h">With the News Product Alliance</h2>
+    <p>I was a mentor on the first cohort of the <a href="https://newsproduct.org/mentor-network">News Product Alliance's Mentor Network</a> in 2022 and 2023, and I'm now a coach with the NPA. If you're an NPA member, that's another way to work with me.</p>
+
+    <h2 class="section-h">Questions</h2>
+    <div class="faq">
+      {d.faq.map(({ q, a }) => <details><summary>{q}</summary><p>{a}</p></details>)}
+    </div>
+
+    <p class="actions" style="margin-top:32px"><a class="btn" href={booking}>Book a session</a></p>
+  </article>
+</Base>

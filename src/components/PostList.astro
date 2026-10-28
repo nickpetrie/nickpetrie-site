@@ -5,20 +5,16 @@ import { formatDate } from '../lib/content';
 interface Props {
   posts: CollectionEntry<'posts'>[];
   headingLevel?: 'h2' | 'h3';
+  summary?: boolean;
 }
-const { posts, headingLevel: H = 'h2' } = Astro.props;
+const { posts, headingLevel: H = 'h3', summary = true } = Astro.props;
 ---
-<ol class="post-list">
+<ol class:list={['entries', { compact: !summary }]}>
   {posts.map((post) => (
-    <li>
-      <article>
-        <H class="post-list-title"><a href={`/${post.id}/`}>{post.data.title}</a></H>
-        <p class="meta">
-          <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
-          {post.data.newsletter && <span class="badge">WNMP #{post.data.newsletter.issue}</span>}
-        </p>
-        <p>{post.data.description}</p>
-      </article>
+    <li class="entry">
+      <H><a href={`/${post.id}/`}>{post.data.title}</a></H>
+      <p class="meta"><time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time></p>
+      {summary && <p class="sum">{post.data.standfirst ?? post.data.description}</p>}
     </li>
   ))}
 </ol>

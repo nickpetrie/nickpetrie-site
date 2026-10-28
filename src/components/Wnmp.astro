@@ -1,0 +1,20 @@
+---
+// The yellow When News Meets Product block: masthead, promise and sign-up.
+import SignupForm from './SignupForm.astro';
+import { mastheadSvg } from '../lib/brand';
+import { newsletter } from '../site';
+
+interface Props { id: string; compact?: boolean; heading?: boolean }
+const { id, compact = false, heading = false } = Astro.props;
+const Tag = heading ? 'h1' : 'p';
+---
+<section class:list={['wnmp', { compact }]} aria-label={newsletter.name}>
+  <div class="wnmp-in">
+    <Tag style="margin:0"><Fragment set:html={mastheadSvg} /><span class="visually-hidden">{newsletter.name}</span></Tag>
+    <div class="wnmp-copy">
+      <p class="promise">{newsletter.promise}</p>
+      <SignupForm id={id} />
+      <p class="small">Free, a few times a year. <a href="/newsletter/">Past issues</a></p>
+    </div>
+  </div>
+</section>

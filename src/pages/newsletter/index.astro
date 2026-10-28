@@ -1,7 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import PostList from '../../components/PostList.astro';
-import SignupForm from '../../components/SignupForm.astro';
+import Wnmp from '../../components/Wnmp.astro';
 import { getPosts, breadcrumbs } from '../../lib/content';
 import { site, newsletter, person } from '../../site';
 
@@ -25,12 +25,10 @@ const issues = (await getPosts()).filter((p) => p.data.newsletter);
     breadcrumbs([{ name: 'Home', path: '/' }, { name: 'Newsletter', path: '/newsletter/' }]),
   ]}
 >
-  <div class="wrap">
-    <p class="kicker">Newsletter</p>
-    <h1>{newsletter.name}</h1>
-    <p class="lede">{newsletter.description}</p>
-    <SignupForm source="/newsletter/" heading="Subscribe" />
-    <h2>Past issues</h2>
-    <PostList posts={issues} headingLevel="h3" />
-  </div>
+  <Wnmp id="newsletter" heading />
+  <section class="block"><p class="lede">Essays on news product, teams and strategy, from someone doing the work. Each issue is an argument, a few links worth your time, and an invitation to reply.</p></section>
+  <section class="block" aria-labelledby="past">
+    <h2 class="label" id="past">Past issues</h2>
+    <PostList posts={issues} />
+  </section>
 </Base>

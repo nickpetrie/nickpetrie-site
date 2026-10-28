@@ -1,10 +1,11 @@
 ---
 title: "Strategy isn't sexy. It just means having a (good) plan"
-description: "This is where I think most people fall down. They can do a list of actions, but making them coherent seems to be really difficult because it means you have to start making choices. Real life trade-offs."
+description: "Strategy just means having a plan. Using the kernel from Good Strategy Bad Strategy: why coherent actions and real trade-offs are where plans fail."
 date: "2021-02-02T08:32:44.000Z"
 updated: "2024-01-23T15:04:51.000Z"
 tags: ["strategy","newsroom"]
 authors: ["nick"]
+related: ["why-newsrooms-need-to-stop-transforming-and-start-changing", "news-2050-a-30-year-outlook-for-the-media", "gotta-get-structural"]
 ogImage: "../../assets/images/remote/strategy-isnt-sexy-it-just-means-having-a-plan-og.jpg"
 metaTitle: "Strategy isn't sexy. It just means having a (good) plan"
 ---

@@ -1,9 +1,12 @@
 ---
 title: "News Product Management Certification is now open for applications"
-description: "News Product Management Certification — News Product AllianceOur exclusive program is designed specifically for news professionals to gain the product…"
+description: "The News Product Alliance has launched the News Product Management Certification, a part-time course for mid to senior news professionals."
 date: "2023-09-06T10:45:12.000Z"
 updated: "2024-01-23T15:04:52.000Z"
+tags: ["product-development"]
 authors: ["nick"]
+related: ["the-two-product-team-problem", "brief-reflection-first-18-months-mentoring"]
+noindex: true
 image: "../../assets/images/2023/09/npetren_thousands_of_post_it_notes_hanging_from_ceiling_diverse_e7e5be37-6141-4533-9bd2-1acdbda7ec0d--1-.webp"
 ---
 <a class="bookmark" href="https://newsproduct.org/news-product-management-certification">

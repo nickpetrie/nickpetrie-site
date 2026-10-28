@@ -32,15 +32,15 @@ const description = a.bio ?? `Writing by ${a.name} on nickpetrie.co.`;
     breadcrumbs([{ name: 'Home', path: '/' }, { name: a.name, path: `/author/${author.id}/` }]),
   ]}
 >
-  <div class="wrap">
-    <header class="author-header">
-      {a.avatar && <Image src={a.avatar} alt="" width={96} height={96} class="avatar" />}
+  <div>
+    <header class="author">
+      {a.avatar && <Image src={a.avatar} alt="" width={96} height={96} />}
       <div>
-        <h1>{a.name}</h1>
+        <h1 class="page-h1" style="margin-top:0">{a.name}</h1>
         {a.bio && <p class="lede">{a.bio}</p>}
         {author.id === 'nick' ? <p><a href="/about/">About Nick</a></p> : a.url && <p><a href={a.url}>{new URL(a.url).hostname.replace(/^www\./, '')}</a></p>}
       </div>
     </header>
-    <PostList posts={posts} />
+    <PostList posts={posts} headingLevel="h2" />
   </div>
 </Base>

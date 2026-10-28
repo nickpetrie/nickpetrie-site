@@ -5,7 +5,7 @@ export const site = {
   name: 'Nick Petrie',
   title: 'Nick Petrie: news product, newsroom strategy and mentoring',
   description:
-    'Nick Petrie writes about news product, newsroom strategy and digital transformation, and mentors people working in news product. Digital Director at The i Paper.',
+    'Nick Petrie writes about news product, newsroom strategy and digital change, and mentors and coaches people in news product. Digital Director at The i Paper.',
   locale: 'en_GB',
   lang: 'en-GB',
   email: 'nick@nickpetrie.co',
@@ -22,9 +22,15 @@ export const site = {
   },
 } as const;
 
+// Home page "The hills I'll die on", in order.
+export const featured = ['bridge-roles-need-to-die', 'the-two-product-team-problem', 'readers-readers-readers-readers-readers'];
+
+export const booking = 'https://savvycal.com/NickPetrie/0977e9aa';
+
 export const newsletter = {
   name: 'When News Meets Product',
   short: 'WNMP',
+  promise: 'For people trying to change news organisations from the inside.',
   url: `${site.url}/newsletter/`,
   description: 'Essays on the strategies, structures and outcomes of the news industry’s digital transformation, from a practitioner. By Nick Petrie.',
 } as const;
@@ -43,6 +49,7 @@ export const person = {
     'Subscription strategy',
     'Audience data and insights',
     'Mentoring',
+    'Coaching',
   ],
   sameAs: Object.values(site.social),
 };

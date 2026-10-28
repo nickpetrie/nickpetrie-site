@@ -1,10 +1,11 @@
 ---
 title: "No thing can save journalism"
-description: "As I've been arguing for a while now, the most important thing to get right is structure - our internal structures should reflect our readers (customers) and not just be the 'traditional', siloed way."
+description: "No single format, from video to newsletters, will save journalism. Publishers need structures built around readers, and the will to reallocate power."
 date: "2021-07-23T08:31:58.000Z"
 updated: "2024-01-23T15:04:51.000Z"
 tags: ["newsroom","product-development"]
 authors: ["nick"]
+related: ["news-2050-a-30-year-outlook-for-the-media", "the-two-product-team-problem", "why-newsrooms-need-to-stop-transforming-and-start-changing"]
 image: "../../assets/images/remote/no-thing-can-save-journalism-feature.jpg"
 ---
 It's been a while since I've felt the need to write a hot take (although given one of the tweets that inspired this is over a week old, it's not that hot)

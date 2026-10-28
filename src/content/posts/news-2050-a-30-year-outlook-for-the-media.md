@@ -1,10 +1,11 @@
 ---
 title: "News 2050: a 30-year outlook for the media"
-description: "News media executives often comfort themselves that the digital world is moving so fast that “you can’t predict what’s going to happen next year, let alone in five years’ time”. We say that’s nonsense."
+description: "A 30-year outlook for news media: the meta-trends that will shape news by 2050, and what media companies should be doing about them now."
 date: "2021-07-09T14:11:55.000Z"
 updated: "2024-01-23T15:04:51.000Z"
 tags: ["strategy","product-development","predictions"]
 authors: ["nick","alan"]
+related: ["no-thing-can-save-journalism", "why-newsrooms-need-to-stop-transforming-and-start-changing", "strategy-isnt-sexy-it-just-means-having-a-plan"]
 image: "../../assets/images/remote/news-2050-a-30-year-outlook-for-the-media-feature.jpg"
 metaTitle: "News 2050: a 30 year outlook for the media"
 ---

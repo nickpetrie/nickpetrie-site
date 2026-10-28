@@ -1,9 +1,10 @@
 ---
+// Topic hubs. Strong topics get an intro and are indexed; thin ones stay online but out of search.
 import { getCollection, type CollectionEntry } from 'astro:content';
 import Base from '../../../layouts/Base.astro';
 import PostList from '../../../components/PostList.astro';
 import { getPosts, breadcrumbs } from '../../../lib/content';
-import { site } from '../../../site';
+import { site, person } from '../../../site';
 
 export async function getStaticPaths() {
   const posts = await getPosts();
@@ -16,20 +17,44 @@ export async function getStaticPaths() {
 interface Props { tag: CollectionEntry<'tags'>; posts: CollectionEntry<'posts'>[] }
 const { tag, posts } = Astro.props;
 const name = tag.data.name;
-const description = tag.data.description ?? `Nick Petrie's writing on ${name.toLowerCase()}: ${posts.length} ${posts.length === 1 ? 'piece' : 'pieces'} on news product and newsroom strategy.`;
+const url = `${site.url}/tag/${tag.id}/`;
+const description = tag.data.description ?? `Nick Petrie's writing on ${name.toLowerCase()}.`;
+const topics = (await getCollection('tags')).filter((t) => !t.data.noindex);
+// Indexable posts first, so the hub leads with the substantial pieces.
+const ordered = [...posts.filter((p) => !p.data.noindex), ...posts.filter((p) => p.data.noindex)];
 ---
 <Base
-  title={`${name}: writing by Nick Petrie`}
+  title={name}
   description={description}
+  noindex={tag.data.noindex}
+  section="/writing/"
   jsonLd={[
-    { '@type': 'CollectionPage', '@id': `${site.url}/tag/${tag.id}/#page`, url: `${site.url}/tag/${tag.id}/`, name, description },
+    {
+      '@type': 'CollectionPage',
+      '@id': `${url}#page`,
+      url,
+      name,
+      description,
+      about: { '@type': 'Thing', name },
+      author: { '@id': person['@id'] },
+      mainEntity: {
+        '@type': 'ItemList',
+        itemListElement: ordered.filter((p) => !p.data.noindex).map((p, i) => ({ '@type': 'ListItem', position: i + 1, url: `${site.url}/${p.id}/` })),
+      },
+    },
     breadcrumbs([{ name: 'Home', path: '/' }, { name: 'Writing', path: '/writing/' }, { name, path: `/tag/${tag.id}/` }]),
   ]}
 >
-  <div class="wrap">
-    <p class="kicker"><a href="/writing/">Writing</a> · Topic</p>
-    <h1>{name}</h1>
-    <p class="lede">{description}</p>
-    <PostList posts={posts} />
-  </div>
+  <p class="label"><a href="/writing/">Writing</a> · Topic</p>
+  <h1 class="page-h1">{name}</h1>
+  {tag.data.intro ? <p class="lede" set:html={tag.data.intro} /> : <p class="lede">{description}</p>}
+  {!tag.data.noindex && (
+    <nav aria-label="Topics">
+      <ul class="chips">
+        <li><a href="/writing/">All</a></li>
+        {topics.map((t) => <li><a href={`/tag/${t.id}/`} aria-current={t.id === tag.id ? 'page' : undefined}>{t.data.name}</a></li>)}
+      </ul>
+    </nav>
+  )}
+  <section class="block"><PostList posts={ordered} headingLevel="h2" /></section>
 </Base>

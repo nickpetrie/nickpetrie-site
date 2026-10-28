@@ -1,42 +1,42 @@
 [
   {
-    "slug": "data-in-the-newsroom",
-    "name": "Data in the newsroom"
-  },
-  {
-    "slug": "jobs",
-    "name": "Jobs"
-  },
-  {
-    "slug": "newsletters",
-    "name": "Newsletters"
+    "slug": "product-development",
+    "name": "News product",
+    "description": "Nick Petrie on news product: how publishers build digital products for readers, and why product is still so hard inside news organisations.",
+    "intro": "News product is where journalism meets the experience readers actually have. These pieces are about how publishers build products, why it is so hard inside newsrooms, and what better looks like."
   },
   {
     "slug": "newsroom",
-    "name": "Newsroom"
-  },
-  {
-    "slug": "product-development",
-    "name": "Product development"
-  },
-  {
-    "slug": "mentoring",
-    "name": "Mentoring"
+    "name": "Newsroom structure",
+    "description": "Nick Petrie on how newsrooms are organised: structures, roles and the relationship between editorial, product and data teams.",
+    "intro": "Most of the news industry's problems are structural. These pieces are about how newsrooms are organised, the roles we create to paper over the gaps, and how editorial, product and data teams could work as one."
   },
   {
     "slug": "strategy",
-    "name": "Strategy"
-  },
-  {
-    "slug": "predictions",
-    "name": "Predictions"
+    "name": "Strategy",
+    "description": "Nick Petrie on strategy in news organisations: diagnosis, trade-offs, long-term thinking and why most plans fail in the doing.",
+    "intro": "Strategy just means having a plan, and most news organisations don't have a coherent one. These pieces are about diagnosis, real trade-offs and thinking further ahead than next quarter."
   },
   {
     "slug": "leadership",
-    "name": "Leadership"
+    "name": "Leadership",
+    "description": "Nick Petrie on leadership in news: leading change, building teams and supporting the people doing the hardest jobs.",
+    "intro": "Change in news organisations is led by people, often the ones with the least formal power. These pieces are about leading change, building teams and looking after the people in between."
   },
   {
-    "slug": "links",
-    "name": "Links"
-  }
+    "slug": "mentoring",
+    "name": "Mentoring and careers",
+    "description": "Nick Petrie on mentoring and careers in news product: what people ask for help with, and lessons from more than 65 sessions.",
+    "intro": "I mentor and coach people working in news product. These pieces are what I've learnt from it. If you want to talk something through, <a href=\"/mentoring/\">book a session</a>."
+  },
+  {
+    "slug": "data-in-the-newsroom",
+    "name": "Data in the newsroom",
+    "description": "Nick Petrie on using data well in newsrooms: metrics, context and making better decisions for journalism and product.",
+    "intro": "Newsrooms have more data than ever, and still struggle to use it well. These pieces are about metrics, missing context and making better decisions."
+  },
+  { "slug": "predictions", "name": "Predictions", "noindex": true },
+  { "slug": "newsletters", "name": "Newsletters", "noindex": true },
+  { "slug": "jobs", "name": "Jobs", "noindex": true },
+  { "slug": "links", "name": "Links", "noindex": true }
 ]

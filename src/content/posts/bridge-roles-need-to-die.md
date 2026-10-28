@@ -1,10 +1,12 @@
 ---
 title: "Bridge roles need to die"
-description: "Bridge roles need to die. Not because the problem(s) they solve don’t matter. Coordination, alignment and cross functional working matter more than ever"
+description: "Bridge roles between editorial and product have become a sticking plaster. They should be time-limited, with a plan to retire them, not a permanent fix."
 date: "2026-01-23T09:41:17.000Z"
 updated: "2026-01-23T09:41:17.000Z"
 tags: ["leadership","newsroom","product-development","strategy"]
 authors: ["nick"]
+standfirst: "They let us ignore the real problems."
+related: ["the-two-product-team-problem", "gotta-get-structural", "no-thing-can-save-journalism"]
 newsletter:
   issue: 6
   beehiivSlug: "bridge-roles-need-to-die"
@@ -19,7 +21,7 @@ What really struck me over the last year wasn't that these remain challenging ro
 
 The nature of these roles means the people in them see and experience the dysfunction more clearly than anyone. They hold things together through a mix of sheer force of will for things to be better and putting in serious hours to try and make sure they are. Precisely because they tend to be so effective, the business doesn’t have to confront the underlying issues. 
 
-We keep creating jobs that exist to stand in the gap between editorial and product, and then we wonder why the gap never closes.
+<blockquote class="pull"><p>We keep creating jobs that exist to stand in the gap between editorial and product, and then we wonder why the gap never closes.</p></blockquote>
 
 The important question then becomes: how do we build better infrastructure? Bridge-type roles might be part of a transition, but they should be time-limited secondments with off-boarding plans. We should actively plan how to retire such roles while we're creating them.
 

@@ -7,7 +7,10 @@ const posts = defineCollection({
   schema: ({ image }) =>
     z.object({
       title: z.string(),
+      // One or two sentences: the meta description, list summary and AI-facing summary.
       description: z.string(),
+      // A short line under the headline. Falls back to the description.
+      standfirst: z.string().optional(),
       date: z.coerce.date(),
       updated: z.coerce.date().optional(),
       tags: z.array(z.string()).default([]),
@@ -20,6 +23,10 @@ const posts = defineCollection({
       metaDescription: z.string().optional(),
       // Set on posts that went out as a When News Meets Product issue.
       newsletter: z.object({ issue: z.number(), beehiivSlug: z.string().optional() }).optional(),
+      // Hand-picked "Read next" posts, by slug.
+      related: z.array(z.string()).default([]),
+      // Thin or link-only posts: still online, but kept out of search, the sitemap and home page.
+      noindex: z.boolean().default(false),
       draft: z.boolean().default(false),
     }),
 });
@@ -32,6 +39,7 @@ const pages = defineCollection({
       description: z.string(),
       updated: z.coerce.date().optional(),
       legacySlug: z.string().optional(),
+      faq: z.array(z.object({ q: z.string(), a: z.string() })).default([]),
       image: image().optional(),
       ogImage: image().optional(),
       metaTitle: z.string().optional(),
@@ -41,7 +49,8 @@ const pages = defineCollection({
 
 const tags = defineCollection({
   loader: file('./src/data/tags.json', { parser: (text) => JSON.parse(text).map((t: { slug: string }) => ({ id: t.slug, ...t })) }),
-  schema: z.object({ slug: z.string(), name: z.string(), description: z.string().optional() }),
+  // `intro` is HTML shown at the top of the topic page; thin topics are noindexed.
+  schema: z.object({ slug: z.string(), name: z.string(), description: z.string().optional(), intro: z.string().optional(), noindex: z.boolean().default(false) }),
 });
 
 const authors = defineCollection({

@@ -1,30 +1,39 @@
 ---
 import Base from '../layouts/Base.astro';
 import PostList from '../components/PostList.astro';
-import SignupForm from '../components/SignupForm.astro';
+import Wnmp from '../components/Wnmp.astro';
+import MentoringBand from '../components/MentoringBand.astro';
+import Portrait from '../components/Portrait.astro';
 import { getPosts } from '../lib/content';
-import { site } from '../site';
+import { site, featured } from '../site';
 
 const posts = await getPosts();
+const hills = featured.map((slug) => posts.find((p) => p.id === slug)!);
+const more = posts.filter((p) => !featured.includes(p.id) && !p.data.noindex).slice(0, 3);
 ---
 <Base title={site.title} description={site.description}>
-  <section class="wrap intro">
-    <h1>Nick Petrie</h1>
-    <p class="lede">
-      I work where journalism meets product. I'm Digital Director at The i Paper, and before that I was Deputy Digital News
-      Director at Reuters and spent nearly a decade at The Times and Sunday Times. I write about news product, newsroom
-      strategy and the people who make it work, and I <a href="/mentoring/">mentor</a> people in news product.
-    </p>
-    <p><a href="/about/">More about me</a></p>
+  <section class="hero">
+    <div>
+      <h1>I work where journalism meets product.</h1>
+      <p class="lede">Digital Director at The i Paper, previously at Reuters and The Times. I write about news product and newsroom strategy, and mentor people working in it.</p>
+      <p><a href="/about/">More about me</a></p>
+    </div>
+    <figure class="portrait"><Portrait size={220} eager /></figure>
   </section>
 
-  <section class="wrap">
-    <SignupForm source="/" />
+  <Wnmp id="home" />
+
+  <section class="block" aria-labelledby="hills">
+    <h2 class="label" id="hills">The hills I'll die on</h2>
+    <p class="small intro">Three pieces that say what I think, and why.</p>
+    <PostList posts={hills} />
   </section>
 
-  <section class="wrap">
-    <h2>Latest writing</h2>
-    <PostList posts={posts.slice(0, 8)} headingLevel="h3" />
+  <section class="block" aria-labelledby="more">
+    <h2 class="label" id="more">More writing</h2>
+    <PostList posts={more} summary={false} />
     <p><a href="/writing/">All writing</a></p>
   </section>
+
+  <MentoringBand slot="after-main" />
 </Base>

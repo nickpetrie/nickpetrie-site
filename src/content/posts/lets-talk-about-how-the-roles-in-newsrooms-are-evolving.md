@@ -1,10 +1,11 @@
 ---
 title: "Let's talk about how the roles in newsrooms are evolving"
-description: "TL;DR I’m starting a newsletter focused on exploring all the new roles that have appeared in newsrooms as they evolved over the past decade or more. You can…"
+description: "Why I started Evolving Newsroom, a newsletter profiling the people in the new, non-traditional roles that have appeared in newsrooms."
 date: "2020-05-27T09:00:00.000Z"
 updated: "2024-01-23T15:04:51.000Z"
 tags: ["jobs","newsletters"]
 authors: ["nick"]
+related: ["bridge-roles-need-to-die", "brief-reflection-first-18-months-mentoring"]
 ---
 *TL;DR I’m starting a newsletter focused on exploring all the new roles that have appeared in newsrooms as they evolved over the past decade or more. **[You can sign up here](https://evolvingnewsroom.substack.com/about?)***
 

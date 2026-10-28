@@ -1,9 +1,11 @@
 ---
 title: "The Two product team problem"
-description: "In most publishers with any kind of legacy operation (but particularly newspapers) newsrooms are the original product team."
+description: "Most publishers have two product teams: the newsroom and the product department. How alignment, structure and integration can make them one."
 date: "2025-01-20T10:44:27.000Z"
 updated: "2025-01-20T10:44:27.000Z"
+tags: ["product-development", "newsroom", "strategy"]
 authors: ["nick"]
+related: ["bridge-roles-need-to-die", "gotta-get-structural", "no-thing-can-save-journalism"]
 newsletter:
   issue: 5
   beehiivSlug: "the-two-product-team-problem"

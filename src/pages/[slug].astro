@@ -1,16 +1,17 @@
 ---
-// Posts live at /<slug>/, exactly as on Ghost. Standalone pages (about, mentoring, contact) too.
+// Posts live at /<slug>/, exactly as on Ghost. Standalone pages (about, contact) too; mentoring has its own file.
 import { getCollection, getEntries, render, type CollectionEntry } from 'astro:content';
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
-import SignupForm from '../components/SignupForm.astro';
 import PostList from '../components/PostList.astro';
+import Wnmp from '../components/Wnmp.astro';
+import Portrait from '../components/Portrait.astro';
 import { getPosts, formatDate, ogPath, articleNode, breadcrumbs } from '../lib/content';
 import { newsletter, person, site } from '../site';
 
 export async function getStaticPaths() {
   const posts = await getPosts();
-  const pages = await getCollection('pages');
+  const pages = (await getCollection('pages')).filter((p) => p.id !== 'mentoring');
   return [
     ...posts.map((entry) => ({ params: { slug: entry.id }, props: { kind: 'post' as const, entry } })),
     ...pages.map((entry) => ({ params: { slug: entry.id }, props: { kind: 'page' as const, entry } })),
@@ -31,19 +32,21 @@ let jsonLd: Record<string, unknown>[] = [];
 let authors: CollectionEntry<'authors'>[] = [];
 let tags: CollectionEntry<'tags'>[] = [];
 let related: CollectionEntry<'posts'>[] = [];
+const post = kind === 'post' ? (entry as CollectionEntry<'posts'>) : undefined;
 
-if (kind === 'post') {
-  const post = entry as CollectionEntry<'posts'>;
+if (post) {
   authors = await getEntries(post.data.authors.map((id) => ({ collection: 'authors', id })));
   tags = (await getEntries(post.data.tags.map((id) => ({ collection: 'tags', id })))).filter(Boolean);
   const all = await getPosts();
-  related = all
-    .filter((p) => p.id !== post.id)
+  // Hand-picked first, then topped up by shared topics.
+  const picked = post.data.related.map((id) => all.find((p) => p.id === id)!).filter(Boolean);
+  const byTopic = all
+    .filter((p) => p.id !== post.id && !p.data.noindex && !picked.includes(p))
     .map((p) => ({ p, score: p.data.tags.filter((t) => post.data.tags.includes(t)).length }))
     .filter((x) => x.score > 0)
     .sort((a, b) => b.score - a.score || b.p.data.date.valueOf() - a.p.data.date.valueOf())
-    .slice(0, 3)
     .map((x) => x.p);
+  related = [...picked, ...byTopic].slice(0, 3);
   jsonLd = [
     articleNode(post, authors),
     breadcrumbs([
@@ -62,31 +65,38 @@ if (kind === 'post') {
     mainEntity: { '@id': person['@id'] },
   }];
 }
+
+const topic = tags.find((t) => !t.data.noindex) ?? tags[0];
+const soloNick = authors.length === 1 && authors[0].id === 'nick';
 ---
 <Base
   title={title}
   description={description}
   image={ogPath(entry.id)}
-  type={kind === 'post' ? 'article' : entry.id === 'about' ? 'profile' : 'website'}
-  published={kind === 'post' ? (d as CollectionEntry<'posts'>['data']).date : undefined}
+  type={post ? 'article' : entry.id === 'about' ? 'profile' : 'website'}
+  published={post?.data.date}
   modified={d.updated}
+  noindex={post?.data.noindex}
+  section={post ? '/writing/' : undefined}
   jsonLd={jsonLd}
 >
-  <article class="wrap prose-wrap">
-    <header class="entry-header">
-      {kind === 'post' && (entry as CollectionEntry<'posts'>).data.newsletter && (
-        <p class="kicker"><a href="/newsletter/">{newsletter.name}</a> · Issue {(entry as CollectionEntry<'posts'>).data.newsletter!.issue}</p>
-      )}
-      <h1>{d.title}</h1>
-      {kind === 'post' && (
-        <p class="meta">
-          By {authors.map((a, i) => (
-            <>{i > 0 && ' and '}<a href={a.id === 'nick' ? '/about/' : `/author/${a.id}/`} rel="author">{a.data.name}</a></>
-          ))}
-          · <time datetime={(d as CollectionEntry<'posts'>['data']).date.toISOString()}>{formatDate((d as CollectionEntry<'posts'>['data']).date)}</time>
-        </p>
-      )}
-    </header>
+  <article class="art">
+    {post?.data.newsletter ? (
+      <p class="label"><a href="/newsletter/">{newsletter.name}</a> · Issue {post.data.newsletter.issue}</p>
+    ) : post && topic ? (
+      <p class="label"><a href={`/tag/${topic.id}/`}>{topic.data.name}</a></p>
+    ) : null}
+    <h1>{d.title}</h1>
+    {post && <p class="standfirst">{post.data.standfirst ?? post.data.description}</p>}
+    {post && (
+      <p class="byline">
+        By {authors.map((a, i) => (
+          <>{i > 0 && ' and '}<a href={a.id === 'nick' ? '/about/' : `/author/${a.id}/`} rel="author">{a.data.name}</a></>
+        ))}{' '}
+        · <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
+      </p>
+    )}
+    {entry.id === 'about' && <figure class="portrait inline"><Portrait size={200} eager /></figure>}
 
     {d.image && (
       <figure class="feature">
@@ -99,25 +109,28 @@ if (kind === 'post') {
       <Content />
     </div>
 
-    {kind === 'post' && tags.length > 0 && (
-      <ul class="tags" aria-label="Topics">
-        {tags.map((t) => <li><a href={`/tag/${t.id}/`}>{t.data.name}</a></li>)}
-      </ul>
+    {tags.length > 0 && (
+      <p class="filed">Filed under {tags.map((t, i) => <>{i > 0 && ', '}<a href={`/tag/${t.id}/`}>{t.data.name}</a></>)}</p>
     )}
   </article>
 
-  {kind === 'post' && (
-    <aside class="wrap prose-wrap after-post">
-      <SignupForm source={`/${entry.id}/`} />
-      {related.length > 0 && (
-        <section>
-          <h2>Related</h2>
-          <PostList posts={related} headingLevel="h3" />
-        </section>
-      )}
+  {post && soloNick && (
+    <aside class="author">
+      <Portrait size={80} />
+      <div>
+        <p class="author-name">Nick Petrie</p>
+        <p class="small">Digital Director at The i Paper, previously at Reuters and The Times. I write about news product and newsroom strategy, and mentor people working in it.</p>
+        <p class="small"><a href="/about/">About me</a> · <a href="/mentoring/">Mentoring</a></p>
+      </div>
     </aside>
   )}
-  {kind === 'page' && entry.id === 'about' && (
-    <aside class="wrap prose-wrap after-post"><SignupForm source="/about/" /></aside>
+
+  {related.length > 0 && (
+    <section class="block" aria-labelledby="read-next">
+      <h2 class="label" id="read-next">Read next</h2>
+      <PostList posts={related} summary={false} />
+    </section>
   )}
+
+  {(post || entry.id === 'about') && <Wnmp id="article" compact />}
 </Base>

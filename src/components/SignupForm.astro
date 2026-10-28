@@ -1,20 +1,16 @@
 ---
 // Posts to /api/subscribe (the Worker), which adds the reader to beehiiv.
 // Works without JavaScript; the script only keeps the reader on the page.
-import { newsletter } from '../site';
-
 interface Props {
   source?: string; // which page the sign-up came from, for beehiiv's referrer stats
-  heading?: string;
+  id: string; // unique per page, for the label
 }
-const { source = Astro.url.pathname, heading = `Get ${newsletter.name} by email` } = Astro.props;
+const { source = Astro.url.pathname, id } = Astro.props;
 ---
 <form class="signup" method="post" action="/api/subscribe">
-  <p class="signup-heading">{heading}</p>
-  <p class="signup-blurb">{newsletter.description} Free, and only when there's something worth saying.</p>
   <div class="signup-row">
-    <label class="visually-hidden" for={`email-${source}`}>Email address</label>
-    <input id={`email-${source}`} type="email" name="email" autocomplete="email" required placeholder="you@example.com" />
+    <label class="visually-hidden" for={`email-${id}`}>Email address</label>
+    <input id={`email-${id}`} type="email" name="email" autocomplete="email" required placeholder="you@example.com" />
     <input type="hidden" name="source" value={source} />
     <div class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
     <button type="submit">Subscribe</button>
@@ -33,7 +29,7 @@ const { source = Astro.url.pathname, heading = `Get ${newsletter.name} by email`
       try {
         const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { accept: 'application/json' } });
         const body = await res.json().catch(() => ({}));
-        status.textContent = res.ok ? 'Thanks. Check your inbox to confirm.' : body.error ?? 'Something went wrong. Please try again.';
+        status.textContent = res.ok ? "Thanks, you're subscribed. Look out for a welcome email." : body.error ?? 'Something went wrong. Please try again.';
         if (res.ok) form.reset();
       } catch {
         status.textContent = 'Something went wrong. Please try again.';

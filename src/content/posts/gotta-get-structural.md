@@ -1,9 +1,11 @@
 ---
 title: "Gotta get structural"
-description: "It’s been several months since my last newsletter and there have been some changes. The biggest is I’ve started a new job as the Digital Director for The i Paper."
+description: "Starting as Digital Director at The i Paper: better reader metrics, a new relationship between newsroom and product, and a longer view of change."
 date: "2024-12-16T15:08:45.000Z"
 updated: "2024-12-16T15:08:45.000Z"
+tags: ["newsroom", "strategy"]
 authors: ["nick"]
+related: ["the-two-product-team-problem", "bridge-roles-need-to-die", "why-newsrooms-need-to-stop-transforming-and-start-changing"]
 newsletter:
   issue: 4
   beehiivSlug: "gotta-get-structural"

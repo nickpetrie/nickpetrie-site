@@ -1,9 +1,11 @@
 ---
 title: "Joining the News Product Alliance board"
-description: "Hopefully many of you have heard of the NPA by now and are members of the Slack community and are making use of the Product Kit, Mentoring Scheme and…"
+description: "I'm joining the board of the News Product Alliance as it becomes a non-profit, to help grow its community of news product people."
 date: "2023-01-25T04:00:20.000Z"
 updated: "2024-01-23T15:04:52.000Z"
+tags: ["leadership"]
 authors: ["nick"]
+related: ["after-two-years-of-mentoring-and-baby", "brief-reflection-first-18-months-mentoring"]
 ---
 Hopefully many of you have heard of the [NPA](https://newsproduct.org/about-us) by now and are members of the [Slack](https://newsproduct.org/slack) community and are making use of the [Product Kit](https://newsproduct.org/product-kit), [Mentoring Scheme](https://newsproduct.org/mentor-network) and planning to attend the upcoming [Summit](https://newsproduct.org/summit/) at the end of April
 

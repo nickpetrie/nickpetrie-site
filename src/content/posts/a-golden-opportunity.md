@@ -1,10 +1,11 @@
 ---
 title: "A golden opportunity?"
-description: "Are we entering a golden age of media and publishing, or the end of times? Who knows? What I know is that the 'news' feels exciting again."
+description: "Most publishers are stuck partway through their digital transition just as AI arrives. The real problems are structural and cultural, and need alignment."
 date: "2023-10-19T08:27:00.000Z"
 updated: "2024-01-23T15:04:52.000Z"
 tags: ["product-development","strategy","newsletters"]
 authors: ["nick"]
+related: ["stand-out-or-fade-away", "why-newsrooms-need-to-stop-transforming-and-start-changing", "the-two-product-team-problem"]
 image: "../../assets/images/2023/10/-Golden-Age-for-Journalism.webp"
 newsletter:
   issue: 1

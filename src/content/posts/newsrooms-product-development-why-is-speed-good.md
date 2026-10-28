@@ -1,10 +1,11 @@
 ---
 title: "Why is speed good?"
-description: "What is the value of speed then? I think for modern newsrooms trying to create the best possible product experiences what we are actually interested in is learning quickly and making better decisions."
+description: "Newsrooms and product teams both love speed, for the wrong reasons. What matters is shortening the time to learn, and deciding well with what you learn."
 date: "2020-12-17T10:52:39.000Z"
 updated: "2024-01-23T15:04:51.000Z"
 tags: ["newsroom","product-development"]
 authors: ["nick"]
+related: ["opportunity-choosing-different-news-product", "strategy-isnt-sexy-it-just-means-having-a-plan", "cherry-picking-metrics"]
 metaTitle: "Why is speed good? Tensions in newsroom product development"
 metaDescription: "I think for modern newsrooms trying to create the best possible product experiences what we are actually interested in is learning quickly and making better decision"
 ---

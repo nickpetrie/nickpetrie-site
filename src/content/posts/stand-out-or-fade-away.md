@@ -1,10 +1,11 @@
 ---
 title: "Stand out or fade away"
-description: "We created a product with an opinion. A point of view about how it should be used, that wasn’t just like every other news experience out there."
+description: "Lessons from edition-based publishing at The Times and The Verge's redesign: why news products need a point of view as platforms send less traffic."
 date: "2024-01-15T11:21:46.000Z"
 updated: "2024-01-23T15:04:52.000Z"
 tags: ["leadership","product-development","strategy","newsroom"]
 authors: ["nick"]
+related: ["opportunity-choosing-different-news-product", "readers-readers-readers-readers-readers", "a-golden-opportunity"]
 ogImage: "../../assets/images/2024/01/DALL-E-Stand-Out-or-Fade-Away-1.webp"
 newsletter:
   issue: 2

@@ -1,41 +1,21 @@
 ---
-title: "News Product Mentoring"
-description: "I can mentor and advise people looking to get started in the media/product/innovation space and understand the wide range of paths they could take."
-updated: "2026-05-28T10:46:49.000Z"
+title: "News product mentoring"
+metaTitle: "News product mentoring and coaching"
+description: "One-to-one mentoring and coaching for people in news product, from Nick Petrie, Digital Director at The i Paper. One-off sessions are pay what you can."
+updated: "2026-10-28T12:00:00.000Z"
 legacySlug: "mentoring-media-innovation-news-product"
-image: "../../assets/images/remote/mentoring-feature.jpg"
-imageCaption: "Photo by Ally Griffin / Unsplash"
+faq:
+  - q: "How much does it cost?"
+    a: "One-off sessions are pay what you can. A session is worth £250, and you can set any amount from £1 when you book. Stripe won't take £0."
+  - q: "Is paying £1 really fine?"
+    a: "Yes. Students, early-career journalists and anyone who can't afford more are welcome to pay £1. If you can afford to pay, I trust your judgement."
+  - q: "Is this mentoring or coaching?"
+    a: "Both. Mentoring is me sharing what I've learnt and what I'd do in your position. Coaching is helping you work out your own answer. Most sessions use a bit of each, depending on what you need."
+  - q: "Who is it for?"
+    a: "People working in or moving into news product, audience, data and digital roles: from first jobs to people leading change across a newsroom."
+  - q: "Can my employer pay?"
+    a: "Often, yes. Many organisations will fund mentoring or coaching as personal development, so it's worth asking."
+  - q: "How does ongoing mentoring work?"
+    a: "We agree goals, meet monthly over 3, 6 or 12 months, and stay in touch on WhatsApp between calls. I have 2 to 3 spaces open from October 2026."
 ---
-## Ongoing Day-to-day News Product Mentoring
-
-> **From June 2026**: I have 2-3 spaces available for paid monthly mentoring slots. These work best as 3 / 6 / 12 month commitments so we can set goals and work through challenges over time. I also offer Whatsapp support between calls.
->
-> *It's often worth checking if your company will fund mentoring as part of your personal development*
-
-I can mentor and advise people looking to get started in the media/news-product/innovation space and understand the wide range of paths they could take. I can also coach those moving into their first management roles and particularly anyone who is responsible for cultural change and innovation in their organisations.
-
-In addition I can help if you are working on new business/product/organisational strategy, newsroom tooling and applying reader data & insights in the newsroom.
-
-**One time Pay-What-You-Can-Mentoring**
-
-Demand for my mentoring services is growing faster than I have time to support, so I am trying an experiment. When you go to book a slot, you will now be asked to 'check out', rather than 'book'. You will see this copy under the fee and a 'change amount' button.
-
-*A mentoring session is worth £250. Students, early career journalists and those who can't afford to pay are welcome to change the amount to £1. **Honestly.** (Stripe won't accept £0 unfortunately).*
-
-***I'll always offer free/very low cost sessions of some kind***
-
-*Those who can afford to pay, I trust your judgement as to how much that is.*
-
-I mean every word of that.
-
-
-
----
-
-## News Product Alliance Mentoring
-
-I've joined the [**NPA Mentor network**](https://newsproduct.org/mentor-network) where the idea is:
-
-> 150 emerging product thinkers will be selected and matched with one of 50 experienced news product professionals.
-
-The first cohort finished in May this year and we are waiting to hear if the programme will be offered again. [Sign up](/newsletter/) to find out when applications open again.
+The page itself is laid out in src/pages/mentoring.astro. Edit the FAQ above; it feeds the page and its structured data.

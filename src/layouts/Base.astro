@@ -1,53 +1,66 @@
 ---
 import Seo from '../components/Seo.astro';
+import SignupForm from '../components/SignupForm.astro';
 import '../styles/global.css';
-import { site } from '../site';
+import { site, newsletter } from '../site';
+import { npMarkSvg } from '../lib/brand';
 
 type SeoProps = import('astro/types').ComponentProps<typeof Seo>;
-interface Props extends SeoProps {}
+interface Props extends SeoProps {
+  section?: string; // nav item to mark as current when the path doesn't say, e.g. posts under Writing
+}
 
-const props = Astro.props;
+const { section, ...props } = Astro.props;
 const path = Astro.url.pathname;
 const analyticsToken = import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN;
+const current = (href: string) => path.startsWith(href) || href === section;
 ---
 <!doctype html>
 <html lang={site.lang}>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <meta name="theme-color" content="#16181D" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="preload" href="/fonts/SourceSerif4-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/SourceSans3-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <meta name="theme-color" content="#F7F6F1" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#1F2834" media="(prefers-color-scheme: dark)" />
     <Seo {...props} />
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>
-    <header class="site-header">
-      <div class="wrap header-inner">
-        <a class="brand" href="/" aria-label="Nick Petrie, home">Nick Petrie</a>
-        <nav aria-label="Main">
-          <ul>
-            {site.nav.map((item) => (
-              <li><a href={item.href} aria-current={path.startsWith(item.href) ? 'page' : undefined}>{item.label}</a></li>
-            ))}
-          </ul>
-        </nav>
-      </div>
+    <header class="head wrap">
+      <a class="brand" href="/"><Fragment set:html={npMarkSvg} /><span>Nick Petrie</span></a>
+      <nav aria-label="Main">
+        <ul>
+          {site.nav.map((item) => (
+            <li><a href={item.href} aria-current={current(item.href) ? 'page' : undefined}>{item.label}</a></li>
+          ))}
+        </ul>
+      </nav>
     </header>
 
-    <main id="main">
+    <main id="main" class="wrap">
       <slot />
     </main>
+    <slot name="after-main" />
 
-    <footer class="site-footer">
-      <div class="wrap footer-inner">
-        <p>© {new Date().getFullYear()} Nick Petrie</p>
-        <ul>
-          <li><a href="/contact/">Contact</a></li>
-          <li><a href="/rss/">RSS</a></li>
-          <li><a href={site.social.linkedin} rel="me">LinkedIn</a></li>
-          <li><a href={site.social.x} rel="me">X</a></li>
-          <li><a href={site.social.mastodon} rel="me">Mastodon</a></li>
-        </ul>
+    <footer class="foot">
+      <div class="wrap foot-in">
+        <div>
+          <p class="foot-name">Nick Petrie</p>
+          <p class="small">
+            <a href={`mailto:${site.email}`}>{site.email}</a><br />
+            <a href={site.social.linkedin} rel="me">LinkedIn</a> · <a href={site.social.x} rel="me">X</a> · <a href={site.social.mastodon} rel="me">Mastodon</a> · <a href="/rss/">RSS</a><br />
+            <a href="/contact/">Contact and colophon</a>
+          </p>
+        </div>
+        <div>
+          <p class="foot-label">{newsletter.name}</p>
+          <p class="small">{newsletter.promise}</p>
+          <SignupForm id="footer" />
+        </div>
       </div>
     </footer>
 

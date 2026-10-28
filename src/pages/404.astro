@@ -2,13 +2,12 @@
 import Base from '../layouts/Base.astro';
 import PostList from '../components/PostList.astro';
 import { getPosts } from '../lib/content';
+import { featured } from '../site';
 
-const posts = (await getPosts()).slice(0, 5);
+const posts = (await getPosts()).filter((p) => featured.includes(p.id));
 ---
 <Base title="Page not found" description="This page doesn't exist or has moved." noindex>
-  <div class="wrap">
-    <h1>Page not found</h1>
-    <p class="lede">That page doesn't exist, or it has moved. Try <a href="/writing/">all my writing</a>, or one of these:</p>
-    <PostList posts={posts} headingLevel="h2" />
-  </div>
+  <h1 class="page-h1">Page not found</h1>
+  <p class="lede">That page doesn't exist, or it has moved. Try <a href="/writing/">all my writing</a>, or one of these:</p>
+  <PostList posts={posts} headingLevel="h2" />
 </Base>

@@ -6,10 +6,7 @@ import { getPosts, breadcrumbs } from '../../lib/content';
 import { site } from '../../site';
 
 const posts = await getPosts();
-const tags = (await getCollection('tags'))
-  .map((t) => ({ t, n: posts.filter((p) => p.data.tags.includes(t.id)).length }))
-  .filter((x) => x.n > 0)
-  .sort((a, b) => b.n - a.n);
+const topics = (await getCollection('tags')).filter((t) => !t.data.noindex);
 const years = [...new Set(posts.map((p) => p.data.date.getFullYear()))];
 const description = 'Everything Nick Petrie has written on news product, newsroom strategy, leadership and mentoring, by year.';
 ---
@@ -25,23 +22,24 @@ const description = 'Everything Nick Petrie has written on news product, newsroo
       description,
       mainEntity: {
         '@type': 'ItemList',
-        itemListElement: posts.map((p, i) => ({ '@type': 'ListItem', position: i + 1, url: `${site.url}/${p.id}/` })),
+        itemListElement: posts.filter((p) => !p.data.noindex).map((p, i) => ({ '@type': 'ListItem', position: i + 1, url: `${site.url}/${p.id}/` })),
       },
     },
     breadcrumbs([{ name: 'Home', path: '/' }, { name: 'Writing', path: '/writing/' }]),
   ]}
 >
-  <div class="wrap">
-    <h1>Writing</h1>
-    <p class="lede">{description}</p>
-    <ul class="tags" aria-label="Topics">
-      {tags.map(({ t, n }) => <li><a href={`/tag/${t.id}/`}>{t.data.name} <span>({n})</span></a></li>)}
+  <h1 class="page-h1">Writing</h1>
+  <p class="lede">Everything I've written on news product, newsroom strategy, leadership and mentoring.</p>
+  <nav aria-label="Topics">
+    <ul class="chips">
+      <li><a href="/writing/" aria-current="page">All</a></li>
+      {topics.map((t) => <li><a href={`/tag/${t.id}/`}>{t.data.name}</a></li>)}
     </ul>
-    {years.map((year) => (
-      <section>
-        <h2 id={`y${year}`}>{year}</h2>
-        <PostList posts={posts.filter((p) => p.data.date.getFullYear() === year)} headingLevel="h3" />
-      </section>
-    ))}
-  </div>
+  </nav>
+  {years.map((year) => (
+    <section class="year">
+      <h2 id={`y${year}`}>{year}</h2>
+      <PostList posts={posts.filter((p) => p.data.date.getFullYear() === year)} summary={false} />
+    </section>
+  ))}
 </Base>

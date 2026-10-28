@@ -1,10 +1,11 @@
 ---
 title: "After two years of mentoring and a baby I'm trying something new."
-description: "In January I reflected on 18 months of mentoring, what I had learnt and observed from those sessions and now that I've passed the two year mark I wanted to…"
+description: "65 mentoring sessions in: what has changed since my first 18 months, and why I moved to pay-what-you-can mentoring for news product people."
 date: "2023-08-22T10:55:38.000Z"
 updated: "2024-01-23T15:04:52.000Z"
 tags: ["mentoring","leadership"]
 authors: ["nick"]
+related: ["brief-reflection-first-18-months-mentoring", "bridge-roles-need-to-die", "joining-the-news-product-alliance-board"]
 ogImage: "../../assets/images/remote/after-two-years-of-mentoring-and-baby-og.jpg"
 ---
 In January [I reflected on 18 months](/brief-reflection-first-18-months-mentoring/) of mentoring, what I had learnt and observed from those sessions and now that I've passed the two year mark I wanted to do it again.

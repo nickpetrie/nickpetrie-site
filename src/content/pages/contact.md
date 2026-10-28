@@ -1,23 +1,17 @@
 ---
-title: "Contact & Colophon"
-description: "You can find me on Twitter @petren or drop me an email at nickpetrie@hey.com"
-updated: "2022-12-19T15:06:47.000Z"
+title: "Contact"
+description: "How to get in touch with Nick Petrie, and how this site is built."
+updated: "2026-10-28T12:00:00.000Z"
 legacySlug: "contact-colophon"
 ---
-## Contact
+Email me at [nick@nickpetrie.co](mailto:nick@nickpetrie.co). I read everything, though replies can take a few days.
 
-You can find me on Twitter [@petren](https://www.twitter.com/petren) at Mastodon as [@petren](https://macaw.social/@petren)  or drop me an email at [nicholaspetrie@gmail.com](mailto:nicholaspetrie@gmail.com)
+I'm on [LinkedIn](https://www.linkedin.com/in/nick-elliot-petrie/), [X](https://x.com/petren) and [Mastodon](https://macaw.social/@petren).
 
----
+For mentoring or coaching, [book a session](/mentoring/).
 
 ## Colophon
 
-**nickpetrie.co** uses the [Atilla Theme](https://github.com/zutrinken/attila), powered by [Ghost](https://ghost.org/) and hosted on [Digital Ocean](https://m.do.co/c/66889533ddd2)\*.
+This site is built with [Astro](https://astro.build) and hosted on [Cloudflare](https://www.cloudflare.com). The newsletter is sent with [beehiiv](https://www.beehiiv.com). Type is Source Serif and Source Sans, by Adobe.
 
-Set up and configured by [Dan at Gloat](https://gloat.dev/) (who is great and super helpful - pop this code `**JJ92H6**` in the request form to let him know I referred you)
-
-I also use [Fathom Analytics](https://usefathom.com/ref/XTGZTF)\* because they don't add cookies or other tracking, but let me get a sense of how many people are reading and where they come from, which is helpful.  
-
-*\*Indicates a link that includes a referral code*
-
-[@Petren](https://macaw.social/@petren)
+There are no cookies and no ad trackers. I use Cloudflare's privacy-first analytics, which counts visits without following you around.

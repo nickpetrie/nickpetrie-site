@@ -1,10 +1,11 @@
 ---
 title: "The opportunity in choosing to be different"
-description: "There is tremendous opportunity in choosing to be different, in ensuring your readers and their needs are at the heart of your decision making. It does mean you won't be for everyone, but it also means those readers that choose your product know for sure why they like it."
+description: "Publishers define themselves by how close they are to competitors. The opportunity is in choosing to be different and putting readers' needs first."
 date: "2021-01-26T11:12:55.000Z"
 updated: "2024-01-23T15:04:51.000Z"
 tags: ["newsroom","product-development"]
 authors: ["nick"]
+related: ["stand-out-or-fade-away", "newsrooms-product-development-why-is-speed-good", "readers-readers-readers-readers-readers"]
 ogImage: "../../assets/images/2021/01/1280px-Expert_Rock_Climber_-Unsplash--2.jpg"
 metaTitle: "The opportunity in choosing to be different"
 metaDescription: "Being in a competitive market with low margins is a tough business to be in. Even more so when differentiating your product is both expensive and challenges the status quo."

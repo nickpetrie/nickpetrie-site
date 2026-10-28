@@ -1,0 +1,9 @@
+---
+// Nick's 2022 profile photo, until there's a new portrait.
+import { Image } from 'astro:assets';
+import photo from '../assets/images/2022/11/Nick-profile-colour-2022.jpg';
+
+interface Props { size: number; class?: string; eager?: boolean }
+const { size, class: cls, eager = false } = Astro.props;
+---
+<Image src={photo} alt="Nick Petrie" width={size} height={size} densities={[1, 2]} class={cls} loading={eager ? 'eager' : 'lazy'} />

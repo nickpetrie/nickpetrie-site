@@ -1,10 +1,11 @@
 ---
 title: "Readers readers readers readers readers"
-description: "If we wanted to boil down the industry’s myriad problems into a single one. I’d argue our failure to engage with readers on their needs and how we can serve and satisfy them is the place to start."
+description: "If the news industry has one problem, it's failing to understand and serve readers' needs. Five places to start closing the gap."
 date: "2024-03-25T10:17:25.000Z"
 updated: "2024-03-25T10:27:09.000Z"
 tags: ["strategy","product-development","newsroom"]
 authors: ["nick"]
+related: ["stand-out-or-fade-away", "opportunity-choosing-different-news-product", "gotta-get-structural"]
 metaDescription: "If we wanted to boil down the industry’s myriad problems into a single one. I’d argue our failure to engage with readers on their needs and how we can serve and satisfy them is the place to start."
 newsletter:
   issue: 3

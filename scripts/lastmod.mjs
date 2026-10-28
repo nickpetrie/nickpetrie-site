@@ -26,3 +26,18 @@ export function lastModified(pathname) {
   cache ??= load();
   return cache.get(pathname);
 }
+
+// Paths marked noindex (thin posts and topics), which the sitemap leaves out.
+let noindexCache;
+export function isNoindex(pathname) {
+  noindexCache ??= (() => {
+    const set = new Set();
+    const posts = path.join(root, 'src/content/posts');
+    for (const file of fs.readdirSync(posts).filter((f) => f.endsWith('.md'))) {
+      if (/^noindex: true$/m.test(fs.readFileSync(path.join(posts, file), 'utf8'))) set.add(`/${file.replace(/\.md$/, '')}/`);
+    }
+    for (const t of JSON.parse(fs.readFileSync(path.join(root, 'src/data/tags.json'), 'utf8'))) if (t.noindex) set.add(`/tag/${t.slug}/`);
+    return set;
+  })();
+  return noindexCache.has(pathname);
+}
