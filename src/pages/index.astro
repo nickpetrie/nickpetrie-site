@@ -13,12 +13,13 @@ const more = posts.filter((p) => !featured.includes(p.id) && !p.data.noindex).sl
 ---
 <Base title={site.title} description={site.description}>
   <section class="hero">
-    <div>
+    <figure class="portrait"><Portrait size={220} eager /></figure>
+    <p class="id-line"><b>Nick Petrie</b><span>Digital Director, The i Paper</span></p>
+    <div class="hero-text">
       <h1>I work where journalism meets product.</h1>
-      <p class="lede">Digital Director at The i Paper, previously at Reuters and The Times. I write about news product and newsroom strategy, and mentor people working in it.</p>
+      <p class="lede">Previously at Reuters and The Times. I write about news product and newsroom strategy, and mentor and coach people working in it.</p>
       <p><a href="/about/">More about me</a></p>
     </div>
-    <figure class="portrait"><Portrait size={220} eager /></figure>
   </section>
 
   <Wnmp id="home" />

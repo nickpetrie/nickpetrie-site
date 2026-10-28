@@ -27,19 +27,31 @@ const current = (href: string) => path.startsWith(href) || href === section;
     <meta name="theme-color" content="#F7F6F1" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#1F2834" media="(prefers-color-scheme: dark)" />
     <Seo {...props} />
+    <script is:inline>document.documentElement.classList.add('js')</script>
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>
     <header class="head wrap">
       <a class="brand" href="/"><Fragment set:html={npMarkSvg} /><span>Nick Petrie</span></a>
       <nav aria-label="Main">
-        <ul>
+        <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu"><span class="menu-icon" aria-hidden="true"></span>Menu</button>
+        <ul id="menu">
           {site.nav.map((item) => (
             <li><a href={item.href} aria-current={current(item.href) ? 'page' : undefined}>{item.label}</a></li>
           ))}
         </ul>
       </nav>
     </header>
+
+    <script is:inline>
+      // Phones only: the menu button opens the nav as a panel. Without JS the links simply show.
+      const btn = document.querySelector('.menu-btn');
+      btn.addEventListener('click', () => {
+        const open = btn.getAttribute('aria-expanded') !== 'true';
+        btn.setAttribute('aria-expanded', String(open));
+        btn.closest('.head').classList.toggle('open', open);
+      });
+    </script>
 
     <main id="main" class="wrap">
       <slot />
