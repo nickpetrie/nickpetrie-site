@@ -218,7 +218,11 @@ h1,h2,h3{text-wrap:balance} img,svg{max-width:100%}
 .vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 .label{font:700 13px/1.2 var(--sans);letter-spacing:.06em;text-transform:uppercase;margin:0 0 10px}
 .small{font-size:15px;color:var(--muted)} .lede{color:var(--muted)}
-.view{background:var(--paper);color:var(--ink);min-height:100vh}
+.view{background:var(--paper);color:var(--ink);min-height:100vh;container:view / inline-size}
+/* Device frames: the layout responds to the frame's width (container queries), so a desktop layout can be shown scaled down on a phone. */
+.stage{position:relative;overflow:hidden} .stage.framed{background:#E4E3DD;padding-block:16px}
+.stage.framed .view{transform-origin:top left;box-shadow:0 1px 4px rgba(0,0,0,.15);min-height:0}
+.stage.phone .view{margin:0 auto}
 .mast{display:block;height:auto}
 .signup{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 6px} .signup input{flex:1 1 220px;font:inherit;font-size:17px;padding:11px 12px;border:1px solid var(--ink);border-radius:4px;background:#fff;color:#1F2834}
 .signup button,.btn{font:700 16px/1 var(--sans);padding:13px 18px;border-radius:4px;border:1px solid var(--ink);background:var(--ink);color:var(--paper);cursor:pointer;text-decoration:none;display:inline-block}
@@ -248,7 +252,7 @@ nav ul{list-style:none;display:flex;gap:6px 20px;flex-wrap:wrap;margin:0;padding
 /* Option 2 */
 .o2-layout{display:grid;grid-template-columns:300px minmax(0,1fr);max-width:1180px;margin:0 auto;gap:56px;padding-block:40px;padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px))}
 .o2-side{position:sticky;top:24px;align-self:start}
-.o2-side .np{width:72px;height:72px;display:block;margin-bottom:16px} .o2-side .name{font:600 24px/1.1 var(--sans);margin:0 0 10px}
+.o2-side .np{width:72px;height:72px;margin-bottom:16px} .o2-side .name{font:600 24px/1.1 var(--sans);margin:0 0 10px}
 .o2-side .bio{font-size:16px;color:var(--muted);margin:0 0 18px} .ctas{display:grid;gap:8px;margin-bottom:18px}
 .btn.yellow{background:var(--yellow);border-color:var(--yellow);color:#1F2834;text-align:center} .btn.line{background:transparent;color:var(--ink);border-color:var(--ink);text-align:center}
 .o2-side .contact{font-size:15px;color:var(--muted)} .nav.side{border-top:1px solid var(--rule);padding-top:14px;margin-top:14px} .nav.side ul{flex-direction:column;gap:6px}
@@ -282,12 +286,12 @@ nav ul{list-style:none;display:flex;gap:6px 20px;flex-wrap:wrap;margin:0;padding
 .o3-artbody{display:grid;grid-template-columns:minmax(0,680px) 260px;gap:64px;padding-top:24px!important;padding-bottom:48px!important;border-top:1px solid var(--rule)}
 .o3-rail{border-left:1px solid var(--rule);padding-left:24px;font-size:16px;align-self:start;position:sticky;top:24px}
 
-@media (max-width:860px){
+@container view (max-width:860px){
   .o2-layout{grid-template-columns:1fr;gap:28px;padding-block:24px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))} .o2-side{position:static} .nav.side{display:none} .ctas{grid-template-columns:1fr 1fr}
   .o3-lead,.band-in,.o3-artbody{grid-template-columns:1fr;gap:28px} .o3-about{border-left:0;padding-left:0;border-top:1px solid var(--rule);padding-top:20px}
   .o3-grid{grid-template-columns:1fr} .o3-index ul{columns:1} .o3-rail{border-left:0;padding-left:0;position:static}
 }
-@media (max-width:520px){.o1-list .year{grid-template-columns:1fr;gap:4px} .o2-wnmp{flex-direction:column} .ctas{grid-template-columns:1fr}}
+@container view (max-width:520px){.o1-list .year{grid-template-columns:1fr;gap:4px} .o2-wnmp{flex-direction:column} .ctas{grid-template-columns:1fr}}
 
 /* Review toolbar */
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:11;background:#fff}
@@ -305,23 +309,45 @@ page = f'''<!doctype html>
 <div class="bar">
   <div class="row"><b>Option</b>{opt_buttons}</div>
   <div class="row"><b>Page</b><button type="button" data-set-page="home">Home</button><button type="button" data-set-page="article">Article</button></div>
+  <div class="row"><b>Screen</b><button type="button" data-set-frame="fit">Fit my screen</button><button type="button" data-set-frame="desktop">Desktop (1280 px)</button><button type="button" data-set-frame="phone">Phone (390 px)</button></div>
   {descs}
-  <p class="desc">Real posts and brand v0.3. Links don't go anywhere yet. Resize the window or open on your phone to see mobile; dark mode follows your device setting.</p>
+  <p class="desc">Real posts and brand v0.3. Links don't go anywhere yet. "Desktop" shows the full-width layout scaled to fit your screen; dark mode follows your device setting.</p>
 </div>
-{views}
+<div class="stage" id="stage">{views}</div>
 <script>
-  let opt = '1', page = 'home';
+  let opt = '1', page = 'home', frame = 'fit';
+  const stage = document.getElementById('stage');
+  function fit() {{
+    const v = [...document.querySelectorAll('.view')].find((el) => !el.hidden);
+    if (!v) return;
+    stage.className = 'stage' + (frame === 'fit' ? '' : ' framed ' + frame);
+    v.style.width = ''; v.style.transform = ''; stage.style.height = '';
+    if (frame === 'fit') return;
+    const w = frame === 'desktop' ? 1280 : 390;
+    const avail = stage.clientWidth;
+    const scale = Math.min(1, avail / w);
+    v.style.width = w + 'px';
+    v.style.transform = scale < 1 ? `scale(${{scale}})` : '';
+    if (frame === 'phone' && scale === 1) v.style.marginLeft = 'auto';
+    stage.style.height = (v.offsetHeight * scale + 32) + 'px';
+  }}
+  addEventListener('resize', fit);
+  document.fonts.ready.then(fit);
   function show() {{
     for (const v of document.querySelectorAll('.view')) v.hidden = !(v.dataset.opt === opt && v.dataset.page === page);
     for (const d of document.querySelectorAll('.bar .desc[data-opt]')) d.hidden = d.dataset.opt !== opt;
     for (const b of document.querySelectorAll('[data-set-opt]')) b.setAttribute('aria-pressed', String(b.dataset.setOpt === opt));
     for (const b of document.querySelectorAll('[data-set-page]')) b.setAttribute('aria-pressed', String(b.dataset.setPage === page));
+    for (const b of document.querySelectorAll('[data-set-frame]')) b.setAttribute('aria-pressed', String(b.dataset.setFrame === frame));
     window.scrollTo(0, 0);
+    fit();
   }}
   document.addEventListener('click', (ev) => {{
-    const b = ev.target.closest('[data-set-opt],[data-set-page]');
+    const b = ev.target.closest('[data-set-opt],[data-set-page],[data-set-frame]');
     if (!b) return;
-    if (b.dataset.setOpt) opt = b.dataset.setOpt; else page = b.dataset.setPage;
+    if (b.dataset.setOpt) opt = b.dataset.setOpt;
+    else if (b.dataset.setPage) page = b.dataset.setPage;
+    else frame = b.dataset.setFrame;
     show();
   }});
   show();
@@ -331,6 +357,7 @@ page = f'''<!doctype html>
 out = here / 'site-prototypes.html'
 out.write_text(page)
 art = re.sub(r'^<!doctype html>\s*<html[^>]*><head>.*?<title>', '<title>', page, flags=re.S)
+art = art.replace('<title>Website prototypes</title>', '<title>nickpetrie.co site options</title>')
 art = art.replace('</title>', '</title>\n<meta name="claude:viewport-fit-sides" content="cover">', 1)
 art = art.replace('</head>\n<body>', '').replace('</body></html>', '')
 (here / 'artifact-site-prototypes.html').write_text(art)
