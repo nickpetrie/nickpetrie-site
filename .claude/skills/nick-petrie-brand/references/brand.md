@@ -82,6 +82,7 @@ Nick writes as a practitioner talking to peers: someone who has done the job (Th
 
 Only these, or what Nick gives you. If something's missing, write `[to confirm]` rather than guess.
 
+- Working in news product since 2010 ("I'm Nick, and I've been working in news product since 2010"). Prefer "since 2010" to a count of years, so it never goes out of date.
 - Nick Petrie, Digital Director at The i Paper. Previously Deputy Digital News Director at Reuters (three years) and nearly a decade at The Times and Sunday Times, most of it as Deputy Head of Digital.
 - Former board member of the News Product Alliance; now a coach with the NPA. Mentor on the first cohort of the NPA's Mentor Network (2022 to 2023).
 - Mentoring since 2021: more than 100 sessions.
