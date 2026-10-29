@@ -17,9 +17,9 @@
     "ACCESS_TEAM": "misty-hall-b273.cloudflareaccess.com",
     "ACCESS_AUD": "8410ad1edf4d576c6b44046ae58a7fc1303e20ae84255ef79fb7c633590d986e",
     "ADMIN_EMAIL": "nicholas.petrie@gmail.com",
-    // Set once Nick's own Buffer account has his LinkedIn profile connected.
-    "BUFFER_ORG_ID": "",
-    "BUFFER_CHANNEL_ID": "",
+    // Nick's own Buffer: organisation "My Organization", LinkedIn profile nick-elliot-petrie.
+    "BUFFER_ORG_ID": "68b1cc6f988548bc2ac97cdb",
+    "BUFFER_CHANNEL_ID": "6ae2627d2f1f5ed64802345b",
     "MEDIA_BASE": "https://studio.nickpetrie.co/p/"
   }
 }
