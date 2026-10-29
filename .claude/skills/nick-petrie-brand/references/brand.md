@@ -61,7 +61,7 @@ Nick writes as a practitioner talking to peers: someone who has done the job (Th
 
 | Format | Tone |
 |---|---|
-| Essay or newsletter | Argued and personal. One big idea, the evidence, what to do, an invitation to reply. |
+| Essay or newsletter | Personal. Each issue is one thought, a couple of interesting links and an invitation to join the discussion. |
 | LinkedIn post | The essay's argument in 80 to 200 words. First line is the claim. Two to four short paragraphs. One question or one link. |
 | Quote card | One line he'd stand behind on its own. Verbatim from the essay. |
 | Mentoring | Warm and practical. Pay what you can, stated plainly and meant. |
@@ -88,4 +88,6 @@ Only these, or what Nick gives you. If something's missing, write `[to confirm]`
 - Offers: ongoing mentoring (2 to 3 monthly spaces from October 2026, over 3, 6 or 12 months, with WhatsApp support); leadership coaching (get in touch); one-off sessions, pay what you can (worth £250; £1 is fine). Booking: nickpetrie.co/mentoring.
 - Testimonial (public use, 17 December 2024): Joe Cawthorn, "Nick has a great way of turning seemingly unsolvable issues into practical, tangible actions…" (full text on nickpetrie.co/mentoring). Role and organisation: `[to confirm]`.
 - Newsletter: When News Meets Product. Promise: "For people trying to change news organisations from the inside." Free, a few times a year. nickpetrie.co/newsletter.
+- How Nick describes the newsletter: "It arrives a few times a year: usually one thought, a couple of interesting links, and an invitation to join the discussion." On replies: "I read everything, and it's a rich conversation when other people get involved."
+- How Nick describes his mentoring in short: "I mentor and coach people working in news product who are trying to navigate organisational change."
 - Links: nickpetrie.co, linkedin.com/in/nick-elliot-petrie, x.com/petren, macaw.social/@petren.

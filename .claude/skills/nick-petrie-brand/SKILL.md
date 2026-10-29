@@ -38,7 +38,7 @@ Most of the work is the copy. Write as Nick, first person, British English, foll
 - **Design text:** a headline that makes a claim (3 to 10 words), at most two sentences of text. No emoji, no hashtags on the design.
 - **LinkedIn post text:** first line is the argument, in one sentence. Then two to four short paragraphs: why it matters, one concrete example, what to do. End with one question or one link (the essay), not both. 80 to 200 words. Up to three specific hashtags at the end, or none.
 - **Carousels:** take the essay's own list or steps. One point per slide, each a short imperative headline plus one sentence. The last slide asks a question and points to the newsletter.
-- **Newsletter promos:** lead with the issue's argument, then "When News Meets Product is for people trying to change news organisations from the inside. Free, a few times a year."
+- **Newsletter promos:** lead with the issue's thought, then "When News Meets Product is for people trying to change news organisations from the inside. A few times a year: one thought, a couple of interesting links, and an invitation to join the discussion."
 - **Mentoring:** practical and warm. State pay what you can plainly. Leadership coaching is "get in touch".
 
 ## Hand-over
