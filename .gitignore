@@ -7,3 +7,6 @@ dist/
 # Personal data never belongs in this public repo.
 *members*.csv
 *members*.json
+
+# Private notes and stats: keep in Drive, not this public repo
+docs/newsletter-*
