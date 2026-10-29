@@ -19,7 +19,7 @@ Studio is Nick's LinkedIn post tool at `https://studio.nickpetrie.co`, a copy of
 - `image`: one card (`imageUrl`), usually 4:5. Drawn in the browser when Nick edits the words.
 - `carousel`: slides (`slideUrls`, spec `{slides: [...]}`). On approval the worker joins the slides into one PDF (`approvedDocument`, `src/pdf.js`) and books it as a LinkedIn document post.
 - `text`: no media.
-- `firstComment` (optional): posted as LinkedIn's first comment, usually the link to the essay.
+- Links go in the post text. LinkedIn first comments need a paid Buffer plan (tested 29 October 2026), so Studio doesn't use them.
 
 ## Data model
 
@@ -83,7 +83,7 @@ Buffer's public GraphQL API: `POST https://api.buffer.com` with `Authorization: 
 `CreatePostInput` must have:
 - `channelId`, `schedulingType: automatic`, `mode: addToQueue`, `text`;
 - `assets`: `[{image:{url, metadata:{altText}}}]` for an image post; `[{document:{url, title, thumbnailUrl}}]` for a carousel (the PDF, with slide 1 as the thumbnail); `[]` for text;
-- `metadata: {linkedin: {firstComment?}}`, and `aiAssisted: true`.
+- `metadata: {linkedin: {}}`, and `aiAssisted: true`. Tested: Buffer accepts a document post and stores the PDF URL as the asset `source`.
 
 The union payload returns `... on PostActionSuccess { post { id dueAt status } }`, or `... on MutationError { message }`.
 

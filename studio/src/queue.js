@@ -132,7 +132,7 @@ export function toBufferInput(d) {
     images: urls.map((url) => ({ url, alt })),
     document: d.kind === 'carousel' ? { url: d.approvedDocument, title: d.documentTitle || d.title || 'Slides', thumbnailUrl: (d.approvedSlides || [])[0] } : undefined,
   });
-  return { text: d.approvedCaption, assets, type, firstComment: d.firstComment || undefined };
+  return { text: d.approvedCaption, assets, type };
 }
 
 /** Differences between a Buffer post and what was approved. [] means they match. */

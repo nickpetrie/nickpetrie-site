@@ -30,7 +30,7 @@ function fakeBuffer({ posts = [], schedule = SCHEDULE, now = NOW } = {}) {
           const taken = st.posts.map((p) => Date.parse(p.dueAt));
           due = new Date(Q.pickSlot({ schedule: st.schedule, taken, now })).toISOString();
         }
-        const p = { id: `b${st.n++}`, status: 'scheduled', dueAt: due, text: i.text, assets: i.assets.map((a) => ({ type: a.image ? 'image' : 'document', source: (a.image || a.document).url })), firstComment: i.metadata.linkedin.firstComment };
+        const p = { id: `b${st.n++}`, status: 'scheduled', dueAt: due, text: i.text, assets: i.assets.map((a) => ({ type: a.image ? 'image' : 'document', source: (a.image || a.document).url })) };
         st.posts.push(p);
         return { createPost: { __typename: 'PostActionSuccess', post: { id: p.id, status: 'scheduled', dueAt: due } } };
       }
@@ -137,12 +137,11 @@ test('bookBlocker: only the approved version goes', () => {
 // ------------------------------------------------------- with a fake Buffer
 
 test('place: books now with room; assets/metadata built right', async () => {
-  const t = setup({ a: approved('a', { kind: 'carousel', approvedSlides: ['https://m/a1.jpg', 'https://m/a2.jpg'], approvedDocument: 'https://m/a-v1.pdf', firstComment: 'https://www.nickpetrie.co/a/', collaborator: 'mumclub' }) });
+  const t = setup({ a: approved('a', { kind: 'carousel', approvedSlides: ['https://m/a1.jpg', 'https://m/a2.jpg'], approvedDocument: 'https://m/a-v1.pdf', collaborator: 'mumclub' }) });
   try {
     const r = await Q.place(t.env, 'a');
     assert.equal(r.booked, true);
     assert.deepEqual(t.bf.posts[0].assets, [{ type: 'document', source: 'https://m/a-v1.pdf' }]);
-    assert.equal(t.bf.posts[0].firstComment, 'https://www.nickpetrie.co/a/');
     const d = (await t.db.getDoc(t.env, 'posts', 'a')).data;
     assert.equal(d.status, 'scheduled');
     assert.equal(d.scheduledFor, '2026-10-28T18:01:00.000Z');

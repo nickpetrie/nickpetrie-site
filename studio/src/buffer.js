@@ -65,10 +65,10 @@ export function buildAssets({ type, images = [], document }) {
 
 /**
  * mode: 'addToQueue' (default) or 'customScheduled' (needs dueAt).
- * type: image | carousel | text. firstComment: LinkedIn's first comment (often the link).
+ * type: image | carousel | text. (LinkedIn first comments need a paid Buffer plan, so links go in the text.)
  * draft: save as a Buffer draft (tests only). Returns {id, dueAt, status}.
  */
-export async function createPost(env, { text, assets, type = 'image', firstComment, mode = 'addToQueue', dueAt, draft = false }) {
+export async function createPost(env, { text, assets, type = 'image', mode = 'addToQueue', dueAt, draft = false }) {
   if (mode === 'customScheduled' && !dueAt) throw new Error('customScheduled needs dueAt');
   if (!['image', 'carousel', 'text'].includes(type)) throw new Error(`Unknown post type "${type}"`);
   const input = {
@@ -78,7 +78,7 @@ export async function createPost(env, { text, assets, type = 'image', firstComme
     text,
     assets,
     aiAssisted: true,
-    metadata: { linkedin: firstComment ? { firstComment } : {} },
+    metadata: { linkedin: {} },
   };
   if (mode === 'customScheduled') input.dueAt = dueAt;
   if (draft) input.saveToDraft = true;

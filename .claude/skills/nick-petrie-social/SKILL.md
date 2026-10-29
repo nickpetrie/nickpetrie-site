@@ -33,7 +33,6 @@ Id: `<planned date>-<slug>`, e.g. `2026-11-03-bridge-roles`.
 | `pillar` | `Essay`, `Newsletter`, `Quote`, `Carousel`, `Mentoring`, `Event` or `Comment` |
 | `title`, `about`, `alt` | Short internal name; one line on what it's for; alt text (describe the card, including its words) |
 | `caption` | The LinkedIn post text. `captionEdit` is Nick's own edit and always wins. |
-| `firstComment` | Optional first comment, usually the essay link. |
 | `spec` | The brand spec the card was made from (`{slides: [...]}` for a carousel). Studio's "Edit words" redraws it live. |
 | `imageUrl`, `slideUrls` | Public media URLs. Slide 1 is also `imageUrl`. |
 | `renderedAt` | Now (ms) on every new version. |
@@ -45,7 +44,7 @@ Id: `<planned date>-<slug>`, e.g. `2026-11-03-bridge-roles`.
 On each check, `list briefs --status new` first. Set each to `working` (with `startedAt`, `etaMinutes`), make the posts, then `done` with `postIds` and a short `reply`. If a fact that must be right is missing, ask in `reply` and leave it `working`.
 
 When a new essay or newsletter issue is published on nickpetrie.co (or Nick asks), make a set:
-1. **Launch post:** `image`, the brand skill's new-essay or issue card, post text from the essay's argument, `firstComment` with the essay URL.
+1. **Launch post:** `image`, the brand skill's new-essay or issue card, post text from the essay's argument, ending with the essay URL on its own line (first comments need a paid Buffer plan).
 2. **Two alternatives** that really differ: a quote card with the sharpest line (verbatim), and a carousel if the essay has a list or steps. Different first lines, not just different images.
 3. **A follow-up** a week later: a quote card or a text post that picks up one point and asks a question.
 
