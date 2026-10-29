@@ -1,13 +1,15 @@
 ---
 // Posts to /api/subscribe (the Worker), which adds the reader to beehiiv.
-// Works without JavaScript; the script only keeps the reader on the page.
+// The script keeps the reader on the page and, when a Turnstile key is set, loads Cloudflare's
+// bot check the first time someone touches a form (so pages don't load it for nothing).
 interface Props {
   source?: string; // which page the sign-up came from, for beehiiv's referrer stats
   id: string; // unique per page, for the label
 }
+import { services } from '../site';
 const { source = Astro.url.pathname, id } = Astro.props;
 ---
-<form class="signup" method="post" action="/api/subscribe">
+<form class="signup" method="post" action="/api/subscribe" data-turnstile={services.turnstileSiteKey || undefined}>
   <div class="signup-row">
     <label class="visually-hidden" for={`email-${id}`}>Email address</label>
     <input id={`email-${id}`} type="email" name="email" autocomplete="email" required placeholder="you@example.com" />
@@ -15,11 +17,50 @@ const { source = Astro.url.pathname, id } = Astro.props;
     <div class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
     <button type="submit">Subscribe</button>
   </div>
+  {services.turnstileSiteKey && <div class="turnstile"></div>}
   <p class="signup-status" role="status" aria-live="polite"></p>
 </form>
 
 <script>
-  for (const form of document.querySelectorAll<HTMLFormElement>('form.signup')) {
+  const forms = [...document.querySelectorAll<HTMLFormElement>('form.signup')];
+  const key = forms[0]?.dataset.turnstile;
+  type TS = { render: (el: Element, o: object) => string; reset: (id: string) => void; getResponse: (id: string) => string | undefined };
+  const win = window as unknown as { turnstile?: TS; npTurnstile?: () => void };
+  let loading: Promise<void> | null = null;
+  const widgets = new Map<HTMLFormElement, string>();
+
+  // Loads Turnstile once and renders a widget in every sign-up form. It stays invisible unless
+  // Cloudflare needs the reader to tick a box.
+  function loadTurnstile() {
+    if (!key) return Promise.resolve();
+    loading ??= new Promise<void>((done) => {
+      win.npTurnstile = () => {
+        for (const f of forms) {
+          const slot = f.querySelector('.turnstile');
+          if (slot) widgets.set(f, win.turnstile!.render(slot, { sitekey: key, appearance: 'interaction-only', size: 'flexible', action: 'subscribe' }));
+        }
+        done();
+      };
+      const s = document.createElement('script');
+      s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=npTurnstile';
+      s.async = true;
+      document.head.append(s);
+    });
+    return loading;
+  }
+  async function token(form: HTMLFormElement) {
+    if (!key) return true;
+    await loadTurnstile();
+    const id = widgets.get(form);
+    for (let i = 0; i < 50; i++) { // up to 10 seconds while the check finishes
+      if (id && win.turnstile?.getResponse(id)) return true;
+      await new Promise((r) => setTimeout(r, 200));
+    }
+    return false;
+  }
+
+  for (const form of forms) {
+    form.addEventListener('focusin', () => { loadTurnstile(); }, { once: true });
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
       const status = form.querySelector('.signup-status')!;
@@ -27,6 +68,10 @@ const { source = Astro.url.pathname, id } = Astro.props;
       button.disabled = true;
       status.textContent = 'Subscribing…';
       try {
+        if (!(await token(form))) {
+          status.textContent = 'Please complete the check above, then press Subscribe again.';
+          return;
+        }
         const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { accept: 'application/json' } });
         const body = await res.json().catch(() => ({}));
         status.textContent = res.ok ? "Thanks, you're subscribed. Look out for a welcome email." : body.error ?? 'Something went wrong. Please try again.';
@@ -35,6 +80,8 @@ const { source = Astro.url.pathname, id } = Astro.props;
         status.textContent = 'Something went wrong. Please try again.';
       } finally {
         button.disabled = false;
+        const id = widgets.get(form);
+        if (id) win.turnstile?.reset(id);
       }
     });
   }

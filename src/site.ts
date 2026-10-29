@@ -25,6 +25,14 @@ export const site = {
 // Home page "The hills I'll die on", in order.
 export const featured = ['bridge-roles-need-to-die', 'the-two-product-team-problem', 'readers-readers-readers-readers-readers'];
 
+// Public values for third-party scripts. Empty turns the feature off.
+export const services = {
+  // Cloudflare Web Analytics (cookie-free). The token is public: it appears in every page.
+  analyticsToken: '',
+  // Cloudflare Turnstile site key for the sign-up forms. The secret is the Worker secret TURNSTILE_SECRET.
+  turnstileSiteKey: '',
+};
+
 export const booking = 'https://savvycal.com/NickPetrie/0977e9aa';
 
 export const newsletter = {

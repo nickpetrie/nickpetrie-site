@@ -2,7 +2,7 @@
 import Seo from '../components/Seo.astro';
 import SignupForm from '../components/SignupForm.astro';
 import '../styles/global.css';
-import { site, newsletter } from '../site';
+import { site, newsletter, services } from '../site';
 import { npMarkSvg } from '../lib/brand';
 
 type SeoProps = import('astro/types').ComponentProps<typeof Seo>;
@@ -12,7 +12,7 @@ interface Props extends SeoProps {
 
 const { section, ...props } = Astro.props;
 const path = Astro.url.pathname;
-const analyticsToken = import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN;
+const analyticsToken = services.analyticsToken || import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN;
 const current = (href: string) => path.startsWith(href) || href === section;
 ---
 <!doctype html>
