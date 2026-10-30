@@ -19,21 +19,19 @@ Last checked 30 October 2026. No secrets here: secret *names* only. Values live 
 
 Account `97b38e997c8ed5ed5eb3264ef052e31f`, zone `nickpetrie.co` (`260472b9edb00f470f7b5d3221036779`).
 
-**DNS** (before the switch from Ghost):
+**DNS** (since the switch from Ghost on 30 October 2026):
 
-| Type | Name | Points to | Proxied |
+| Type | Name | Points to | Notes |
 |---|---|---|---|
-| A | nickpetrie.co | 192.0.2.1 (placeholder for the redirect rule) | yes |
-| CNAME | www | nick-petrie.ghost.io | no |
-| MX ×3 | nickpetrie.co | route1/2/3.mx.cloudflare.net | no |
-| TXT | nickpetrie.co | SPF: Cloudflare Email Routing and Google | no |
-| TXT | cf2024-1._domainkey | DKIM for Email Routing | no |
-| TXT | _dmarc | `v=DMARC1; p=none` | no |
-| AAAA | studio | 100:: (Workers custom domain) | yes |
+| AAAA | nickpetrie.co, www, studio | 100:: | Workers custom domains, created by Cloudflare. Change them under the Worker's Domains, not in DNS |
+| MX ×3 | nickpetrie.co | route1/2/3.mx.cloudflare.net | Email: never touch |
+| TXT | nickpetrie.co | SPF: Cloudflare Email Routing and Google | Email: never touch |
+| TXT | cf2024-1._domainkey | DKIM for Email Routing | Email: never touch |
+| TXT | _dmarc | `v=DMARC1; p=none` | |
 
-**At the switch:** delete the `www` CNAME, add `www.nickpetrie.co` and `nickpetrie.co` as custom domains on the `nickpetrie-site` Worker (Cloudflare creates the records), and remove the bare-domain redirect rule (the Worker redirects `nickpetrie.co` to `www` itself). Never touch the MX and TXT records: they are email.
+Before the switch, `www` was a CNAME to `nick-petrie.ghost.io` and the bare domain an A record to 192.0.2.1.
 
-**Redirect rule** (zone): "Bare domain to www (301)" while Ghost is live.
+**Redirect rule** (zone): "Bare domain to www (301)". It runs before the Worker, which does the same redirect, so it is harmless and can be deleted.
 
 **Access** (Zero Trust team `misty-hall-b273.cloudflareaccess.com`):
 - "Studio (nickpetrie.co)" on `studio.nickpetrie.co`: Allow, `nicholas.petrie@gmail.com` and `nicholaspetrie@gmail.com`, one-time PIN by email. Its AUD is `ACCESS_AUD` in `studio/wrangler.jsonc`.
