@@ -30,7 +30,7 @@ export const services = {
   // Cloudflare Web Analytics (cookie-free). The token is public: it appears in every page.
   analyticsToken: '8ee0ac4539a44f029cde7234529b2262',
   // Cloudflare Turnstile site key for the sign-up forms. The secret is the Worker secret TURNSTILE_SECRET.
-  turnstileSiteKey: '',
+  turnstileSiteKey: '0x4AAAAAAFsfaybbFo7DC9Ht',
 };
 
 export const booking = 'https://savvycal.com/NickPetrie/0977e9aa';
