@@ -14,7 +14,9 @@
     "run_worker_first": true
   },
   "vars": {
-    "BEEHIIV_PUBLICATION_ID": "pub_dc13bc61-8017-4e9f-9827-57bbd16ff777"
+    "BEEHIIV_PUBLICATION_ID": "pub_dc13bc61-8017-4e9f-9827-57bbd16ff777",
+    // "log" while trying Turnstile out; remove (or set "enforce") to block failed checks.
+    "TURNSTILE_MODE": "log"
   },
   "observability": { "enabled": true }
   // Secret, set once with: npx wrangler secret put BEEHIIV_API_KEY

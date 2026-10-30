@@ -28,7 +28,8 @@ export const featured = ['bridge-roles-need-to-die', 'the-two-product-team-probl
 // Public values for third-party scripts. Empty turns the feature off.
 export const services = {
   // Cloudflare Web Analytics (cookie-free). The token is public: it appears in every page.
-  analyticsToken: '8ee0ac4539a44f029cde7234529b2262',
+  // Empty: Cloudflare adds the Web Analytics script automatically on nickpetrie.co (token 8ee0ac4539a44f029cde7234529b2262).
+  analyticsToken: '',
   // Cloudflare Turnstile site key for the sign-up forms. The secret is the Worker secret TURNSTILE_SECRET.
   turnstileSiteKey: '0x4AAAAAAFsfaybbFo7DC9Ht',
 };

@@ -1,6 +1,6 @@
 // POST /api/subscribe: adds an email address to When News Meets Product on beehiiv.
 // Needs BEEHIIV_PUBLICATION_ID (var) and BEEHIIV_API_KEY (secret). With TURNSTILE_SECRET set, the
-// form's Cloudflare Turnstile token must check out too.
+// form's Cloudflare Turnstile token must check out too (unless TURNSTILE_MODE is "log").
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 function reply(request, status, body) {
@@ -39,8 +39,13 @@ export async function subscribe(request, env) {
   // Honeypot: real people never fill this in. Pretend it worked.
   if (form?.get('website')) return reply(request, 200, { ok: true });
   if (!EMAIL.test(email) || email.length > 254) return reply(request, 400, { error: 'Please enter a valid email address.' });
-  if (env.TURNSTILE_SECRET && !(await human(form.get('cf-turnstile-response'), request, env))) {
-    return reply(request, 403, { error: 'We couldn\'t check you\'re not a bot. Please reload the page and try again.' });
+  if (env.TURNSTILE_SECRET) {
+    const ok = await human(form.get('cf-turnstile-response'), request, env);
+    // TURNSTILE_MODE "log" checks and records the result without blocking anyone (for trying it out).
+    console.log('turnstile', JSON.stringify({ ok, mode: env.TURNSTILE_MODE || 'enforce' }));
+    if (!ok && env.TURNSTILE_MODE !== 'log') {
+      return reply(request, 403, { error: 'We couldn\'t check you\'re not a bot. Please reload the page and try again.' });
+    }
   }
   if (!env.BEEHIIV_API_KEY || !env.BEEHIIV_PUBLICATION_ID) return reply(request, 503, { error: 'Sign-up is not available right now.' });
 
