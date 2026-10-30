@@ -39,14 +39,14 @@ Before the switch, `www` was a CNAME to `nick-petrie.ghost.io` and the bare doma
 
 **Storage:** D1 `nickpetrie-studio` (`c6080381-5b9b-44c0-bee0-19de01eff234`); R2 `nickpetrie-social` (Studio images and PDFs at the root, Studio's screens under `studio-web/`, backups under `backups/`).
 
-**Other:** Web Analytics site for nickpetrie.co (token in `src/site.ts`, public by design). Turnstile: not yet created (needs Turnstile: Edit on the API token); when it is, the site key goes in `src/site.ts` and the secret in `TURNSTILE_SECRET`.
+**Other:** Web Analytics for nickpetrie.co uses Cloudflare's automatic setup (the site adds no script of its own, so visits aren't counted twice). Turnstile widget "nickpetrie.co newsletter sign-up" (managed) covers nickpetrie.co, www and the workers.dev preview: site key in `src/site.ts`, secret in `TURNSTILE_SECRET`. `TURNSTILE_MODE` in `wrangler.jsonc`: `log` records results without blocking; remove it to block failed checks.
 
 **Secrets:**
 
 | Worker | Secret | Comes from |
 |---|---|---|
 | nickpetrie-site | `BEEHIIV_API_KEY` | beehiiv → Settings → API |
-| nickpetrie-site | `TURNSTILE_SECRET` (once Turnstile is set up) | Cloudflare → Turnstile → the widget |
+| nickpetrie-site | `TURNSTILE_SECRET` | Cloudflare → Turnstile → the widget |
 | nickpetrie-studio | `BUFFER_API_KEY` | publish.buffer.com/settings/api |
 
 Set one with `npx wrangler secret put NAME` (add `--config studio/wrangler.jsonc` for Studio), or in the dashboard under the Worker's Settings → Variables and secrets.
