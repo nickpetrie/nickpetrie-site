@@ -45,6 +45,9 @@ export default {
   async scheduled(event, env, ctx) {
     try {
       const { runCron } = await import('./queue.js');
+      const { weeklyBackup } = await import('./backup.js');
+      const saved = await weeklyBackup(env, event.scheduledTime).catch((e) => ({ error: e.message }));
+      if (saved) console.log('backup', JSON.stringify(saved));
       const report = await runCron(env);
       console.log('cron ok', JSON.stringify(report));
     } catch (e) {

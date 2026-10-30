@@ -413,3 +413,20 @@ test('pdf.js: slides become one page each', async () => {
   assert.equal((pdf.match(/\/Subtype \/Image/g) || []).length, 3);
   assert.match(pdf, /startxref\n\d+\n%%EOF\n$/);
 });
+
+test('backup.js: weekly, four rolling copies, Sunday 03:00 UTC only', async () => {
+  const { weeklyBackup, backupNow } = await import('../src/backup.js');
+  const put = [];
+  const env = {
+    DB: { prepare: (sql) => ({ all: async () => ({ results: sql.includes('FROM docs') ? [{ collection: 'posts', id: 'a', data: '{"title":"A"}', rev: 1, updated_at: 1, updated_by: 'x' }] : [] }) }) },
+    MEDIA: { put: async (key, value) => put.push({ key, size: value.byteLength }) },
+  };
+  assert.equal(await weeklyBackup(env, Date.UTC(2026, 10, 2, 3, 5)), null, 'Monday: no backup');
+  const sun = Date.UTC(2026, 10, 1, 3, 5);
+  const r = await weeklyBackup(env, sun);
+  assert.match(r.key, /^backups\/studio-[0-3]\.json\.gz$/);
+  assert.equal(await weeklyBackup(env, Date.UTC(2026, 10, 1, 3, 20)), null, 'only the first run after 03:00');
+  const later = await backupNow(env, sun + 4 * 7 * 86400000);
+  assert.equal(later.key, r.key, 'four weeks later it overwrites the same slot');
+  assert.ok(put.every((p) => p.size > 0));
+});
