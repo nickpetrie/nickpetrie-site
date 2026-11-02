@@ -90,10 +90,12 @@ img { max-width: 100%; height: auto; }
   .hero .portrait { padding-top: 6px; }
 }
 .block { margin-block: 44px; }
-.section-title { font: 400 clamp(28px, 4vw, 34px)/1.15 var(--display); margin: 0 0 6px; }
+.section-title { font: 400 clamp(36px, 5vw, 46px)/1.08 var(--display); letter-spacing: -.01em; margin: 0 0 8px; }
 .hills { background: var(--tint); padding: 28px 28px 12px; }
 .hills .intro { margin: 0 0 14px; }
 .hills .entry { border-top-color: var(--rule); }
+.hills .entry h3 { font-size: 21px; }
+@media (min-width: 760px) { .hills .entry h3 { font-size: 23px; } }
 @media (max-width: 759px) { .hills { margin-inline: calc(-1 * var(--gutter)); padding: 28px var(--gutter) 8px; } }
 .intro { margin-top: -4px; }
 
