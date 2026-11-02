@@ -18,6 +18,7 @@ Brand v0.3 (28 October 2026). The same system runs the website (nickpetrie.co), 
 | Muted | `#5A6470` on paper, `#A9B1BA` on ink | Secondary text |
 | Rule | `#D8DCD9` on paper, `#36404C` on ink | Hairlines |
 | Tint | `#EEEBE1` | Quiet panels on the site (quotes, cards) |
+| Slate | `#E3E8EC` | Full-width feature band on the site (the hills I'll die on) |
 
 Rules: yellow is never text on paper (it fails contrast). Yellow text is fine on ink, for emphasis only. Links are the text colour with an underline. One accent per design: don't put yellow rules, a highlight and a yellow kicker all on one canvas.
 

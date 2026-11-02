@@ -9,7 +9,7 @@
 @font-face { font-family: 'Source Serif 4 Display'; src: url(/fonts/SourceSerif4Display-Regular.woff2) format('woff2'); font-weight: 400; font-display: swap; }
 
 :root {
-  --ink: #1F2834; --paper: #F7F6F1; --yellow: #E6C635; --muted: #5A6470; --rule: #D8DCD9; --card: #FFFFFF; --tint: #EEEBE1;
+  --ink: #1F2834; --paper: #F7F6F1; --yellow: #E6C635; --muted: #5A6470; --rule: #D8DCD9; --card: #FFFFFF; --tint: #EEEBE1; --slate: #E3E8EC;
   --sans: 'Source Sans 3', Arial, sans-serif;
   --serif: 'Source Serif 4', Georgia, serif;
   --display: 'Source Serif 4 Display', Georgia, serif;
@@ -17,9 +17,9 @@
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) { --ink: #F7F6F1; --paper: #1F2834; --muted: #A9B1BA; --rule: #36404C; --card: #26303D; --tint: #283240; color-scheme: dark; }
+  :root:not([data-theme="light"]) { --ink: #F7F6F1; --paper: #1F2834; --muted: #A9B1BA; --rule: #36404C; --card: #26303D; --tint: #283240; --slate: #2A3746; color-scheme: dark; }
 }
-:root[data-theme="dark"] { --ink: #F7F6F1; --paper: #1F2834; --muted: #A9B1BA; --rule: #36404C; --card: #26303D; --tint: #283240; color-scheme: dark; }
+:root[data-theme="dark"] { --ink: #F7F6F1; --paper: #1F2834; --muted: #A9B1BA; --rule: #36404C; --card: #26303D; --tint: #283240; --slate: #2A3746; color-scheme: dark; }
 
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
@@ -91,12 +91,13 @@ img { max-width: 100%; height: auto; }
 }
 .block { margin-block: 44px; }
 .section-title { font: 400 clamp(36px, 5vw, 46px)/1.08 var(--display); letter-spacing: -.01em; margin: 0 0 8px; }
-.hills { background: var(--tint); padding: 28px 28px 12px; }
+/* full-bleed band: the shadow paints the colour out to the viewport edges */
+.hills { background: var(--slate); box-shadow: 0 0 0 100vmax var(--slate); clip-path: inset(0 -100vmax); padding: 48px 0 24px; }
 .hills .intro { margin: 0 0 14px; }
-.hills .entry { border-top-color: var(--rule); }
+.hills .entry { border-top-color: color-mix(in srgb, var(--ink) 13%, var(--slate)); }
 .hills .entry h3 { font-size: 21px; }
 @media (min-width: 760px) { .hills .entry h3 { font-size: 23px; } }
-@media (max-width: 759px) { .hills { margin-inline: calc(-1 * var(--gutter)); padding: 28px var(--gutter) 8px; } }
+@media (max-width: 759px) { .hills { padding: 36px 0 12px; } }
 .intro { margin-top: -4px; }
 
 /* When News Meets Product sign-up. Full bleed on phones. */
