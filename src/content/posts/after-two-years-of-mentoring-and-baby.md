@@ -18,7 +18,7 @@ Since I re-opened my mentoring calendar 3 weeks ago post paternity leave I have 
 
 I'm trying a small experiment to see if it changes the way people think about what they need from me and how they'll use the time most effectively.
 
-### Pay-What-You-Can-Mentoring
+## Pay-What-You-Can-Mentoring
 
 Demand for my mentoring services is growing faster than I have time to support, so I am trying an experiment. When you go to book a slot, you will now be asked to 'check out', rather than 'book'. You will see this copy under the fee and a 'change amount' button.
 

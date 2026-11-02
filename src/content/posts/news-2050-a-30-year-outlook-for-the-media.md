@@ -19,7 +19,7 @@ They are right in front of us already: growing direct revenue from readers as di
 
 There, simple – now get on with it.
 
-### But what will the news media world look like in 2050, broadly 30 years from now?
+## But what will the news media world look like in 2050, broadly 30 years from now?
 
 Making a super-long-term forecast is a technique used by a number of tech firms – [notably Amazon](https://venturebeat.com/2011/09/09/jeff-bezos-long-term-amazon/) and [Stripe](https://newsletter.bringthedonuts.com/p/building-products-at-stripe) – to ensure they are constantly looking up from the path they are on to gaze at the horizon to confirm they are on the right track. This allows them to sense-check their current tactics against a long-term strategy. There is no reason, we would argue, that the news media cannot do the same.
 
@@ -33,7 +33,7 @@ Of course people get things wrong – and we have no doubt we will have made err
 
 So what are the meta-trends that will guide news consumption as we sit in our flying cars – ;) – and what do media companies need to do to seize the opportunities they present?
 
-### Meta trends
+## Meta trends
 
 It is clear that in 30 years’ time there will be more of everything. More information, more data and more content than we can possibly imagine. (We’ve already passed the point where 500 hours of video are uploaded to YouTube every hour.) There will be many more ways of accessing this information, and mobile data and broadband speeds will no longer present any real barrier to richer experiences for people no matter what device they use or where they are.
 
@@ -53,7 +53,7 @@ This devotion to what customers want suggests that the likes of Apple, Amazon, F
 
 Will they continue with their more recent experiment of becoming primary news providers? The ease with which Apple, with an underwhelming news product, has amassed nearly 10m subscribers to its News service worldwide suggests that they will. And the entry of Google and Facebook into this market will certainly drive this forward as FOMO rules kick in. If news proves an enduringly good driver of loyalty and engagement, which we have no reason to expect it won’t, then expect the platforms to compete hard against existing providers.
 
-### What else?
+## What else?
 
 Personalisation gets a bad rep: we’ve all experienced daft display ads from Amazon recommending products we have bought literally minutes before. But how many of you actually quite like your Discover playlist on Spotify or have found your iPhone making it easy to open your podcast app when you pop your AirPods in? What we like to think of as “discreet 1-2-1 personalisation” is already quietly creeping along in a way that does benefit users.
 
@@ -73,7 +73,7 @@ The coronavirus pandemic has reminded people of the value of what is closer to h
 
 We know that many people like to comment and join in discussions, whether on newspaper websites or sites like Reddit. The problem is how do you stop these spaces becoming cesspits? Building real communities will be a powerful point of leverage when it comes to keeping readers subscribed.
 
-### How can media companies respond to such a changing environment?
+## How can media companies respond to such a changing environment?
 
 First they must accept that the media industry of the past will not be returning. Steady reliable incomes doing the “same” thing for decades on end, a market capable of supporting multiple actors doing slight variations on the same theme – this will never exist again.
 

@@ -45,6 +45,6 @@ What would you do differently?
 
 ---
 
-### Don’t miss
+## Don’t miss
 
 Troy Young has an [brilliant thought experiment](https://www.peoplevsalgorithms.com/p/this-is-cnn) on how CNN might look if it leans into an AI centred transformation

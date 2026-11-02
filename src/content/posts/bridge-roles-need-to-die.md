@@ -29,7 +29,7 @@ That requires a different mindset. Moving from reactive problem-solving to more 
 
 ---
 
-### Community
+## Community
 Just before Christmas [Joanna Geary](https://www.linkedin.com/posts/joannageary_wthhldn-hhldn-hhldn-activity-7399075357510877184-pu_2?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAWVwgsBbrOepzPQ4RwtXfAQPajFX1utsRA) got together a fantastic group of speakers to share the interesting projects they are working on and at the same time she hit upon a big problem - the hacks/hackers, open source, rising tide lifts all boats attitude of the 2010’s has faded away. I was sad to miss it.
 
 Fewer orgs blog about their successes and failures, fewer news orgs are open sourcing code to let others build upon their work, fewer people are building in public, fewer groups of people are getting together to learn and share in more informal settings
@@ -38,6 +38,6 @@ As ever - i’d love to hear from you, whether you have a different take, agree 
 
 ---
 
-### Mentoring
+## Mentoring
 
 If you are looking for support and development, [I have space](/mentoring/) for new sessions

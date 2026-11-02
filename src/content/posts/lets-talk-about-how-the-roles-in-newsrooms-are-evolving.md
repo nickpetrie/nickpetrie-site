@@ -21,7 +21,7 @@ I can see there is still demand to understand this industry, how it is changing 
 
 I’m aware it could seem odd to be talking about new roles when so many jobs in journalism are being lost at an accelerated rate due to the pandemic. But it seems more important than ever to look towards the future and what newsrooms need to become. I aim to do just that.
 
-### Introducing Evolving Newsroom – looking at the new roles in journalism
+## Introducing Evolving Newsroom – looking at the new roles in journalism
 
 There’s such a huge variety of new roles, strategies, organisational structures and business models that it only felt right to be inspired by Hacks and to look to tell the stories of how newsrooms are evolving through the people doing it first hand.
 
@@ -31,7 +31,7 @@ The plan is simple, a weekly newsletter with a profile of someone in a non-tradi
 
 If it’s popular, then perhaps more than one profile a week – I’ll wait and see
 
-### How can you get involved/help I hear you scream?
+## How can you get involved/help I hear you scream?
 
 1.  Sign up for the newsletter – I even have a handy box above to make it easy
 2.  [Share the newsletter](https://evolvingnewsroom.substack.com/p/coming-soon?token=eyJ1c2VyX2lkIjozNjQ0NDgxLCJwb3N0X2lkIjo0MzY4NTUsIl8iOiJpNHVYcyIsImlhdCI6MTU4OTgzMDgwNSwiZXhwIjoxNTg5ODM0NDA1LCJpc3MiOiJwdWItNDM4NjUiLCJzdWIiOiJwb3N0LXJlYWN0aW9uIn0.Ie--E2juXNzqhjwc_o_P2iz0uw7JMufH_-GEkMd8AlM&utm_source=substack&utm_medium=email&utm_content=share) with your friends, the students you know, that colleague thinking about a career change and your networks, everyone really!

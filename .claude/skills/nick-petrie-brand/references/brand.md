@@ -85,7 +85,7 @@ Only these, or what Nick gives you. If something's missing, write `[to confirm]`
 - Working in news product since 2010 ("I'm Nick, and I've been working in news product since 2010"). Prefer "since 2010" to a count of years, so it never goes out of date.
 - Nick Petrie, Digital Director at The i Paper. Previously Deputy Digital News Director at Reuters (three years) and nearly a decade at The Times and Sunday Times, most of it as Deputy Head of Digital.
 - Former board member of the News Product Alliance; now a coach with the NPA. Mentor on the first cohort of the NPA's Mentor Network (2022 to 2023).
-- Mentoring since 2021: more than 100 sessions.
+- Mentoring since 2021. Don't quote a session count.
 - Offers: ongoing mentoring (2 to 3 monthly spaces from October 2026, over 3, 6 or 12 months, with WhatsApp support); leadership coaching (get in touch); one-off sessions, pay what you can (worth £250; £1 is fine). Booking: nickpetrie.co/mentoring.
 - Testimonial (public use, 17 December 2024): Joe Cawthorn, "Nick has a great way of turning seemingly unsolvable issues into practical, tangible actions…" (full text on nickpetrie.co/mentoring). Role and organisation: `[to confirm]`.
 - Newsletter: When News Meets Product. Promise: "For people trying to change news organisations from the inside." Free, a few times a year. nickpetrie.co/newsletter.

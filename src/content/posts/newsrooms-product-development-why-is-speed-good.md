@@ -26,7 +26,7 @@ It seems speed is not virtuous on its own.    
 
 What is the value of speed then? I think for modern newsrooms trying to create the best possible product experiences what we are actually interested in is **learning quickly** and **making better decisions**.
 
-### Speed ≠ Learning
+## Speed ≠ Learning
 
 Being able to release product features quickly is good in theory - lean product development keeps costs down, but most importantly allows you to verify ideas before you over commit. The faster you can put ideas in your readers' hands, the sooner you can learn what they think or see how they behave.
 
@@ -38,7 +38,7 @@ I think that we shouldn't be optimising teams to deliver small incremental impro
 
 I think moving at a consistent '[High average speed](https://jamesclear.com/average-speed)' is much more valuable than constant peaks and troughs.
 
-### Speed & decision making
+## Speed & decision making
 
 Lets assume we have fixed our speed problem; that we can develop product ideas both quickly and thoughtfully with a clear understanding of what we need to learn and why.
 
@@ -56,7 +56,7 @@ Being focused on how to build robust Learning Loops and then using what we learn
 
 ---
 
-### Further reading
+## Further reading
 
 There have been some excellent posts about newsrooms and product this summer that unpack how we could and should be adapting to our readers' needs
 

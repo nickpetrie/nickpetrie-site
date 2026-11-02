@@ -24,8 +24,8 @@ const more = posts.filter((p) => !featured.includes(p.id) && !p.data.noindex).sl
 
   <Wnmp id="home" />
 
-  <section class="block" aria-labelledby="hills">
-    <h2 class="label" id="hills">The hills I'll die on</h2>
+  <section class="block hills" aria-labelledby="hills">
+    <h2 class="section-title" id="hills">The hills I'll die on</h2>
     <p class="small intro">Three pieces that say what I think, and why.</p>
     <PostList posts={hills} />
   </section>
