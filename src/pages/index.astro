@@ -22,7 +22,6 @@ const more = posts.filter((p) => !featured.includes(p.id) && !p.data.noindex).sl
     </div>
   </section>
 
-  <div class="home-band">
   <Wnmp id="home" />
 
   <section class="block hills" aria-labelledby="hills">
@@ -36,7 +35,6 @@ const more = posts.filter((p) => !featured.includes(p.id) && !p.data.noindex).sl
     <PostList posts={more} summary={false} />
     <p><a href="/writing/">All writing</a></p>
   </section>
-  </div>
 
-  <MentoringBand slot="after-main" flush />
+  <MentoringBand slot="after-main" />
 </Base>
