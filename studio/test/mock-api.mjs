@@ -33,6 +33,7 @@ function reset() {
   media = new Map(); logRows = [];
   db = { posts: new Map(), briefs: new Map(), ideas: new Map(), buffer: new Map(), config: new Map() };
   for (const c of ['posts', 'briefs', 'ideas']) for (const x of load(c)) db[c].set(x.id, doc(x.id, x.data));
+  db.config.set('site-stats', doc('site-stats', fakeSiteStats()));
   const P = (id) => db.posts.get(id).data;
   const clone = (id, newId, over) => {
     const d = JSON.parse(JSON.stringify(P(id)));
@@ -59,6 +60,21 @@ function reset() {
   }
   for (const d of db.posts.values()) if (d.data.status === 'scheduled' && !d.data.bufferId) d.data.bufferId = 'b-' + d.id;
   refreshBuffer();
+}
+
+// Made-up website numbers for the Stats tab (the real ones stay out of this public repo).
+function fakeSiteStats() {
+  const days = [];
+  const paths = ['/', '/about/', '/the-two-product-team-problem/', '/bridge-roles-need-to-die/', '/mentoring/', '/newsletter/', '/writing/', '/tag/predictions/'];
+  for (let i = 59; i >= 0; i--) {
+    const d = new Date(Date.now() - i * 864e5).toISOString().slice(0, 10);
+    const spike = i % 7 === 2 ? 20 : 0, visits = 10 + ((i * 7) % 13) + spike, views = visits + 2 + (i % 5);
+    const pages = {};
+    paths.forEach((p, k) => { const n = Math.max(0, Math.round(views / (k + 2)) - (i % 3)); if (n) pages[p] = [n, Math.max(0, n - 1)]; });
+    if (i % 4 === 0) pages['/newsletter/thanks/'] = [1, 0];
+    days.push({ date: d, views, visits, pages, from: { '': visits - 4 - spike - (i % 3), 'linkedin.com': 3 + spike, 'google.com': 1 + (i % 3) }, devices: { desktop: views - 3, mobile: 3 } });
+  }
+  return { updatedAt: Date.now() - 2 * 864e5, days, titles: { '/about/': 'About', '/the-two-product-team-problem/': 'The two product team problem', '/bridge-roles-need-to-die/': 'Bridge roles need to die' } };
 }
 
 const slots = { fri: '07:29', mon: '20:05', sat: '22:06', sun: '22:42', thu: '10:45', tue: '19:20', wed: '18:01' };

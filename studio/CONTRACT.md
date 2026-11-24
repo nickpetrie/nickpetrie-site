@@ -45,6 +45,8 @@ Briefs: fields as in the skill, plus `status`:
 - `working`, shown as "In progress", with `startedAt` and `etaMinutes` written by Claude;
 - `done`, shown as "Done · N posts made", with `postIds`.
 
+Website numbers: `config/site-stats` holds `{updatedAt, days:[{date, views, visits, pages:{path:[views, visits]}, from:{host: visits}, devices:{type: views}}], titles:{path: title}}`, as in Shannon's Studio but without `/go/` links (this site has none). `stats.py` writes it once a week from Cloudflare Web Analytics, counting only `nickpetrie.co` and `www` (the same Web Analytics site also covers other nickpetrie.co hostnames), one query per day so the counts aren't sampled, with page titles from `src/content`. The Stats tab reads it with `GET /api/docs/config/site-stats`: visits, pages viewed, visits from LinkedIn and from search, newsletter sign-ups (views of `/newsletter/thanks/`), mentoring page views, a day-by-day chart, top pages, sources and phone or computer, for the last 7, 30 or 90 days against the period before.
+
 Every write goes through `rev`: the client sends the `rev` it read, and the server rejects stale writes with 409 and the current doc. Every write also adds a row to `log`.
 
 ## API (all JSON, all behind Access)

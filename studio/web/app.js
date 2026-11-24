@@ -188,7 +188,7 @@ function renderHeader() {
 function renderTabs() {
   const nav = $('tabs');
   const comingN = scheduledPosts().length + waitingPosts().length;
-  const tabs = [['review', 'Ready for review', S.loaded ? reviewPosts().length : null], ['coming', 'Coming up', S.loaded ? comingN : null], ['done', 'Done', null], ['briefs', 'Briefs', null]];
+  const tabs = [['review', 'Ready for review', S.loaded ? reviewPosts().length : null], ['coming', 'Coming up', S.loaded ? comingN : null], ['done', 'Done', null], ['briefs', 'Briefs', null], ['stats', 'Stats', null]];
   if (S.me && S.me.admin) tabs.push(['debug', 'Debug', null]);
   nav.hidden = wide() && S.mode === 'edit';
   nav.replaceChildren(...[el('div', { class: 'tab-row' }, ...tabs.map(([k, label, n]) =>
@@ -232,7 +232,7 @@ function confirmBox(title, text, okLabel, danger) {
 /* ---------- routing ---------- */
 function parseHash() {
   const [tab, id, mode] = location.hash.replace(/^#\/?/, '').split('/').map((x) => x && decodeURIComponent(x));
-  S.tab = ['review', 'coming', 'done', 'briefs', 'debug'].includes(tab) ? tab : 'review';
+  S.tab = ['review', 'coming', 'done', 'briefs', 'stats', 'debug'].includes(tab) ? tab : 'review';
   S.openId = id || null;
   S.mode = mode === 'edit' ? 'edit' : 'view';
 }
@@ -1260,6 +1260,135 @@ function viewDebug(main) {
         el('thead', {}, el('tr', {}, ...['When', 'Who', 'What', 'Post', 'Detail'].map((h) => el('th', { text: h })))), el('tbody', {}, ...rows))))));
 }
 
+/* ---------- stats: website numbers (config/site-stats, refreshed weekly by studio/stats.py) ---------- */
+// The same page as Shannon's Studio, for nickpetrie.co: LinkedIn visits and newsletter sign-ups in
+// place of Instagram and bookings, and no /go/ links (the site has none).
+const PAGE_NAMES = {
+  '/': 'Home', '/writing/': 'Writing', '/newsletter/': 'Newsletter', '/newsletter/thanks/': 'Thank-you page (after signing up)',
+  '/mentoring/': 'Mentoring', '/author/nick/': 'Author page', '/rss/': 'RSS feed',
+};
+const SIGNUP_PAGE = '/newsletter/thanks/', MENTORING_PAGE = '/mentoring/';
+function pageName(path, titles) {
+  if (PAGE_NAMES[path]) return PAGE_NAMES[path];
+  if (titles && titles[path]) return titles[path];
+  if (path.startsWith('/tag/')) return 'Tag: ' + path.slice(5).replace(/\/$/, '').replace(/-/g, ' ');
+  return path;
+}
+const isLinkedIn = (h) => /linkedin|lnkd\.in/.test(h);
+const isSearch = (h) => /(^|\.)google\.|bing\.|duckduckgo|yahoo|ecosia|kagi|search\.brave|perplexity|chatgpt|openai/.test(h);
+function sourceName(host) {
+  if (!host) return 'Direct, email and links in apps';
+  if (isLinkedIn(host)) return 'LinkedIn';
+  if (/(^|\.)google\./.test(host)) return 'Google';
+  if (/chatgpt|openai|perplexity|claude\.ai|gemini/.test(host)) return 'AI assistants';
+  if (isSearch(host)) return 'Other search engines';
+  if (/^t\.co$|twitter|^x\.com/.test(host)) return 'X';
+  if (/bsky/.test(host)) return 'Bluesky';
+  if (/facebook|fb\.com/.test(host)) return 'Facebook';
+  if (/beehiiv|mail\.|gmail|outlook/.test(host)) return 'Newsletter and email';
+  return host;
+}
+async function loadStats(force) {
+  if (S.statsBusy || (!force && S.stats && Date.now() - S.statsAt < 300000)) return;
+  S.statsBusy = true;
+  try { S.stats = (await api('GET', '/api/docs/config/site-stats')).data; S.statsAt = Date.now(); S.statsFailed = false; S.statsMissing = false; }
+  catch (e) { S.statsFailed = true; S.statsMissing = e instanceof ApiError && e.status === 404; }
+  S.statsBusy = false;
+  if (S.tab === 'stats' && !busy()) renderMain();
+}
+function statsWindow(days, n, offset = 0) {
+  const end = new Date(todayKey() + 'T12:00:00Z'); end.setUTCDate(end.getUTCDate() - offset * n);
+  const keys = Array.from({ length: n }, (_, i) => { const d = new Date(end); d.setUTCDate(d.getUTCDate() - (n - 1 - i)); return d.toISOString().slice(0, 10); });
+  const by = Object.fromEntries(days.map((d) => [d.date, d]));
+  return keys.map((k) => by[k] || { date: k, views: 0, visits: 0, pages: {}, from: {}, devices: {} });
+}
+const sumBy = (rows, f) => rows.reduce((a, r) => a + (f(r) || 0), 0);
+function addUp(rows, key) {
+  const out = {};
+  for (const r of rows) for (const [k, v] of Object.entries(r[key] || {})) out[k] = (out[k] || 0) + (Array.isArray(v) ? v[0] : v);
+  return Object.entries(out).sort((a, b) => b[1] - a[1]);
+}
+const pageViews = (rows, path, i = 0) => sumBy(rows, (r) => { const v = (r.pages || {})[path]; return Array.isArray(v) ? v[i] : (v || 0); });
+const visitsFrom = (rows, test) => sumBy(rows, (r) => sumBy(Object.entries(r.from || {}).filter(([h]) => test(h)), ([, v]) => v));
+function statTile(label, value, prev, hint) {
+  const diff = prev === null || prev === undefined ? null : value - prev;
+  const trend = diff === null ? null : el('span', { class: `trend ${diff > 0 ? 'up' : diff < 0 ? 'down' : ''}`, text: diff === 0 ? 'Same as the period before' : `${diff > 0 ? '▲' : '▼'} ${Math.abs(diff)} on the period before` });
+  return el('div', { class: 'stat-tile' }, el('span', { class: 'stat-label', text: label }), el('span', { class: 'stat-num', text: value.toLocaleString('en-GB') }), trend, hint ? el('span', { class: 'muted small', text: hint }) : null);
+}
+function statBars(rows) {
+  // Bars stretch to the box (preserveAspectRatio none); the dates are HTML so they stay readable.
+  const W = 1000, H = 100, max = Math.max(1, ...rows.map((r) => r.views)), bw = W / rows.length, w = bw * 0.7;
+  const ns = 'http://www.w3.org/2000/svg';
+  const svg = document.createElementNS(ns, 'svg');
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`); svg.setAttribute('preserveAspectRatio', 'none'); svg.setAttribute('class', 'stat-chart'); svg.setAttribute('aria-hidden', 'true');
+  const add = (at) => { const n = document.createElementNS(ns, 'rect'); for (const [k, v] of Object.entries(at)) n.setAttribute(k, v); svg.append(n); return n; };
+  rows.forEach((r, i) => {
+    const x = i * bw + (bw - w) / 2;
+    if (r.views) { const b = add({ x, y: H - (r.views / max) * H, width: w, height: (r.views / max) * H, class: 'bar-views' }); const t = document.createElementNS(ns, 'title'); t.textContent = `${dateOnly(r.date)}: ${plural(r.views, 'page view')}, ${plural(r.visits, 'visit')}`; b.append(t); }
+    if (r.visits) add({ x, y: H - (r.visits / max) * H, width: w, height: (r.visits / max) * H, class: 'bar-visits' });
+  });
+  const every = rows.length <= 7 ? 1 : rows.length <= 30 ? 7 : 30;
+  const ticks = el('div', { class: 'stat-ticks', 'aria-hidden': 'true' }, ...rows.map((r, i) => (rows.length - 1 - i) % every === 0
+    ? el('span', { style: `left:${((i + 0.5) / rows.length) * 100}%`, text: dateOnly(r.date).replace(/^\w+ /, '') }) : null));
+  const table = el('table', { class: 'sr' }, el('caption', { text: 'Pages viewed and visits per day' }),
+    el('tbody', {}, ...rows.filter((r) => r.views).map((r) => el('tr', {}, el('th', { text: dateOnly(r.date) }), el('td', { text: `${plural(r.views, 'page view')}, ${plural(r.visits, 'visit')}` })))));
+  return el('div', { class: 'stat-chart-wrap' }, svg, ticks, table);
+}
+function statList(title, rows, name, unit) {
+  return el('section', { class: 'panel stat-list' }, el('h2', { text: title }),
+    !rows.length ? el('p', { class: 'muted', text: 'Nothing yet for this period.' }) :
+      el('ol', {}, ...rows.slice(0, 12).map(([k, n]) => el('li', {},
+        el('span', { class: 'sl-name', title: k, text: name(k) }),
+        el('span', { class: 'sl-bar', 'aria-hidden': 'true' }, el('span', { style: `width:${Math.max(3, Math.round((n / Math.max(1, rows[0][1])) * 100))}%` })),
+        el('span', { class: 'sl-num', text: unit ? plural(n, unit) : String(n) })))));
+}
+function viewStats(main) {
+  loadStats();
+  const st = S.stats;
+  if (!st) {
+    main.append(el('div', { class: 'empty padded' },
+      el('strong', { text: S.statsMissing ? 'No website numbers yet' : S.statsFailed ? 'Studio couldn\'t load the website numbers' : 'Loading the website numbers…' }),
+      S.statsMissing ? el('p', { text: 'Claude fills these in once a week from Cloudflare Web Analytics.' }) : null,
+      S.statsFailed && !S.statsMissing ? el('button', { type: 'button', class: 'btn white', text: 'Try again', onclick: () => loadStats(true) }) : null));
+    return;
+  }
+  const n = S.statsDays || 30;
+  const cur = statsWindow(st.days || [], n), prev = statsWindow(st.days || [], n, 1);
+  const first = (st.days || [])[0]?.date;
+  const hasPrev = !!(first && first <= prev[0].date);
+  const before = (f) => (hasPrev ? f(prev) : null);
+  const visits = sumBy(cur, (r) => r.visits), views = sumBy(cur, (r) => r.views);
+  const sources = {};
+  for (const [h, v] of addUp(cur, 'from')) sources[sourceName(h)] = (sources[sourceName(h)] || 0) + v;
+  const devices = addUp(cur, 'devices');
+  const devTotal = sumBy(devices, ([, v]) => v);
+  const phone = devTotal ? Math.round((sumBy(devices.filter(([d]) => d === 'mobile' || d === 'tablet'), ([, v]) => v) / devTotal) * 100) : 0;
+  const pages = addUp(cur, 'pages').filter(([p]) => p !== SIGNUP_PAGE);
+  const signups = (rows) => pageViews(rows, SIGNUP_PAGE);
+
+  main.append(el('div', { class: 'stats-page' },
+    el('div', { class: 'stats-head' },
+      el('div', {}, el('h2', { text: 'Your website' }), el('p', { class: 'muted small', text: `nickpetrie.co · updated ${st.updatedAt ? fmt(new Date(st.updatedAt).toISOString()) : '–'} · refreshed once a week` })),
+      el('div', { class: 'stat-period', role: 'group', 'aria-label': 'Period' }, ...[[7, 'Last 7 days'], [30, 'Last 30 days'], [90, 'Last 90 days']].map(([d, label]) =>
+        el('button', { type: 'button', class: 'chipbtn', 'aria-pressed': String(n === d), text: label, onclick: () => { S.statsDays = d; renderMain(); } })))),
+    el('div', { class: 'stat-tiles' },
+      statTile('Visits', visits, before((r) => sumBy(r, (x) => x.visits)), 'Each time someone arrives at the site'),
+      statTile('Pages viewed', views, before((r) => sumBy(r, (x) => x.views)), visits ? `About ${(views / visits).toFixed(1)} pages a visit` : null),
+      statTile('Visits from LinkedIn', visitsFrom(cur, isLinkedIn), before((r) => visitsFrom(r, isLinkedIn)), 'From your posts, profile and messages there'),
+      statTile('Visits from search', visitsFrom(cur, isSearch), before((r) => visitsFrom(r, isSearch)), 'Google, Bing, DuckDuckGo and AI assistants'),
+      statTile('Newsletter sign-ups', signups(cur), before(signups), 'Sign-ups through the form on the site'),
+      statTile('Mentoring page views', pageViews(cur, MENTORING_PAGE), before((r) => pageViews(r, MENTORING_PAGE)), 'nickpetrie.co/mentoring')),
+    el('section', { class: 'panel' }, el('h2', { text: 'Day by day' }),
+      el('p', { class: 'legend small' }, el('span', { class: 'key key-views' }), 'Pages viewed', el('span', { class: 'key key-visits' }), 'Visits'),
+      statBars(cur)),
+    el('div', { class: 'stat-grid' },
+      statList('Most viewed pages', pages, (k) => pageName(k, st.titles), 'view'),
+      statList('Where visits came from', Object.entries(sources).sort((a, b) => b[1] - a[1]), (k) => k, ''),
+      el('section', { class: 'panel stat-list' }, el('h2', { text: 'Phone or computer' }),
+        devTotal ? el('p', { text: `${phone}% of pages were viewed on a phone or tablet, ${100 - phone}% on a computer.` }) : el('p', { class: 'muted', text: 'Nothing yet for this period.' }))),
+    el('p', { class: 'muted small stats-note', text: 'Counted by Cloudflare without cookies, so these are visits rather than individual people, and they include your own. Visits from emails and most apps show as direct, because they don\'t say where they came from. Newsletter sign-ups count visits to the thank-you page the sign-up form opens, so sign-ups made on beehiiv itself aren\'t included.' + (first ? ` The numbers start on ${dayText(first + 'T12:00:00Z', true)}.` : '') })));
+}
+
 /* ---------- render ---------- */
 const busy = () => {
   if (S.mode === 'edit' || S.dragging || dlg().open) return true;
@@ -1279,6 +1408,7 @@ function renderMain() {
   else if (S.tab === 'coming') viewComing(main);
   else if (S.tab === 'done') viewDone(main);
   else if (S.tab === 'debug') viewDebug(main);
+  else if (S.tab === 'stats') viewStats(main);
   else viewBriefs(main);
   main.querySelectorAll('[data-keep]').forEach((n) => { if (keep[n.dataset.keep] != null) n.scrollTop = keep[n.dataset.keep]; });
   if (fid) { const n = [...main.querySelectorAll('[data-fid]')].find((x) => x.dataset.fid === fid); if (n) n.focus({ preventScroll: true, focusVisible: S.keyboard }); }

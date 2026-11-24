@@ -498,3 +498,39 @@ dialog::backdrop { background: rgba(20, 20, 18, .5); }
 .log code { font-size: 11px; overflow-wrap: anywhere; }
 .log tr.bad td { background: var(--red-bg); }
 @media (min-width: 960px) { .debug { padding: 20px 28px; } }
+
+/* Website stats (the Stats tab), as in Shannon's Studio, in ink on paper */
+.stats-page { --views: #c9d1d9; display: flex; flex-direction: column; gap: 16px; padding: 20px 28px 40px; max-width: 1200px; margin-inline: auto; width: 100%; }
+.stats-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; flex-wrap: wrap; }
+.stats-head h2 { font-size: 22px; }
+.stat-period { display: flex; gap: 8px; flex-wrap: wrap; }
+.stat-tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.stat-tile { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; }
+.stat-label { font-size: 13px; font-weight: 600; color: var(--ink2); }
+.stat-num { font-size: 32px; font-weight: 700; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.trend { font-size: 13px; color: var(--muted); }
+.trend.up { color: var(--green); }
+.trend.down { color: var(--red); }
+.stat-chart-wrap { position: relative; padding: 0 0 22px; }
+.stat-chart { width: 100%; height: 170px; display: block; border-bottom: 1px solid var(--line2); }
+.stat-ticks { position: relative; height: 18px; }
+.stat-ticks span { position: absolute; top: 4px; transform: translateX(-50%); font-size: 12px; color: var(--muted); white-space: nowrap; }
+.stat-chart .bar-views { fill: var(--views); }
+.stat-chart .bar-visits { fill: var(--ink); }
+.legend { display: flex; align-items: center; gap: 6px 8px; flex-wrap: wrap; color: var(--muted); }
+.key { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+.key-views { background: var(--views); } .key-visits { background: var(--ink); margin-left: 10px; }
+.stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.stat-list ol { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.stat-list li { display: grid; grid-template-columns: minmax(0, 1.4fr) 1fr auto; align-items: center; gap: 10px; font-size: 14px; }
+.sl-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sl-bar { height: 8px; background: var(--grey); border-radius: 99px; overflow: hidden; }
+.sl-bar span { display: block; height: 100%; background: var(--ink); border-radius: 99px; }
+.sl-num { font-variant-numeric: tabular-nums; color: var(--ink2); font-size: 13px; white-space: nowrap; }
+.stats-note { max-width: 70ch; }
+@media (max-width: 760px) {
+  .stats-page { padding: 16px; }
+  .stat-tiles { grid-template-columns: 1fr 1fr; }
+  .stat-grid { grid-template-columns: 1fr; }
+  .stat-num { font-size: 26px; }
+}

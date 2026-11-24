@@ -62,4 +62,4 @@ A week after a post goes out, save its numbers in `metrics` (reactions, comments
 
 ## How requests reach you
 
-Nothing wakes you automatically. Briefs and change requests wait in the database until a check runs: either a scheduled Studio check (if Nick sets one up) or Nick asking. Start with briefs, then `changes`, then `needsRender`. Stay quiet when there's nothing to do.
+Nothing wakes you automatically. Briefs and change requests wait in the database until a check runs: either a scheduled Studio check (if Nick sets one up) or Nick asking. Start with briefs, then `changes`, then `needsRender`. Stay quiet when there's nothing to do. On every check, also run `python3 studio/stats.py --weekly`: it refreshes the Stats tab's website numbers when they're a week old and does nothing otherwise, so don't mention it.
