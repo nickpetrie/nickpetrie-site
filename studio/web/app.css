@@ -46,6 +46,7 @@ img { display: block; max-width: 100%; }
 .tab:hover { background: var(--bg); color: var(--ink); }
 .tab[aria-current='page'] { background: var(--ink); color: #fff; }
 .tab .count { font-weight: 600; opacity: .85; }
+.tab-short { display: none; }
 
 /* buttons */
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 44px; padding: 0 16px; border-radius: 10px; border: 1px solid var(--line2); background: #fff; color: var(--ink); font-size: 14px; font-weight: 600; text-decoration: none; cursor: pointer; text-align: center; }
@@ -296,7 +297,9 @@ dialog::backdrop { background: rgba(20, 20, 18, .5); }
   .brand { flex-direction: column; gap: 2px; }
   .tabs { padding: 6px 8px; }
   .tab-row { width: 100%; gap: 4px; }
-  .tab { flex: 1; flex-direction: column; justify-content: center; gap: 0; padding: 4px; text-align: center; font-size: 13px; line-height: 1.15; }
+  .tab-row { overflow-x: auto; scrollbar-width: none; }
+  .tab { flex: 1 0 auto; flex-direction: column; justify-content: center; gap: 0; padding: 4px 6px; text-align: center; font-size: 13px; line-height: 1.15; white-space: nowrap; }
+  .tab-long { display: none; } .tab-short { display: inline; }
   .tab .count { font-size: 12px; }
   .list-scroll { padding: 16px; }
   .tab-review .items { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }

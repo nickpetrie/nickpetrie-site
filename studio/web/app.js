@@ -185,6 +185,7 @@ function renderHeader() {
   const label = free > 0 ? `Buffer: ${used} of ${limit} used · room for ${free}` : `Buffer: ${used} of ${limit} used${waiting ? ` · ${waiting} waiting` : ''}`;
   $('buffer').replaceChildren(S.loaded ? dots : '', S.loaded ? el('span', { class: 'buffer-text', text: label }) : '');
 }
+const TAB_SHORT = { review: 'Review', coming: 'Coming' };
 function renderTabs() {
   const nav = $('tabs');
   const comingN = scheduledPosts().length + waitingPosts().length;
@@ -192,7 +193,10 @@ function renderTabs() {
   if (S.me && S.me.admin) tabs.push(['debug', 'Debug', null]);
   nav.hidden = wide() && S.mode === 'edit';
   nav.replaceChildren(...[el('div', { class: 'tab-row' }, ...tabs.map(([k, label, n]) =>
-    el('a', { class: 'tab', href: `#/${k}`, 'aria-current': S.tab === k ? 'page' : null }, label, n !== null ? el('span', { class: 'count', text: n }) : null))),
+    el('a', { class: 'tab', href: `#/${k}`, 'aria-current': S.tab === k ? 'page' : null },
+      // Phones get a one-word label so six tabs fit on one line.
+      TAB_SHORT[k] ? [el('span', { class: 'tab-long', text: label }), el('span', { class: 'tab-short', text: TAB_SHORT[k] })] : label,
+      n !== null ? el('span', { class: 'count', text: n }) : null))),
     null].filter(Boolean));
 }
 
